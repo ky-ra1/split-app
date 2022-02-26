@@ -1,4 +1,7 @@
--- DB Name: split-app
+-- DB Name: split_app
+-- Run `createdb split_app` in terminal to create the table
+-- Then run `psql split_app` to run the below commands in the DB
+
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     first_name VARCHAR(30) NOT NULL,
@@ -30,7 +33,7 @@ CREATE TABLE payments (
 ALTER TABLE payment_events
 ADD CONSTRAINT fk_creator_id
 FOREIGN KEY(event_creator_id)
-REFERENCES payments(id);
+REFERENCES users(id);
 
 ALTER TABLE payments
 ADD CONSTRAINT fk_user_id
