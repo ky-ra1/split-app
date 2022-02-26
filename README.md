@@ -75,3 +75,7 @@ Every User can be a Main User and vice versa.
 #### Mobile
 
 ![mobile](/assets/mobile.png)
+
+
+## Entity Relationship Diagram
+![erd](/assets/database-ERD.png)
