@@ -19,6 +19,7 @@ When a `user` logs in that was a main user for a payment event, they'll see a li
 * Let users rate each other for payment
 * Add a comment for payments
 * User can put in a specific amounts for indviduals in addition to percentages
+* Track confirmation of payment to be paid (i.e. when a user views payments)
 
 ## Assumptions:
 * All users already have an account.
