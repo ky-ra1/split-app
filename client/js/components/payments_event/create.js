@@ -30,17 +30,14 @@ const renderCreatePaymentEventList = () => {
     setupAddListener();
 };
 
-let userCount;
-let user;
-
 function setupAddListener() {
-    userCount = document.getElementsByClassName('user').length;
+    let userCount = document.getElementsByClassName('user').length;
     const addUser = document.querySelector(`.addUser-${userCount}`);
     const userForm = document.getElementById('users');
 
     addUser.addEventListener('click', (event) => {
         event.preventDefault();
-        user = document.getElementById(`${userCount}`);
+        let user = document.getElementById(`${userCount}`);
         // let valid = checkValidity(user.value);
         let valid = true;
 
@@ -110,10 +107,9 @@ const form = document.getElementById('submitButton');
 form.addEventListener('submit', (event) => {
     event.preventDefault();
 
-    userCount = document.getElementsByClassName('user').length;
-    user = document.getElementById(`${userCount}`);
+    let userCount = document.getElementsByClassName('user').length;
+    let user = document.getElementById(`${userCount}`);
     checkValidity(user.value);
 
     const eventDetailsForm = document.querySelectorAll('#eventDetails');
-    console.log(eventDetailsForm);
 });
