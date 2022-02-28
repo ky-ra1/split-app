@@ -28,7 +28,7 @@ const PaymentsEvent = {
         });        
     },
     delete: (eventId) => {
-        const query = `DELETE FROM challenges WHERE id = $1`;
+        const query = `DELETE FROM payments_event WHERE id = $1`;
         return db.query(query, [eventId]);        
     }
 }
