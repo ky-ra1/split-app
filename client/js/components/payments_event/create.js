@@ -1,5 +1,6 @@
 const renderCreatePaymentEventList = () => {
     const page = document.getElementById('page');
+    let userCount = 1;
 
     page.innerHTML = `
     <h1>Add Payment Event</h1>
@@ -15,7 +16,7 @@ const renderCreatePaymentEventList = () => {
     <form id="users" onsubmit="return false">
         <h1>User Breakdown</h1>
         <label for="user">User ${userCount}:</label><br>
-        <input type="text" id="${userCount}" class="users" name="user"> 
+        <input type="text" id="${userCount}" class="user" name="user"> 
         <label for="percentage">Percentage: </label>
         <input type="number" id="user" class="percentage" name="percentage">   
         <span id="display-${userCount}"></span>
@@ -27,10 +28,11 @@ const renderCreatePaymentEventList = () => {
     </form>`
     
 
-    setupAddListener(userCount);
+    setupAddListener();
 }
 
-function setupAddListener(userCount) {
+function setupAddListener() {
+    let userCount = document.getElementsByClassName('user').length;
     const addUser = document.querySelector(`.addUser-${userCount}`);
     const userForm = document.getElementById('users');
 
@@ -39,7 +41,6 @@ function setupAddListener(userCount) {
             const user = document.getElementById(`${userCount}`);
             // let valid = checkValidity(user.value);
             let valid = true;
-            console.log(user.value);
 
             userCount = userCount + 1;
             if(valid) {
@@ -48,9 +49,9 @@ function setupAddListener(userCount) {
                     error.innerHTML = '';
                 }
 
-                addUserForm(userCount);
+                addUserForm();
 
-                setupAddListener(userCount);
+                setupAddListener();
             } else {
                 userForm.innerHTML += `
                 <span id="error">Invalid</span>
@@ -59,7 +60,8 @@ function setupAddListener(userCount) {
         });
 }
 
-function addUserForm(userCount) {
+function addUserForm() {
+    let userCount = document.getElementsByClassName('user').length + 1;
     const userForm = document.getElementById(`users`);
     let userLabel = document.createElement("label");
     userLabel.setAttribute("for", userCount);
@@ -72,7 +74,7 @@ function addUserForm(userCount) {
     let userInput = document.createElement('input');
     userInput.setAttribute("type", "text");
     userInput.setAttribute('id', userCount);
-    userInput.setAttribute('class', 'users');
+    userInput.setAttribute('class', 'user');
     userInput.setAttribute('name', 'user');
     userForm.appendChild(userInput);
 
