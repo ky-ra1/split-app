@@ -9,9 +9,9 @@ const expressSession = require("express-session");
 const paymentEventsController = require('./controllers/payments_event');
 const usersController = require('./controllers/users');
 const sessionsController = require('./controllers/sessions');
+const paymentsController = require('./controllers/payments');
 
 const pgSession = require("connect-pg-simple")(expressSession);
-
 const db = require('./database/db');
 
 // App
@@ -34,11 +34,12 @@ app.use(
 app.use(express.json());
 app.use(express.static('client'));
 
+
 // Controllers
 app.use("/api/paymentsEvent/", paymentEventsController);
 app.use('/api/users/', usersController);
 app.use("/api/sessions/", sessionsController);
-
+app.use('/api/payments/', paymentsController);
 
 app.listen(port, () => {
     console.log(`server listening on port: ${port}`);
