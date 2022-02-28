@@ -24,12 +24,11 @@ const renderCreatePaymentEventList = () => {
     </form>
     
     <form id="submitButton">
-        <button class="submitEvent">Submit</button>
-    </form>`
-    
+        <button type="submit" class="submitEvent">Submit</button>
+    </form>`;
 
     setupAddListener();
-}
+};
 
 function setupAddListener() {
     let userCount = document.getElementsByClassName('user').length;
@@ -37,34 +36,34 @@ function setupAddListener() {
     const userForm = document.getElementById('users');
 
     addUser.addEventListener('click', (event) => {
-            event.preventDefault();
-            const user = document.getElementById(`${userCount}`);
-            // let valid = checkValidity(user.value);
-            let valid = true;
+        event.preventDefault();
+        let user = document.getElementById(`${userCount}`);
+        // let valid = checkValidity(user.value);
+        let valid = true;
 
-            userCount = userCount + 1;
-            if(valid) {
-                const error = document.getElementById('error');
-                if(error) {
-                    error.innerHTML = '';
-                }
-
-                addUserForm();
-
-                setupAddListener();
-            } else {
-                userForm.innerHTML += `
-                <span id="error">Invalid</span>
-                `
+        userCount = userCount + 1;
+        if (valid) {
+            const error = document.getElementById('error');
+            if (error) {
+                error.innerHTML = '';
             }
-        });
+
+            addUserForm();
+
+            setupAddListener();
+        } else {
+            userForm.innerHTML += `
+                <span id="error">Invalid</span>
+                `;
+        }
+    });
 }
 
 function addUserForm() {
     let userCount = document.getElementsByClassName('user').length + 1;
     const userForm = document.getElementById(`users`);
-    let userLabel = document.createElement("label");
-    userLabel.setAttribute("for", userCount);
+    let userLabel = document.createElement('label');
+    userLabel.setAttribute('for', userCount);
     userLabel.innerHTML = `User: ${userCount}`;
     userForm.appendChild(userLabel);
 
@@ -72,27 +71,27 @@ function addUserForm() {
     userForm.appendChild(breakTag);
 
     let userInput = document.createElement('input');
-    userInput.setAttribute("type", "text");
+    userInput.setAttribute('type', 'text');
     userInput.setAttribute('id', userCount);
     userInput.setAttribute('class', 'user');
     userInput.setAttribute('name', 'user');
     userForm.appendChild(userInput);
 
-    let percentageLabel = document.createElement("label");
-    percentageLabel.setAttribute("for", `percentage-${userCount}`);
+    let percentageLabel = document.createElement('label');
+    percentageLabel.setAttribute('for', `percentage-${userCount}`);
     percentageLabel.innerHTML = `Percentage: `;
-    userForm.appendChild(percentageLabel); 
-    
+    userForm.appendChild(percentageLabel);
+
     let percentageInput = document.createElement('input');
-    percentageInput.setAttribute("type", "number");
+    percentageInput.setAttribute('type', 'number');
     percentageInput.setAttribute('id', 'user');
     percentageInput.setAttribute('class', 'percentage');
     percentageInput.setAttribute('name', 'percentage');
-    userForm.appendChild(percentageInput);    
+    userForm.appendChild(percentageInput);
 
-    let button = document.createElement("button");
+    let button = document.createElement('button');
     button.setAttribute('type', 'button');
-    button.appendChild(document.createTextNode("+"));
+    button.appendChild(document.createTextNode('+'));
     button.setAttribute('class', `addUser-${userCount}`);
     userForm.appendChild(button);
 
@@ -100,6 +99,17 @@ function addUserForm() {
 }
 
 function checkValidity(user) {
-    //validate user with the user api 
+    //validate user with the user api
     return true;
 }
+
+const form = document.getElementById('submitButton');
+form.addEventListener('submit', (event) => {
+    event.preventDefault();
+
+    let userCount = document.getElementsByClassName('user').length;
+    let user = document.getElementById(`${userCount}`);
+    checkValidity(user.value);
+
+    const eventDetailsForm = document.querySelectorAll('#eventDetails');
+});
