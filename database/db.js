@@ -10,7 +10,7 @@ if (process.env.NODE_ENV === 'production') {
     });
 } else {
     db = new pg.Pool({
-        database: 'my_local_database_name', //TODO Change based on db name
+        database: 'split_app',
     });
 }
 
