@@ -39,6 +39,3 @@ const Payments = {
         return db.query(query, [user_id]);
     },
 };
-
-// where paid with innerjoin to payment event - event name and event id, id of payment - history
-// where owed with innerjoin to payment event - event name and event id, id of payment - owed

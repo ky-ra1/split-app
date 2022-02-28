@@ -1,10 +1,10 @@
 const express = require('express');
-const paymentsEvent = require('../../models/payments_event');
+const payments = require('../../models/payments');
 
 const router = express.Router();
 
 router.get('/', (req, res) => {
-    paymentsEvent.getAll().then((paymentEvents) => {
+    payments.getAll().then((paymentEvents) => {
         res.json(paymentEvents);
     });
 });
