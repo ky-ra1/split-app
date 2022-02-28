@@ -14,7 +14,7 @@ const app = express();
 
 app.use(express.static('client'));
 
-app.use('/api/paymentEvents/', paymentEventsController);
+app.use("/api/paymentsEvent/", paymentEventsController);
 app.use('/api/users/', usersController);
 
 app.listen(port, () => {

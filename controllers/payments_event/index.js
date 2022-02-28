@@ -1,27 +1,29 @@
 const express = require('express');
-const paymentEvents = require('../../models/payment_events');
+const paymentsEvent = require('../../models/payments_event');
 
 const router = express.Router();
 
 router.get('/', (req, res) => {
-    paymentEvents.getAll().then((paymentEvents) => {
+    paymentsEvent.getAll().then((paymentEvents) => {
         res.json(paymentEvents);
     });
 });
 
 router.get('/getByCreatorId/:id', (req, res) => {
-    paymentEvents.getByCreatorId(req.params.id).then((paymentEvents) => {
+    paymentsEvent.getByCreatorId(req.params.id).then((paymentEvents) => {
         res.json(paymentEvents);
     });
 });
 
 router.get('/getByEventId/:id', (req, res) => {
-    paymentEvents.getByCreatorId(req.params.id).then((paymentEvents) => {
+    paymentsEvent.getByCreatorId(req.params.id).then((paymentEvents) => {
         res.json(paymentEvents);
     });
 });
 
 //TO DO PATCH
+
+//TO DO DELETE
 
 
 module.exports = router;
