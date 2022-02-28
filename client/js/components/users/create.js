@@ -32,25 +32,21 @@ function renderSignupForm() {
             email: emailField.value,
         };
 
-        axios.post('/api/users', body).then((response) => {
-            renderLoginForm(); // TODO change to auto login
-        });
+        let error = null;
+        if (body.first_name === '') {
+            error = 'Name is required';
+        } else if (body.username === '') {
+            error = 'Username is required';
+        } else if (body.password === '') {
+            error = 'Password is required';
+        } else if (body.email === '') {
+            error = 'Email is required';
+        }
 
-        // let error = null;
-        // if (body.first_name === '') {
-        //     error = 'Name is required';
-        // } else if (body.username === '') {
-        //     error = 'Username is required';
-        // } else if (body.password === '') {
-        //     error = 'Password is required';
-        // } else if (body.email === '') {
-        //     error = 'Email is required';
-        // }
-
-        // if (!error) {
-        //     axios.post('/api/users', body).then((response) => {
-        //         renderLoginForm(); // TODO change to auto login
-        //     });
-        // }
+        if (!error) {
+            axios.post('/api/users', body).then((response) => {
+                renderLoginForm(); // TODO change to auto login
+            });
+        }
     });
 }
