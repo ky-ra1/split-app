@@ -1,6 +1,7 @@
 const express = require('express');
 
 const paymentEventsController = require('./controllers/payments_event');
+const usersController = require('./controllers/users');
 
 // const db = require('./database/db');
 
@@ -11,9 +12,10 @@ const app = express();
 //     res.send('hello');
 // });
 
-app.use(express.static("client"));
+app.use(express.static('client'));
 
 app.use("/api/paymentsEvent/", paymentEventsController);
+app.use('/api/users/', usersController);
 
 app.listen(port, () => {
     console.log(`server listening on port: ${port}`);
