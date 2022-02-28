@@ -1,6 +1,13 @@
+const { RowDescriptionMessage } = require('pg-protocol/dist/messages');
 const db = require('../database/db');
 
 const Payments = {
+    getAll: () => {
+        const query = 'SELECT * FROM payments';
+        return db.query(query).then((response) => {
+            return response.rows;
+        })
+    },
     getById: (id) => {
         const query = 'SELECT * FROM payments WHERE id = $1';
         return db.query(query, [id]).then((response) => {
@@ -22,20 +29,22 @@ const Payments = {
         });
     },
     updatePaidStatus: (paid_status, id) => {
-        const query = 'UPDATE payments SET paid_status = $1 WHERE id = $2';
+        const query = 'UPDATE payments SET paid_status = $1 WHERE id = $2 RETURNING *';
         return db.query(query, [paid_status, id]).then((response) => {
-            return response.rows ? response.rows[0] : {};
+            return response;
         });
     },
     updateReceivedStatus: (received_status, id) => {
         const query =
-            'UPDATE payments SET recieved_status = $1, paid_date = current_date WHERE id = $2';
+            'UPDATE payments SET recieved_status = $1, paid_date = current_date WHERE id = $2 RETURNING *';
         return db.query(query, [received_status, id]).then((response) => {
-            return response.rows ? response.rows[0] : {};
+            return response;
         });
     },
-    delete: (user_id) => {
-        const query = `DELETE FROM payments WHERE user_id = $1`;
-        return db.query(query, [user_id]);
+    delete: (id) => {
+        const query = `DELETE FROM payments WHERE id = $1`;
+        return db.query(query, [id]);
     },
 };
+
+module.exports = Payments;
