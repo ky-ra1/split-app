@@ -9,14 +9,14 @@ router.get('/:id', (req, res) => {
     });
 });
 
-router.get('/getByUsername', (req, res) => {
-    Users.getByUsername(req.body.username).then((username) => {
+router.get('/getByUsername/:username', (req, res) => {
+    Users.getByUsername(req.params.username).then((username) => {
         res.json(username);
     });
 });
 
-router.get('/getByEmail', (req, res) => {
-    Users.getByEmail(req.body.email).then((email) => {
+router.get('/getByEmail/:email', (req, res) => {
+    Users.getByEmail(req.params.email).then((email) => {
         res.json(email);
     });
 });
