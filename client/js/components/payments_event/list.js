@@ -1,4 +1,6 @@
 function renderPaymentEvent(user_id) {
+    user_id = 1; //test data
+
     const page = document.getElementById('page');
 
     axios
@@ -10,7 +12,7 @@ function renderPaymentEvent(user_id) {
             <p>Total Amount: ${response.data[0].total_amount}</p>
         `
 
-        console.log(response);
+        // console.log(response);
         response.data.forEach(item => {
             page.innerHTML += `
             <div>
@@ -25,5 +27,5 @@ function renderPaymentEvent(user_id) {
     })
     .catch(error => { //TODO ERROR handling
         return error;
-    })
+    });
 }

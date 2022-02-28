@@ -2,15 +2,19 @@
 -- Run `createdb split_app` in terminal to create the table
 -- Then run `psql split_app` to run the below commands in the DB
 
+DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS payment_events;
+DROP TABLE IF EXISTS payments;
+
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     first_name VARCHAR(30) NOT NULL,
-    username VARCHAR(20),
+    username VARCHAR(20), 
     password TEXT NOT NULL,
     email VARCHAR(50) NOT NULL UNIQUE
 );
 
-CREATE TABLE payment_events (
+CREATE TABLE payments_event (
     id SERIAL PRIMARY KEY,
     event_name VARCHAR(20),
     total_amount NUMERIC,
@@ -30,7 +34,7 @@ CREATE TABLE payments (
     payment_event_id INTEGER
 );
 
-ALTER TABLE payment_events
+ALTER TABLE payments_event
 ADD CONSTRAINT fk_creator_id
 FOREIGN KEY(event_creator_id)
 REFERENCES users(id);
@@ -43,4 +47,4 @@ REFERENCES users(id);
 ALTER TABLE payments 
 ADD CONSTRAINT fk_event_id
 FOREIGN KEY(payment_event_id)
-REFERENCES payment_events(id);
+REFERENCES payments_event(id);

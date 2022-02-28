@@ -1,3 +1,4 @@
+-- test data
 INSERT INTO users
 (first_name, username, password, email)
 VALUES ('Jane', 'janedoe', 'test', 'jane.doe@test.com'),
@@ -5,7 +6,7 @@ VALUES ('Jane', 'janedoe', 'test', 'jane.doe@test.com'),
 ('Kate', 'katedoe', 'test', 'kate.doe@test.com'),
 ('Alex', 'alexdoe', 'test', 'alex.doe@test.com');
 
-INSERT INTO payment_events
+INSERT INTO payments_event
 (event_name, total_amount, event_creator_id, description, creation_date, due_date)
 VALUES ('Work dinner', 300.00, 1, 'Dinner with work people on Feb 27th 2022', '2022-02-27', '2022-03-01');
 
