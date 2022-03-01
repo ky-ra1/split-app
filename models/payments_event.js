@@ -34,7 +34,7 @@ const PaymentsEvent = {
         });        
     },
     delete: (eventId) => {
-        const query = `DELETE FROM payments_event WHERE event_creator_id = $1`;
+        const query = `DELETE FROM payments_event WHERE id = $1`;
         return db.query(query, [eventId]);        
     }
 }
