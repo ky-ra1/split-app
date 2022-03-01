@@ -21,6 +21,12 @@ const PaymentsEvent = {
             return response.rows ? response.rows[0] : {};
         });
     },
+    getEventsByCreatorId: (userId) => {
+        const query = `SELECT * FROM payments_event WHERE event_creator_id = $1`;
+        return db.query(query, [userId]).then((response) => {
+            return response.rows;
+        }); 
+    },
     create: (body) => {
         const query = `INSERT INTO payments_event (event_name, total_amount, event_creator_id, description, creation_date, due_date) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`;
         return db.query(query, [body.event_name, body.total_amount, body.event_creator_id, body.description, body.creation_date, body.due_date]).then((response) => {
@@ -28,7 +34,7 @@ const PaymentsEvent = {
         });        
     },
     delete: (eventId) => {
-        const query = `DELETE FROM payments_event WHERE id = $1`;
+        const query = `DELETE FROM payments_event WHERE event_creator_id = $1`;
         return db.query(query, [eventId]);        
     }
 }

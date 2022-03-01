@@ -21,6 +21,13 @@ router.get('/getByEventId/:id', (req, res) => {
     });
 });
 
+router.get('/getEventsByCreatorId/:id', (req, res) => {
+    paymentsEvent.getEventsByCreatorId(req.params.id).then((paymentEvents) => {
+        console.log(paymentEvents);
+        res.json(paymentEvents);
+    });
+});
+
 //TO DO PATCH
 
 //TO DO DELETE

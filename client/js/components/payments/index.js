@@ -1,32 +1,39 @@
 //payments owed
 
-function mainPageElement() {
-    const page = document.getElementById('page'); //need to change
-    const main_page = document.createElement('div');
-    page.replaceChildren(main_page);
-    renderPayments();
-    renderPaymentsEventForMainPage();
-    renderPaymentHistory();
+function mainPageElement(session) {
+    const page = document.getElementById('page'); 
+    page.innerHTML = '';
+
+    renderPaymentsOwed(session);
+    renderPaymentsEventForMainPage(session);
+    renderPaymentHistory(session);
 }
 
-function renderPayments() {
-    user_id = req.session.user_id; //Kyra is working on this// add code to get user id
+function renderPaymentsOwed(session) {
+    user_id = session.user_id; 
 
-    // const page = document.getElementById('page'); //need to change
-    // const main_page = document.createElement('div');
-    // page.replaceChildren(main_page);
+    const page = document.getElementById('page');
+    page.innerHTML += `
+        <h1>Payments Owed</h1>
+    `
+
+    page.innerHTML += `
+        <section id="payments_owed_section">
+        </section>
+    `;
 
     axios
-        .get(`/api/payments/${user_id}`) // need to change
+        .get(`/api/payments/getPaymentsOwed/${user_id}`)
         .then((response) => {
             const payments = response.data;
-            let paymentsDiv = document.createElement('div');
-            main_page.appendChild(paymentsDiv).innerHTML += `
-        <section id="main_payments">
-            <h1>${payments}</h1>
-        </section>
+
+            const paymentsOwedSection = document.getElementById('payments_owed_section');
             
-        `;
+            payments.forEach(payment => {
+                paymentsOwedSection.innerHTML += `
+                    <p>${payments.amount}</p>
+                `
+            });
         })
         .catch((error) => {
             //ERROR handling
@@ -36,24 +43,29 @@ function renderPayments() {
 
 //paymentevent
 
-function renderPaymentsEventForMainPage() {
-    user_id = req.session.user_id; //Kyra is working on this// add code to get user id
+function renderPaymentsEventForMainPage(session) {
+    user_id = session.user_id; //Kyra is working on this// add code to get user id
 
-    // const page = document.getElementById('page'); //need to change
-    // const main_page = document.createElement('div');
-    // page.replaceChildren(main_page);
+    const page = document.getElementById('page');
+    page.innerHTML += `
+        <h1>Payments Events</h1>
+    `
+
+    page.innerHTML += `
+        <section id="payments_event_section">
+        </section>
+    `;
 
     axios
-        .get(`/api/payments/${user_id}`) // need to change
+        .get(`/api/paymentsEvent/getEventsByCreatorId/${user_id}`) // need to change
         .then((response) => {
-            const paymentsEvent = response.data;
-            let paymentsEventDiv = document.createElement('div');
-            main_page.appendChild(paymentsEventDiv).innerHTML += `
-        <section id="main_payments_event">
-            <h1>${paymentsEvent}</h1>
-        </section>
-            
-        `;
+            const paymentEvents = response.data;
+            const paymentsEventSection = document.getElementById('payments_event_section');
+            paymentEvents.forEach(paymentEvent => {
+                paymentsEventSection.innerHTML += `
+                    <p>${paymentEvent.event_name} on ${paymentEvent.creation_date}</p>
+                `
+            });
         })
         .catch((error) => {
             //ERROR handling
@@ -61,24 +73,29 @@ function renderPaymentsEventForMainPage() {
         });
 }
 //payment history
-function renderPaymentHistory(user_id) {
-    user_id = req.session.user_id; //Kyra is working on this// add code to get user id
+function renderPaymentHistory(session) {
+    user_id = session.user_id;
 
-    // const page = document.getElementById('page'); //need to change
-    // const main_page = document.createElement('div');
-    // page.replaceChildren(main_page);
+    const page = document.getElementById('page');
+    page.innerHTML += `
+        <h1>Payments History</h1>
+    `
+
+    page.innerHTML += `
+        <section id="payment_history_section">
+        </section>
+    `;
 
     axios
-        .get(`/api/payments/${user_id}`) // need to change
+        .get(`/api/payments/getPaymentsPaid/${user_id}`) // need to change
         .then((response) => {
             const paymentsHistory = response.data;
-            let paymentsHistoryDiv = document.createElement('div');
-            main_page.appendChild(paymentsHistoryDiv).innerHTML += `
-        <section id="main_payments_history">
-            <h1>${paymentsHistory}</h1>
-        </section>
-            
-        `;
+            const paymentHistorySection = document.getElementById('payment_history_section');
+            paymentsHistory.forEach(payment => {
+                paymentHistorySection.innerHTML += `
+                    <p>${payments.amount}</p>
+                `
+            });
         })
         .catch((error) => {
             //ERROR handling

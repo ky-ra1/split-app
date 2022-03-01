@@ -12,5 +12,6 @@ function renderAppWithSession() {
     getSession().then(session => {
         renderHeader(session);
         // waiting on payments (client/js/components/payments/index.js)
+        mainPageElement(session);
     });
 }
