@@ -29,11 +29,10 @@ function renderLoginForm() {
         // } else if (body.password === '') {
         //     error = 'Password is required';
         // }
-
         // to change when error handling is
         if (true) {
             axios.post('/api/sessions', body).then((response) => {
-                renderAppWithSession(); //required to create
+                renderAppWithSession(); 
             });
         }
     });
