@@ -1,4 +1,4 @@
-function renderHeader() {
+function renderHeader(session = {}) {
     const header = document.querySelector('#header-nav');
     header.innerHTML = `       
         <ul id="navlist">
@@ -6,7 +6,7 @@ function renderHeader() {
             <li onClick="renderPayment()">Create Payment Event</li>
             <li onClick="renderPaymentEvent()">Payment Event</li>
             <li onClick="renderPaymentHistory()">Payment History</li>
-            <li onClick="renderLoginForm()">Login</li>
+            <li onClick="renderLoginForm()">Login</li> 
         </ul>
     `;
 }

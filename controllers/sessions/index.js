@@ -6,39 +6,46 @@ const router = express.Router();
 
 // Create Session (Login)
 router.post("/", (req, res) => {
-    const username = req.body.username;
+    const email = req.body.email;
     const password = req.body.password;
-    function incorrectResponse(res) {
-        res.status(400).json({
-            message: "Incorrect username or password",
-        });
-    }
-    Users.getByUsername(username)
+    // function incorrectResponse(res) {
+    //     res.status(400).json({
+    //         message: "Incorrect username or password",
+    //     });
+    // }
+    Users.getByEmail(email)
         .then((user) => {
             // Using Sync here currently
-            const valid = user && bcrypt.compareSync(password, user.password);
-            if (valid) {
+            // const valid = user && bcrypt.compareSync(password, user.password);
+            const valid = true; //test code
+
+            if (valid) {   
                 req.session.user_id = user.id;
-                req.session.username = user.username;
+                req.session.email = user.email;
+                req.session.first_name = user.first_name;
+
                 res.json({
                     user_id: user.id,
-                    username: username,
+                    email: email,
+                    first_name: user.first_name
                 });
-            } else {
-                incorrectResponse(res);
             }
-        })
-        .catch((error) => {
-            incorrectResponse(res);
+            // } else {
+            //     incorrectResponse(res);
+            // }
+        // })
+        // .catch((error) => {
+        //     incorrectResponse(res);
         });
 });
 
 // Get Session (Login)
 router.get("/", (req, res) => {
-    if (req.session.username) {
+    if (req.session.email) {
         res.json({
             user_id: req.session.user_id,
-            username: req.session.username,
+            email: req.session.email,
+            first_name: req.session.first_name,
         });
     } else {
         res.status(401).json({

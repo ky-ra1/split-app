@@ -15,6 +15,12 @@ router.get('/getById/:id', (req, res) => {
     })
 });
 
+router.get('/getPaymentsOwed/:id', (req, res) => {
+    payments.getPaymentsOwed(req.params.id).then((payment) => {
+        res.json(payment);
+    });
+});
+
 router.get('/getPaymentsPaid/:id', (req, res) => {
     payments.getPaymentsPaid(req.params.id).then((payment) => {
         res.json(payment)
