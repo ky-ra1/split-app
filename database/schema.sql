@@ -2,10 +2,10 @@
 -- Run `createdb split_app` in terminal to create the table
 -- Then run `psql split_app` to run the below commands in the DB
 
-DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS payments;
 DROP TABLE IF EXISTS payment_events;
 DROP TABLE IF EXISTS payments_event;
-DROP TABLE IF EXISTS payments;
+DROP TABLE IF EXISTS users;
 
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
