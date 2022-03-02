@@ -42,6 +42,19 @@ const Payments = {
             return response;
         });
     },
+    create: (body) => {
+        const query = `INSERT INTO payments (user_id,amount,percentage,paid_status,received_status,paid_date,payment_event_id) VALUES ($1,$2,$3,false,false,null,$4) RETURNING *`;
+        return db
+            .query(query, [
+                body.user_id,
+                body.amount,
+                body.percentage,
+                body.payment_event_id,
+            ])
+            .then((response) => {
+                return response.rows ? response.rows[0] : {};
+            });
+    },
     delete: (id) => {
         const query = `DELETE FROM payments WHERE id = $1`;
         return db.query(query, [id]);
