@@ -15,6 +15,11 @@ function renderHeader(session = {}) {
                 renderCreatePaymentEventList(session);
             });
     } else {
+        header.innerHTML = `       
+        <ul id="navlist">
+            <li onClick="renderLoginForm()">Login</li> 
+        </ul>
+    `;
     }
 }
 // nav bar list and functions need to be updated
