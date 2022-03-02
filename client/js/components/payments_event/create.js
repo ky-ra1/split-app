@@ -73,6 +73,12 @@ const renderCreatePaymentEventList = (session) => {
         );
         const dueDateField = document.querySelector('input[name=dueDate]');
 
+        
+        const percentageData = [];
+
+
+
+
         // gets each user data
         const allUserForm = document.querySelectorAll('.user-section');
         const userData = [];
@@ -86,28 +92,47 @@ const renderCreatePaymentEventList = (session) => {
                 (parseInt(user.querySelector('input[name=percentage]').value) /
                     100) *
                 parseInt(totalAmount.value);
-            userData.push(data);
+            data['user_id'] = session.user_id;
+            userData.push(data)
+
+            
+            percentageData.push(data['percentage'])
+
+
         });
 
-        const body = {
-            event_name: eventNameField.value,
-            total_amount: totalAmountField.value,
-            event_creator_id: session.user_id,
-            description: descriptionField.value,
-            creation_date: new Date(),
-            due_date: dueDateField.value,
-            payments: userData,
-            // all payments in array
-        };
+        const validPercentage = validatePercentage(percentageData);
+        if(validPercentage){
+            // clearPercentageError()
 
-        axios
-            .post('/api/paymentsEvent', body)
-            .then((response) => {
-                mainPageElement(session);
-            })
-            .catch((error) => {
-                // to do error handling
-            }); //update endpoint
+            const body = {
+                event_name: eventNameField.value,
+                total_amount: totalAmountField.value,
+                event_creator_id: session.user_id,
+                description: descriptionField.value,
+                creation_date: new Date(),
+                due_date: dueDateField.value,
+                payments: userData,
+                // all payments in array
+            };
+
+            axios
+                .post('/api/paymentsEvent', body)
+                .then((response) => {
+                    mainPageElement(session);
+                })
+                .catch((error) => {
+                    // to do error handling
+                }); //update endpoint
+            }else{
+                clearPercentageError();
+
+                const formDiv = document.querySelector('#add-user-section');
+                const errorPercentage = document.createElement('p');
+                errorPercentage.setAttribute('id', 'error-percentage');
+                errorPercentage.innerHTML = 'Invalid percentage total'; // can fix text later.
+                formDiv.appendChild(errorPercentage);
+            }
     });
 };
 
@@ -148,4 +173,13 @@ function addUserForm() {
     section.appendChild(percentageInput);
 
     section.appendChild(breakTag);
+}
+
+
+
+function clearPercentageError(){
+    const displayedErrorPercentage = document.getElementById('error-percentage');
+    if(displayedErrorPercentage){
+        displayedErrorPercentage.remove();
+    }
 }
