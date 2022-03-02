@@ -1,13 +1,25 @@
 function renderHeader(session = {}) {
     const header = document.querySelector('#header-nav');
-    header.innerHTML = `       
+
+    if (session.email) {
+        header.innerHTML = `       
         <ul id="navlist">
-            <li onClick="renderProfile()">Profile</li>
-            <li onClick="renderPayment()">Create Payment Event</li>
-            <li onClick="renderPaymentEvent()">Payment Event</li>
-            <li onClick="renderPaymentHistory()">Payment History</li>
+            <li id="payment-event">Create Payment Event</li>
+            <li onClick="logout()">Logout</li> 
+        </ul>
+    `;
+        document
+            .querySelector('#payment-event')
+            .addEventListener('click', () => {
+                console.log(session);
+                renderCreatePaymentEventList(session);
+            });
+    } else {
+        header.innerHTML = `       
+        <ul id="navlist">
             <li onClick="renderLoginForm()">Login</li> 
         </ul>
     `;
+    }
 }
 // nav bar list and functions need to be updated
