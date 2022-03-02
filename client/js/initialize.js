@@ -1,17 +1,18 @@
-// Ask if the user is logged in first
-renderAppWithoutSession(); // Or render a loading spinner
-// then look for logged in user
-// renderAppWithSession();
+// // Ask if the user is logged in first
+// renderAppWithoutSession(); // Or render a loading spinner
+// // then look for logged in user
+renderAppWithSession();
 
-function renderAppWithoutSession() {
-    renderHeader();
-    renderLoginForm();
-}
+// function renderAppWithoutSession() {
+//     renderHeader();
+//     renderLoginForm();
+// }
 
 function renderAppWithSession() {
-    getSession().then(session => {
+    getSession().then((session) => {
         renderHeader(session);
-        // waiting on payments (client/js/components/payments/index.js)
-        mainPageElement(session);
+        renderCreatePaymentEventList(session); // for testing to delete
+        //         // waiting on payments (client/js/components/payments/index.js)
+        //         mainPageElement(session);
     });
 }
