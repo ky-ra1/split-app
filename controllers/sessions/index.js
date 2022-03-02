@@ -16,7 +16,8 @@ router.post('/', (req, res) => {
     Users.getByEmail(email).then((user) => {
         // Using Sync here currently
         // const valid = user && bcrypt.compareSync(password, user.password);
-        const valid = true; //test code
+       
+        const valid = user && (password === user.password);
 
         if (valid) {
             req.session.user_id = user.id;
