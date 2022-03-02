@@ -73,10 +73,20 @@ const renderCreatePaymentEventList = (session) => {
         );
         const dueDateField = document.querySelector('input[name=dueDate]');
 
+        // gets each user data
         const allUserForm = document.querySelectorAll('.user-section');
         const userData = [];
         allUserForm.forEach((user) => {
-            console.log(user);
+            const data = {};
+            data['user'] = user.querySelector('input[name=user]').value;
+            data['percentage'] = parseInt(
+                user.querySelector('input[name=percentage]').value
+            );
+            data['amount'] =
+                (parseInt(user.querySelector('input[name=percentage]').value) /
+                    100) *
+                parseInt(totalAmount.value);
+            userData.push(data);
         });
 
         const body = {
@@ -86,14 +96,18 @@ const renderCreatePaymentEventList = (session) => {
             description: descriptionField.value,
             creation_date: new Date(),
             due_date: dueDateField.value,
-            payments: [],
+            payments: userData,
             // all payments in array
         };
 
-        // payments body to send for axios
-        // get each of the payment
-
-        // axios request
+        axios
+            .post('/api/paymentsEvent', body)
+            .then((response) => {
+                mainPageElement(session);
+            })
+            .catch((error) => {
+                // to do error handling
+            }); //update endpoint
     });
 };
 
