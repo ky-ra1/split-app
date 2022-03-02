@@ -4,12 +4,13 @@
 
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS payment_events;
+DROP TABLE IF EXISTS payments_event;
 DROP TABLE IF EXISTS payments;
 
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     first_name VARCHAR(30) NOT NULL,
-    username VARCHAR(20), 
+    username VARCHAR(20) NOT NULL UNIQUE, 
     password TEXT NOT NULL,
     email VARCHAR(50) NOT NULL UNIQUE
 );
@@ -28,8 +29,9 @@ CREATE TABLE payments (
     id SERIAL PRIMARY KEY,
     user_id INTEGER,
     amount NUMERIC,
+    percentage INTEGER,
     paid_status BOOLEAN,
-    recieved_status BOOLEAN,
+    received_status BOOLEAN,
     paid_date DATE,
     payment_event_id INTEGER
 );

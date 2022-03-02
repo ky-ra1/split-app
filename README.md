@@ -60,7 +60,7 @@ Every User can be a Main User and vice versa.
 
 6. As a main user,
    I want to be able to set a due date for a payment event
-   so that I can give the user a guideline about when payment should be recieved by
+   so that I can give the user a guideline about when payment should be received by
 
 7. As a user,
    I want to be able to view all payments that I need to make, is owed to me and payment history
@@ -76,6 +76,6 @@ Every User can be a Main User and vice versa.
 
 ![mobile](/assets/mobile.png)
 
-
 ## Entity Relationship Diagram
+
 ![erd](/assets/database-ERD.png)

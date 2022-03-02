@@ -11,8 +11,8 @@ INSERT INTO payments_event
 VALUES ('Work dinner', 300.00, 1, 'Dinner with work people on Feb 27th 2022', '2022-02-27', '2022-03-01');
 
 INSERT INTO payments
-(user_id, amount, paid_status, recieved_status, paid_date, payment_event_id)
-VALUES (1, 75.00, true, true, '2022-02-27', 1);
+(user_id, amount, percentage, paid_status, received_status, paid_date, payment_event_id)
+VALUES (1, 75.00, 25, true, true, '2022-02-27', 1);
 
 INSERT INTO payments
-(user_id, amount, paid_status, recieved_status, payment_event_id) VALUES (2, 75.00, true, false, 1), (3, 75.00, false, false, 1), (4, 75.00, false, false, 1);
+(user_id, amount, percentage, paid_status, received_status, payment_event_id) VALUES (2, 75.00, 25, true, false, 1), (3, 75.00, 25, false, false, 1), (4, 75.00, 25, false, false, 1);
