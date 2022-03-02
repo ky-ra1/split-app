@@ -16,15 +16,17 @@ const renderCreatePaymentEventList = (session) => {
         <label for="dueDate">Due Date:</label><br>
         <input type="date" id="dueDate" name="dueDate">  
         
+        <h1>User Breakdown</h1>
+        <span>Click to add user</span>
+        <button id="add-user" class="addUser-${userCount}">+</button><br>
         <div id="add-user-section">
-            <h1>User Breakdown</h1>
-            <span>Click to add user</user>
-            <button id="add-user" class="addUser-${userCount}">+</button><br>
-            <label for="user">User ${userCount}:</label><br>
-            <input type="text" id="${userCount}" class="user" name="user"> 
-            <label for="percentage">Percentage: </label>
-            <input type="number" id="user" class="percentage" name="percentage">   
-            <span id="display-${userCount}"></span><br>
+            <section class="user-section">
+                <label for="user">User ${userCount}:</label><br>
+                <input type="text" id="${userCount}" class="user" name="user"> 
+                <label for="percentage">Percentage: </label>
+                <input type="number" id="percentage-${userCount}" class="percentage" name="percentage">   
+                <span id="display-${userCount}"></span><br>
+            </section>
         </div>
 
         <button type="submit" class="submitEvent">Submit</button>
@@ -71,49 +73,79 @@ const renderCreatePaymentEventList = (session) => {
         );
         const dueDateField = document.querySelector('input[name=dueDate]');
 
-        const paymentsEventBody = {
+        // gets each user data
+        const allUserForm = document.querySelectorAll('.user-section');
+        const userData = [];
+        allUserForm.forEach((user) => {
+            const data = {};
+            data['user'] = user.querySelector('input[name=user]').value;
+            data['percentage'] = parseInt(
+                user.querySelector('input[name=percentage]').value
+            );
+            data['amount'] =
+                (parseInt(user.querySelector('input[name=percentage]').value) /
+                    100) *
+                parseInt(totalAmount.value);
+            userData.push(data);
+        });
+
+        const body = {
             event_name: eventNameField.value,
             total_amount: totalAmountField.value,
             event_creator_id: session.user_id,
             description: descriptionField.value,
             creation_date: new Date(),
             due_date: dueDateField.value,
+            payments: userData,
+            // all payments in array
         };
 
-        // payments body to send for axios
-        // axios request
+        axios
+            .post('/api/paymentsEvent', body)
+            .then((response) => {
+                mainPageElement(session);
+            })
+            .catch((error) => {
+                // to do error handling
+            }); //update endpoint
     });
 };
 
 function addUserForm() {
     let userCount = document.getElementsByClassName('user').length + 1;
     const userForm = document.getElementById(`add-user-section`);
+
+    // create a section for each
+    let section = document.createElement('section');
+    section.setAttribute('class', 'user-section');
+    userForm.appendChild(section);
+
     let userLabel = document.createElement('label');
     userLabel.setAttribute('for', userCount);
     userLabel.innerHTML = `User ${userCount}:`;
-    userForm.appendChild(userLabel);
+    section.appendChild(userLabel);
 
     let breakTag = document.createElement('br');
-    userForm.appendChild(breakTag);
+    section.appendChild(breakTag);
 
     let userInput = document.createElement('input');
     userInput.setAttribute('type', 'text');
     userInput.setAttribute('id', userCount);
     userInput.setAttribute('class', 'user');
     userInput.setAttribute('name', 'user');
-    userForm.appendChild(userInput);
+    section.appendChild(userInput);
 
     let percentageLabel = document.createElement('label');
     percentageLabel.setAttribute('for', `percentage-${userCount}`);
     percentageLabel.innerHTML = `Percentage: `;
-    userForm.appendChild(percentageLabel);
+    section.appendChild(percentageLabel);
 
     let percentageInput = document.createElement('input');
     percentageInput.setAttribute('type', 'number');
-    percentageInput.setAttribute('id', 'user');
+    percentageInput.setAttribute('id', `percentage-${userCount}`);
     percentageInput.setAttribute('class', 'percentage');
     percentageInput.setAttribute('name', 'percentage');
-    userForm.appendChild(percentageInput);
+    section.appendChild(percentageInput);
 
-    userForm.appendChild(breakTag);
+    section.appendChild(breakTag);
 }

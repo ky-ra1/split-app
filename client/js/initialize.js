@@ -1,6 +1,6 @@
-// Ask if the user is logged in first
+// // Ask if the user is logged in first
 renderAppWithoutSession(); // Or render a loading spinner
-// then look for logged in user
+// // then look for logged in user
 // renderAppWithSession();
 
 function renderAppWithoutSession() {
@@ -9,7 +9,7 @@ function renderAppWithoutSession() {
 }
 
 function renderAppWithSession() {
-    getSession().then(session => {
+    getSession().then((session) => {
         renderHeader(session);
         // waiting on payments (client/js/components/payments/index.js)
         mainPageElement(session);
