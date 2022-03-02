@@ -1,6 +1,8 @@
-const renderCreatePaymentEventList = () => {
+const renderCreatePaymentEventList = (session) => {
     const page = document.getElementById('page');
     let userCount = 1;
+
+    // get rid of all br tags after styling
 
     page.innerHTML = `
     <h1>Add Payment Event</h1>
@@ -10,61 +12,85 @@ const renderCreatePaymentEventList = () => {
         <label for="description">Description:</label><br>
         <input type="text" id="description" name="description"><br>    
         <label for="totalAmount">Total Amount:</label><br>
-        <input type="number" id="totalAmount" name="totalAmount"> 
-    </form>
+        <input type="number" id="totalAmount" name="totalAmount"><br>
+        <label for="dueDate">Due Date:</label><br>
+        <input type="date" id="dueDate" name="dueDate">  
+        
+        <div id="add-user-section">
+            <h1>User Breakdown</h1>
+            <span>Click to add user</user>
+            <button id="add-user" class="addUser-${userCount}">+</button><br>
+            <label for="user">User ${userCount}:</label><br>
+            <input type="text" id="${userCount}" class="user" name="user"> 
+            <label for="percentage">Percentage: </label>
+            <input type="number" id="user" class="percentage" name="percentage">   
+            <span id="display-${userCount}"></span><br>
+        </div>
 
-    <form id="users" onsubmit="return false">
-        <h1>User Breakdown</h1>
-        <label for="user">User ${userCount}:</label><br>
-        <input type="text" id="${userCount}" class="user" name="user"> 
-        <label for="percentage">Percentage: </label>
-        <input type="number" id="user" class="percentage" name="percentage">   
-        <span id="display-${userCount}"></span>
-        <button type="button" class="addUser-${userCount}">+</button><br>
-    </form>
-    
-    <form id="submitButton">
         <button type="submit" class="submitEvent">Submit</button>
     </form>`;
 
-    setupAddListener();
-};
-
-function setupAddListener() {
-    let userCount = document.getElementsByClassName('user').length;
-    const addUser = document.querySelector(`.addUser-${userCount}`);
-    const userForm = document.getElementById('users');
-
-    addUser.addEventListener('click', (event) => {
+    // + button
+    const addUserButton = document.querySelector('#add-user');
+    addUserButton.addEventListener('click', (event) => {
         event.preventDefault();
+        // get input of user
         let user = document.getElementById(`${userCount}`);
-        // let valid = checkValidity(user.value);
+
+        // check valid user or not
         let valid = true;
 
-        userCount = userCount + 1;
         if (valid) {
+            // no errors
             const error = document.getElementById('error');
             if (error) {
                 error.innerHTML = '';
             }
 
             addUserForm();
-
-            setupAddListener();
         } else {
             userForm.innerHTML += `
                 <span id="error">Invalid</span>
                 `;
         }
+
+        // add user count when clicked on
+        userCount += 1;
     });
-}
+
+    const form = document.getElementById('eventDetails');
+    form.addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        const eventNameField = document.querySelector('input[name=eventName]');
+        const totalAmountField = document.querySelector(
+            'input[name=totalAmount]'
+        );
+        const descriptionField = document.querySelector(
+            'input[name=description]'
+        );
+        const dueDateField = document.querySelector('input[name=dueDate]');
+
+        const paymentsEventBody = {
+            event_name: eventNameField.value,
+            total_amount: totalAmountField.value,
+            event_creator_id: session.user_id,
+            description: descriptionField.value,
+            creation_date: new Date(),
+            due_date: dueDateField.value,
+        };
+
+        // payments body to send for axios
+        // axios request
+    });
+};
 
 function addUserForm() {
     let userCount = document.getElementsByClassName('user').length + 1;
-    const userForm = document.getElementById(`users`);
+    const userForm = document.getElementById(`add-user-section`);
     let userLabel = document.createElement('label');
     userLabel.setAttribute('for', userCount);
-    userLabel.innerHTML = `User: ${userCount}`;
+    userLabel.innerHTML = `User ${userCount}:`;
     userForm.appendChild(userLabel);
 
     let breakTag = document.createElement('br');
@@ -89,27 +115,5 @@ function addUserForm() {
     percentageInput.setAttribute('name', 'percentage');
     userForm.appendChild(percentageInput);
 
-    let button = document.createElement('button');
-    button.setAttribute('type', 'button');
-    button.appendChild(document.createTextNode('+'));
-    button.setAttribute('class', `addUser-${userCount}`);
-    userForm.appendChild(button);
-
     userForm.appendChild(breakTag);
 }
-
-function checkValidity(user) {
-    //validate user with the user api
-    return true;
-}
-
-const form = document.getElementById('submitButton');
-form.addEventListener('submit', (event) => {
-    event.preventDefault();
-
-    let userCount = document.getElementsByClassName('user').length;
-    let user = document.getElementById(`${userCount}`);
-    checkValidity(user.value);
-
-    const eventDetailsForm = document.querySelectorAll('#eventDetails');
-});
