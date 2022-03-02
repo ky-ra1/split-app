@@ -92,6 +92,7 @@ const renderCreatePaymentEventList = (session) => {
                 (parseInt(user.querySelector('input[name=percentage]').value) /
                     100) *
                 parseInt(totalAmount.value);
+            data['user_id'] = session.user_id;
             userData.push(data)
 
             
