@@ -1,11 +1,11 @@
-const express = require("express");
-const Users = require("../../models/users");
-const bcrypt = require("bcrypt");
+const express = require('express');
+const Users = require('../../models/users');
+const bcrypt = require('bcrypt');
 
 const router = express.Router();
 
 // Create Session (Login)
-router.post("/", (req, res) => {
+router.post('/', (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
     // function incorrectResponse(res) {
@@ -13,34 +13,35 @@ router.post("/", (req, res) => {
     //         message: "Incorrect username or password",
     //     });
     // }
-    Users.getByEmail(email)
-        .then((user) => {
-            // Using Sync here currently
-            // const valid = user && bcrypt.compareSync(password, user.password);
-            const valid = true; //test code
+    Users.getByEmail(email).then((user) => {
+        // Using Sync here currently
+        // const valid = user && bcrypt.compareSync(password, user.password);
+        const valid = true; //test code
 
-            if (valid) {   
-                req.session.user_id = user.id;
-                req.session.email = user.email;
-                req.session.first_name = user.first_name;
+        if (valid) {
+            req.session.user_id = user.id;
+            req.session.email = user.email;
+            req.session.first_name = user.first_name;
+            req.session.username = user.username;
 
-                res.json({
-                    user_id: user.id,
-                    email: email,
-                    first_name: user.first_name
-                });
-            }
-            // } else {
-            //     incorrectResponse(res);
-            // }
+            res.json({
+                user_id: user.id,
+                email: email,
+                first_name: user.first_name,
+                username: user.username,
+            });
+        }
+        // } else {
+        //     incorrectResponse(res);
+        // }
         // })
         // .catch((error) => {
         //     incorrectResponse(res);
-        });
+    });
 });
 
 // Get Session (Login)
-router.get("/", (req, res) => {
+router.get('/', (req, res) => {
     if (req.session.email) {
         res.json({
             user_id: req.session.user_id,
@@ -49,15 +50,15 @@ router.get("/", (req, res) => {
         });
     } else {
         res.status(401).json({
-            message: "Not logged in",
+            message: 'Not logged in',
         });
     }
 });
 
 // 3. Delete Session (Logout)
-router.delete("/", (req, res) => {
+router.delete('/', (req, res) => {
     req.session.destroy();
-    res.json({ message: "Logged out" });
+    res.json({ message: 'Logged out' });
 });
 
 module.exports = router;
