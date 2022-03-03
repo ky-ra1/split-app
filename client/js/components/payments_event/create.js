@@ -73,7 +73,7 @@ const renderCreatePaymentEventList = (session) => {
         );
         const dueDateField = document.querySelector('input[name=dueDate]');
 
-        
+
         const percentageData = [];
 
 
@@ -92,9 +92,8 @@ const renderCreatePaymentEventList = (session) => {
                 (parseInt(user.querySelector('input[name=percentage]').value) /
                     100) *
                 parseInt(totalAmount.value);
-            data['user_id'] = session.user_id;
             userData.push(data)
-
+            
             
             percentageData.push(data['percentage'])
 
@@ -115,6 +114,8 @@ const renderCreatePaymentEventList = (session) => {
                 payments: userData,
                 // all payments in array
             };
+
+            console.log(body);
 
             axios
                 .post('/api/paymentsEvent', body)

@@ -34,28 +34,31 @@ router.get('/getEventsByCreatorId/:id', (req, res) => {
 router.post('/', (req, res) => {
     const { payments: paymentsData, ...data } = req.body;
     usersModel.getAll().then(response => {
-        const enteredUsers = paymentsData;
-        const dbUsers = [];
-        for(const idx in response) {
-            dbUsers.push(response[idx].username);
-        }
+            const enteredUsers = paymentsData;
+            const dbUsers = [];
+            for(const idx in response) {
+                dbUsers.push(response[idx].username);
+            }
 
-        for(const idx in enteredUsers) {
-            if(!dbUsers.includes(enteredUsers[idx].user)) {
-                throw new Error(`${enteredUsers[idx].user} does not exist`);
-            };
-        }
-    });
+            for(const idx in enteredUsers) {
+                if(!dbUsers.includes(enteredUsers[idx].user)) {
+                    throw new Error(`${enteredUsers[idx].user} does not exist`);
+                };
+            }
 
-    paymentsEventModel.create(data).then((paymentEvent) => {
-        // let payments = [];
-        for (const paymentData of paymentsData) {
-            paymentModel.create({
-                ...paymentData,
-                payment_event_id: paymentEvent.id,
-            });
-        }
-        res.status(201).json(paymentEvent);
+        paymentsEventModel.create(data).then((paymentEvent) => {
+            // let payments = [];
+            for (const paymentData of paymentsData) {
+                paymentModel.create({
+                    ...paymentData,
+                    payment_event_id: paymentEvent.id,
+                });
+            }
+            res.status(201).json(paymentEvent);
+        });
+    })
+    .catch(error => {
+        
     });
 });
 
