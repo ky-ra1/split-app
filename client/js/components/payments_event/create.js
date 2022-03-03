@@ -115,8 +115,6 @@ const renderCreatePaymentEventList = (session) => {
                 // all payments in array
             };
 
-            console.log(body);
-
             axios
                 .post('/api/paymentsEvent', body)
                 .then((response) => {

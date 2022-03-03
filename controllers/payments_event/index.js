@@ -34,17 +34,26 @@ router.get('/getEventsByCreatorId/:id', (req, res) => {
 router.post('/', (req, res) => {
     const { payments: paymentsData, ...data } = req.body;
     usersModel.getAll().then(response => {
-            const enteredUsers = paymentsData;
-            const dbUsers = [];
-            for(const idx in response) {
-                dbUsers.push(response[idx].username);
-            }
+        const enteredUsers = paymentsData;
+        let dbUsers = [];
+        for(const idx in response) {
+            dbUsers.push(response[idx].username);
+        }
 
+        for(const idx in enteredUsers) {
+            if(!dbUsers.includes(enteredUsers[idx].user)) {
+                throw new Error(`${enteredUsers[idx].user} does not exist`);
+            };
+        }
+
+        dbUsers = [];
+        for(const idx in response) {
             for(const idx in enteredUsers) {
-                if(!dbUsers.includes(enteredUsers[idx].user)) {
-                    throw new Error(`${enteredUsers[idx].user} does not exist`);
-                };
+                if(response[idx].user === enteredUsers[idx].username) {
+                    enteredUsers[idx]['user_id'] = response[idx].id;
+                }
             }
+        }
 
         paymentsEventModel.create(data).then((paymentEvent) => {
             // let payments = [];
