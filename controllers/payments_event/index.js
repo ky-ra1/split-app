@@ -26,7 +26,6 @@ router.get('/getEventsByCreatorId/:id', (req, res) => {
     paymentsEventModel
         .getEventsByCreatorId(req.params.id)
         .then((paymentEvents) => {
-            console.log(paymentEvents);
             res.json(paymentEvents);
         });
 });

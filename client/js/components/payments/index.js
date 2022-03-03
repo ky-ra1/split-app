@@ -14,25 +14,53 @@ function renderPaymentsOwed(session) {
 
     const page = document.getElementById('page');
     page.innerHTML += `
-        <h1>Payments Owed</h1>
+        <h1>Payments</h1>
     `
 
     page.innerHTML += `
-        <section id="payments_owed_section">
+        <section id="payments_owing_section">
+            <h3>Payments Owing<h3>
+        </section>
+        <section id="payments_owed_to_me">
+            <h3>Payments Owed To Me</h3>
         </section>
     `;
 
+    //FIX API CALL to get the event creator, currently displaying event name rather than event creator
     axios
         .get(`/api/payments/getPaymentsOwed/${user_id}`)
         .then((response) => {
             const payments = response.data;
 
-            const paymentsOwedSection = document.getElementById('payments_owed_section');
-            
+            const paymentsOwingSection = document.getElementById('payments_owing_section');
+            const paymentsOwedToMe = document.getElementById('payments_owed_to_me');
+
             payments.forEach(payment => {
-                paymentsOwedSection.innerHTML += `
-                    <p>${payments.amount}</p>
-                `
+                if(payment.user_id !== payment.event_creator_id) {
+                    let status = '';
+                    if(!payment.paid_status && !payment.received_status) {
+                        status = 'UNPAID';
+                    } else if(payment.paid_status && !payment.received_status)   {
+                        status = 'PAID - Payer Notified';
+                    }
+                    if(!payment.received_status) {
+                        paymentsOwingSection.innerHTML += `
+                            <p>${payment.event_name} | ${payment.due_date} | ${status}</p>
+                        `
+                    }
+                } else if (payment.user_id === payment.event_creator_id) {
+                    let status = '';
+                    if(!payment.paid_status && !payment.received_status) {
+                        status = 'UNPAID';
+                    } else if(payment.paid_status && !payment.received_status)   {
+                        status = 'PAID - Payer Notified';
+                    }
+                    if(!payment.received_status) {
+                        paymentsOwedToMe.innerHTML += `
+                            <p>${payment.event_name} | ${payment.due_date} | ${status}</p>
+                        `
+                    }
+                }
             });
         })
         .catch((error) => {
@@ -91,10 +119,17 @@ function renderPaymentHistory(session) {
         .then((response) => {
             const paymentsHistory = response.data;
             const paymentHistorySection = document.getElementById('payment_history_section');
+
             paymentsHistory.forEach(payment => {
-                paymentHistorySection.innerHTML += `
-                    <p>${payments.amount}</p>
-                `
+                let status = 'PAID - Confirmed';
+                
+                console.log((payment.paid_status && payment.received_status));
+                
+                if(payment.paid_status && payment.received_status) {
+                    paymentHistorySection.innerHTML += `
+                        <p>${payment.event_name} | ${payment.due_date} | ${status}</p>
+                    `
+                }
             });
         })
         .catch((error) => {
