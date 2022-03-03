@@ -122,7 +122,7 @@ const renderCreatePaymentEventList = (session) => {
                     mainPageElement(session);
                 })
                 .catch((error) => {
-                    // to do error handling
+                    
                 }); //update endpoint
             }else{
                 clearPercentageError();

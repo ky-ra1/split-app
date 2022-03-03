@@ -30,4 +30,10 @@ router.post('/', (req, res) => {
     });
 });
 
+router.get('/', (req,res) => {
+    Users.getAll().then(users => {
+        res.json(users);
+    });
+});
+
 module.exports = router;

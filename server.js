@@ -14,6 +14,8 @@ const paymentsController = require('./controllers/payments');
 const pgSession = require("connect-pg-simple")(expressSession);
 const db = require('./database/db');
 
+//Middleware imports
+
 // App
 const port = process.env.PORT || 3000;
 const app = express();
@@ -33,6 +35,8 @@ app.use(
 // Pre-request middleware
 app.use(express.json());
 app.use(express.static('client'));
+
+//Other middleware
 
 
 // Controllers
