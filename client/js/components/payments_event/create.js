@@ -73,7 +73,7 @@ const renderCreatePaymentEventList = (session) => {
         );
         const dueDateField = document.querySelector('input[name=dueDate]');
 
-        
+
         const percentageData = [];
 
 
@@ -92,9 +92,8 @@ const renderCreatePaymentEventList = (session) => {
                 (parseInt(user.querySelector('input[name=percentage]').value) /
                     100) *
                 parseInt(totalAmount.value);
-            data['user_id'] = session.user_id;
             userData.push(data)
-
+            
             
             percentageData.push(data['percentage'])
 
@@ -122,7 +121,7 @@ const renderCreatePaymentEventList = (session) => {
                     mainPageElement(session);
                 })
                 .catch((error) => {
-                    // to do error handling
+                    //add error to UI
                 }); //update endpoint
             }else{
                 clearPercentageError();
