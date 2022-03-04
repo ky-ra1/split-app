@@ -34,7 +34,6 @@ router.put('/updatePaidStatus/', (req, res) => {
 });
 
 router.put('/updateReceivedStatus/', (req, res) => {
-    console.log(req.body);
     payments.updateReceivedStatus(req.body).then((payment) => {
         res.json(payment);
     });

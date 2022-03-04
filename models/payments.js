@@ -16,16 +16,16 @@ const Payments = {
     },
     getPaymentsOwed: (id) => {
         const query =
-            'SELECT payments.id AS payments_id, payments.user_id, payments_event.id AS event_id, payments_event.event_name, payments.paid_status, payments.received_status, payments.paid_date FROM payments INNER JOIN payments_event ON (payments_event.id = payments.payment_event_id) WHERE user_id = $1';
+            'SELECT payments.id AS payments_id, payments.user_id, payments_event.id AS event_id, payments_event.event_name, payments.paid_status, payments.received_status, payments.paid_date, payments_event.due_date, payments_event.event_creator_id FROM payments INNER JOIN payments_event ON (payments_event.id = payments.payment_event_id) WHERE user_id = $1';
         return db.query(query, [id]).then((response) => {
-            return response.rows ? response.rows[0] : {};
+            return response.rows;
         });
     },
     getPaymentsPaid: (id) => {
         const query =
-            'SELECT payments.id AS payments_id, payments.user_id, payments_event.id AS event_id, payments_event.event_name, payments.paid_status, payments.received_status, payments.paid_date FROM payments INNER JOIN payments_event ON (payments_event.id = payments.payment_event_id) WHERE user_id = $1 and payments.received_status = true;';
+            'SELECT payments.id AS payments_id, payments.user_id, payments_event.id AS event_id, payments_event.event_name, payments.paid_status, payments.received_status, payments.paid_date, payments_event.due_date FROM payments INNER JOIN payments_event ON (payments_event.id = payments.payment_event_id) WHERE user_id = $1 and payments.received_status = true;';
         return db.query(query, [id]).then((response) => {
-            return response.rows ? response.rows[0] : {};
+            return response.rows;
         });
     },
     updatePaidStatus: (paid_status, id) => {

@@ -23,11 +23,24 @@ router.get('/getByEmail/:email', (req, res) => {
     });
 });
 
-router.post('/', (req, res) => {
+router.post('/', userCreateValidator, (req, res) => {
     const user = req.body;
-    Users.create(user).then((user) => {
-        res.json(user);
-    });
+
+    user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync());
+
+    Users.create(user)
+        .then((user) => {
+            req.session.user_id = user.id;
+            req.session.username = user.username;
+            req.session.first_name = user.first_name;
+
+            res.json(user);
+        })
+        .catch(error => {
+            res.status(400).json({
+                message: "username or email invalid",
+            });
+        });
 });
 
 router.get('/', (req,res) => {

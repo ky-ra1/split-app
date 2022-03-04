@@ -14,10 +14,7 @@ router.post('/', (req, res) => {
     //     });
     // }
     Users.getByEmail(email).then((user) => {
-        // Using Sync here currently
-        // const valid = user && bcrypt.compareSync(password, user.password);
-       
-        const valid = user && (password === user.password);
+        const valid = user && bcrypt.compareSync(password, user.password);
 
         if (valid) {
             req.session.user_id = user.id;
@@ -56,7 +53,7 @@ router.get('/', (req, res) => {
     }
 });
 
-// 3. Delete Session (Logout)
+//Delete Session (Logout)
 router.delete('/', (req, res) => {
     req.session.destroy();
     res.json({ message: 'Logged out' });

@@ -11,7 +11,6 @@ function renderHeader(session = {}) {
         document
             .querySelector('#payment-event')
             .addEventListener('click', () => {
-                console.log(session);
                 renderCreatePaymentEventList(session);
             });
     } else {
