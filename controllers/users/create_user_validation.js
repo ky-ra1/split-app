@@ -1,6 +1,10 @@
+const { getByEmail } = require("../../models/users");
+
 const userCreateValidation = (req, res, next) => {
     const username = req.body.username;
     const password = req.body.password;
+    const email = req.body.email;
+
     if (!username || !password) {
         return res.status(400).json({
             message: "Please provide a username and a password.",
@@ -16,7 +20,7 @@ const userCreateValidation = (req, res, next) => {
             message: "Password must be at least 8 characters.",
         });
     }
-
+    
     next();
 };
 

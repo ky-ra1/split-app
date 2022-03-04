@@ -23,7 +23,7 @@ router.get('/getByEmail/:email', (req, res) => {
     });
 });
 
-router.post('/', (req, res) => {
+router.post('/', userCreateValidator, (req, res) => {
     const user = req.body;
 
     user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync());
