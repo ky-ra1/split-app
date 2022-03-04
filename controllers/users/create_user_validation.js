@@ -20,7 +20,13 @@ const userCreateValidation = (req, res, next) => {
             message: "Password must be at least 8 characters.",
         });
     }
-    
+
+    if(!email.includes('@')) {
+        return res.status(400).json({
+            message: "Enter a valid email address.",
+        });        
+    }
+
     next();
 };
 
