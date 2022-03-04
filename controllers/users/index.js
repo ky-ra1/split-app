@@ -28,13 +28,19 @@ router.post('/', userCreateValidator, (req, res) => {
 
     user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync());
 
-    Users.create(user).then((user) => {
-        req.session.user_id = user.id;
-        req.session.username = user.username;
-        req.session.first_name = user.first_name;
+    Users.create(user)
+        .then((user) => {
+            req.session.user_id = user.id;
+            req.session.username = user.username;
+            req.session.first_name = user.first_name;
 
-        res.json(user);
-    });
+            res.json(user);
+        })
+        .catch(error => {
+            res.status(400).json({
+                message: "username or email invalid",
+            });
+        });
 });
 
 module.exports = router;

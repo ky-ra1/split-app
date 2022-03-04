@@ -44,9 +44,18 @@ function renderSignupForm() {
         }
 
         if (!error) {
-            axios.post('/api/users', body).then((response) => {
-                renderLoginForm(); // TODO change to auto login
-            });
+            axios.post('/api/users', body)
+                .then((response) => {
+                    renderLoginForm(); // TODO change to auto login
+                })
+                .catch(error => {
+                    clearError();
+
+                    const errorElement = document.createElement('p');
+                    errorElement.setAttribute('id', 'error');
+                    errorElement.innerHTML = `${error.response.data.message}`;
+                    page.appendChild(errorElement);
+                });
         } else {
             clearError();
 
