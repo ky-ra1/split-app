@@ -25,7 +25,14 @@ router.get('/getByEmail/:email', (req, res) => {
 
 router.post('/', (req, res) => {
     const user = req.body;
+
+    user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync());
+
     Users.create(user).then((user) => {
+        req.session.user_id = user.id;
+        req.session.username = user.username;
+        req.session.first_name = user.first_name;
+
         res.json(user);
     });
 });
