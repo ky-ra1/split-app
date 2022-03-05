@@ -44,32 +44,18 @@ function renderSignupForm() {
         }
 
         if (!error) {
-            axios.post('/api/users', body)
+            axios
+                .post('/api/users', body)
                 .then((response) => {
                     renderLoginForm(); // TODO change to auto login
                 })
-                .catch(error => {
-                    clearError();
-
-                    const errorElement = document.createElement('p');
-                    errorElement.setAttribute('id', 'error');
-                    errorElement.innerHTML = `${error.response.data.message}`;
-                    page.appendChild(errorElement);
+                .catch((error) => {
+                    clearErrors();
+                    displayError(error.response.data.message);
                 });
         } else {
-            clearError();
-
-            const errorElement = document.createElement('p');
-            errorElement.setAttribute('id', 'error');
-            errorElement.innerHTML = `${error}`;
-            page.appendChild(errorElement);
+            clearErrors();
+            displayError(error);
         }
     });
-}
-
-function clearError() {
-    const error = document.getElementById('error');
-    if(error) {
-        error.remove();
-    }
 }

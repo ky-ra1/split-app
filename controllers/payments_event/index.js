@@ -33,42 +33,42 @@ router.get('/getEventsByCreatorId/:id', (req, res) => {
 
 router.post('/', (req, res) => {
     const { payments: paymentsData, ...data } = req.body;
-    usersModel.getAll().then(response => {
-        const enteredUsers = paymentsData;
-        let dbUsers = [];
-        for(const idx in response) {
-            dbUsers.push(response[idx].username);
-        }
+    usersModel
+        .getAll()
+        .then((response) => {
+            const enteredUsers = paymentsData;
+            let dbUsers = [];
+            for (const idx in response) {
+                dbUsers.push(response[idx].username);
+            }
 
-        for(const idx in enteredUsers) {
-            if(!dbUsers.includes(enteredUsers[idx].user)) {
-                throw new Error(`${enteredUsers[idx].user} does not exist`);
-            };
-        }
-
-        dbUsers = [];
-        for(const idx in response) {
-            for(const idx in enteredUsers) {
-                if(response[idx].user === enteredUsers[idx].username) {
-                    enteredUsers[idx]['user_id'] = response[idx].id;
+            for (const idx in enteredUsers) {
+                if (!dbUsers.includes(enteredUsers[idx].user)) {
+                    throw new Error(`${enteredUsers[idx].user} does not exist`);
                 }
             }
-        }
 
-        paymentsEventModel.create(data).then((paymentEvent) => {
-            // let payments = [];
-            for (const paymentData of paymentsData) {
-                paymentModel.create({
-                    ...paymentData,
-                    payment_event_id: paymentEvent.id,
-                });
+            dbUsers = [];
+            for (const idx in response) {
+                for (const idx in enteredUsers) {
+                    if (response[idx].user === enteredUsers[idx].username) {
+                        enteredUsers[idx]['user_id'] = response[idx].id;
+                    }
+                }
             }
-            res.status(201).json(paymentEvent);
-        });
-    })
-    .catch(error => {
-        
-    });
+
+            paymentsEventModel.create(data).then((paymentEvent) => {
+                // let payments = [];
+                for (const paymentData of paymentsData) {
+                    paymentModel.create({
+                        ...paymentData,
+                        payment_event_id: paymentEvent.id,
+                    });
+                }
+                res.status(201).json(paymentEvent);
+            });
+        })
+        .catch((error) => {});
 });
 
 //TO DO PATCH
