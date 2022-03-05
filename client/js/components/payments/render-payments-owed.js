@@ -260,11 +260,11 @@ function renderPaymentsOwed(session) {
                         // console.log(payment.payments_id, status)
 
                         if(status.includes('PAID')) {
-                            selectListOwed.add(optionTwo, null);
                             selectListOwed.add(optionOne, null);
+                            selectListOwed.add(optionTwo, null);
                         } else {
-                            selectListOwed.add(optionOne, null);
                             selectListOwed.add(optionTwo, null);
+                            selectListOwed.add(optionOne, null);
                         }
 
                         row.appendChild(row_data_1);

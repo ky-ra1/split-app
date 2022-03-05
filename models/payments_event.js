@@ -33,12 +33,33 @@ const PaymentsEvent = {
             return response.rows;
         });
     },  
-    updateRemainingAmount: ({ payment_event_id, amount }) => {
-        const query = 'UPDATE payments_event SET remaining_amount = remaining_amount - $1 WHERE id = $2 RETURNING *';
-        console.log(payment_event_id, amount)
-        return db.query(query, [amount, payment_event_id]).then((response) => {
-            return response.rows ? response.rows[0] : {};
-        });
+    updateRemainingAmount: ({ payment_event_id, amount, status }) => {
+        if(status) {
+            const query = 'UPDATE payments_event SET remaining_amount = remaining_amount - $1 WHERE id = $2 RETURNING *';
+            // console.log(payment_event_id, amount)
+            return db.query(query, [amount, payment_event_id]).then((response) => {
+                return response.rows ? response.rows[0] : {};
+            });
+        } else {
+            const query = 'UPDATE payments_event SET remaining_amount = remaining_amount + $1 WHERE id = $2 RETURNING *';
+            // console.log(payment_event_id, amount)
+            return db.query(query, [amount, payment_event_id]).then((response) => {
+                return response.rows ? response.rows[0] : {};
+            });   
+        }
+    },
+    updateCompletedStatus: (event_id, status) => {
+        if(status) {
+            const query = 'UPDATE payments_event SET completed = true WHERE id = $1 RETURNING *';
+            return db.query(query, [event_id]).then(response => {
+                return response.rows ? response.rows[0] : {};
+            })
+        } else {
+            const query = 'UPDATE payments_event SET completed = false WHERE id = $1 RETURNING *';
+            return db.query(query, [event_id]).then(response => {
+                return response.rows ? response.rows[0] : {};
+            })
+        }
     },
     create: (body) => {
         const query = `INSERT INTO payments_event (event_name, total_amount, event_creator_id, description, creation_date, due_date, remaining_amount, completed) VALUES ($1, $2, $3, $4, $5, $6, $7, false) RETURNING *`;
