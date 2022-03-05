@@ -17,13 +17,13 @@ CREATE TABLE users (
 
 CREATE TABLE payments_event (
     id SERIAL PRIMARY KEY,
-    event_name VARCHAR(20),
-    total_amount NUMERIC,
+    event_name VARCHAR(20) NOT NULL,
+    total_amount NUMERIC NOT NULL,
     remaining_amount NUMERIC,
     event_creator_id INTEGER,
-    description TEXT,
+    description TEXT NOT NULL,
     creation_date DATE,
-    due_date DATE,
+    due_date DATE NOT NULL,
     completed boolean
 );
 
