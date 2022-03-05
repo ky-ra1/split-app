@@ -46,11 +46,19 @@ const Payments = {
         });
     },
     updateReceivedStatus: ({ received_status, id }) => {
-        const query =
-            'UPDATE payments SET received_status = $1, paid_date = current_date WHERE id = $2 RETURNING *';
-        return db.query(query, [received_status, id]).then((response) => {
-            return response;
-        });
+        console.log(received_status)
+        if(received_status) {
+            const query =
+                'UPDATE payments SET received_status = $1, paid_date = current_date WHERE id = $2 RETURNING *';
+            return db.query(query, [received_status, id]).then((response) => {
+                return response;
+            });
+        } else {
+            const query = 'UPDATE payments SET received_status = $1, paid_date = null WHERE id = $2 RETURNING *';
+            return db.query(query, [received_status, id]).then((response) => {
+                return response;
+            });
+        }
     },
     getPaymentByEventId: (event_id) => {
         const query = 'SELECT * FROM payments WHERE payment_event_id = $1';
