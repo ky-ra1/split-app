@@ -18,15 +18,7 @@ function renderHeader(session = {}) {
                     width="50"
                 />
             </a>
-            <a
-                class="btn float-end d-inline"
-                data-bs-toggle="offcanvas"
-                href="#sidebar_right"
-                role="button"
-                aria-controls="sidebar_right"
-            >
-                Login
-            </a>
+            
             <div class="clearfix"></div>
         </div>
         <div
@@ -89,15 +81,7 @@ function renderHeader(session = {}) {
                     width="50"
                 />
             </a>
-            <a
-                class="btn float-end d-inline"
-                data-bs-toggle="offcanvas"
-                href="#sidebar_right"
-                role="button"
-                aria-controls="sidebar_right"
-            >
-                Login
-            </a>
+           
             <div class="clearfix"></div>
         </div>
         <div

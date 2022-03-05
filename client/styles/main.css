@@ -6,7 +6,8 @@ body {
     color: #000;
     overflow-x: hidden;
     height: 100%;
-    background-image: linear-gradient(to right, #c200fb, #ffbc0a);
+    background-color: #faf0f9be;
+    /* background-image: linear-gradient(to right, #c200fb, #ffbc0a); */
     background-repeat: no-repeat;
 }
 
@@ -60,7 +61,12 @@ button:focus {
     width: 70px;
     height: 60px;
 }
-
+#signUpbutton {
+    margin-top: 20px;
+}
+.w-100.border.fixed-top.py-2 {
+    background-image: linear-gradient(to left, #ffd54f, #d500f9);
+}
 .heading {
     margin-bottom: 60px !important;
 }
