@@ -23,17 +23,26 @@ function renderLoginForm() {
             password: passwordField.value,
         };
 
-        // let error = null;
-        // if (body.username === '') {
-        //     error = 'Username is required';
-        // } else if (body.password === '') {
-        //     error = 'Password is required';
-        // }
-        // to change when error handling is
-        if (true) {
-            axios.post('/api/sessions', body).then((response) => {
-                renderAppWithSession(); 
-            });
+        let error = null;
+        if (body.email === '') {
+            error = 'Email is required';
+        } else if (body.password === '') {
+            error = 'Password is required';
+        }
+
+        if (!error) {
+            axios
+                .post('/api/sessions', body)
+                .then((response) => {
+                    renderAppWithSession();
+                })
+                .catch((error) => {
+                    clearErrors();
+                    displayError(error.response.data.message);
+                });
+        } else {
+            clearErrors();
+            displayError(error);
         }
     });
 }

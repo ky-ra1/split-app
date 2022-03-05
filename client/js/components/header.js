@@ -4,6 +4,7 @@ function renderHeader(session = {}) {
     if (session.email) {
         header.innerHTML = `       
         <ul id="navlist">
+            <li id="main-page">Home</li> 
             <li id="payment-event">Create Payment Event</li>
             <li onClick="logout()">Logout</li> 
         </ul>
@@ -13,11 +14,16 @@ function renderHeader(session = {}) {
             .addEventListener('click', () => {
                 renderCreatePaymentEventList(session);
             });
+        document.querySelector('#main-page').addEventListener('click', () => {
+            mainPageElement(session);
+        });
     } else {
         header.innerHTML = `       
         <ul id="navlist">
+            <li onClick="renderSignupForm()">Sign up</li> 
             <li onClick="renderLoginForm()">Login</li> 
         </ul>
+
     `;
     }
 }
