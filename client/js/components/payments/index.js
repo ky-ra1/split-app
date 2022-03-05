@@ -213,7 +213,6 @@ function renderPaymentsEventForMainPage(session) {
     row_heading.appendChild(heading_1);
     row_heading.appendChild(heading_2);
     row_heading.appendChild(heading_3);
-    row_heading.appendChild(heading_4);
     thead.appendChild(row_heading);
 
     axios
