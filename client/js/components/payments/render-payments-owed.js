@@ -14,6 +14,7 @@ function addSelectListenersForOwing() {
                 id: parseInt(event.target.attributes.identifier.textContent),
                 paid_status: paid_status,
             }
+            console.log(body);
 
             axios
                 .patch('/api/payments/updatePaidStatus', body) 
@@ -47,6 +48,7 @@ function addSelectListenersForOwed() {
             axios
                 .patch('/api/payments/updateReceivedStatus', body) 
                 .then(response => {
+                    console.log(response)
                     //show status updated successfully
                 })
                 .catch(error => {
@@ -103,12 +105,15 @@ function renderPaymentsOwed(session) {
             let heading_3 = document.createElement('th');
             heading_3.innerHTML = "Due Date";
             let heading_4 = document.createElement('th');
-            heading_4.innerHTML = "Status";
+            heading_4.innerHTML = "Amount";
+            let heading_5 = document.createElement('th');
+            heading_5.innerHTML = "Status";
 
             row_heading.appendChild(heading_1);
             row_heading.appendChild(heading_2);
             row_heading.appendChild(heading_3);
             row_heading.appendChild(heading_4);
+            row_heading.appendChild(heading_5);
             thead.appendChild(row_heading);
 
 
@@ -133,12 +138,14 @@ function renderPaymentsOwed(session) {
                         let row_data_3 = document.createElement('td');
                         row_data_3.innerHTML = `${payment.due_date}`;
                         let row_data_4 = document.createElement('td');
+                        row_data_4.innerHTML = `${payment.due_date}`;
+                        let row_data_5 = document.createElement('td');
                         
                         const selectList = document.createElement('select');
                         selectList.classList.add('selectPaymentOwing');
                         selectList.setAttribute('identifier', payment.payments_id)
 
-                        row_data_4.appendChild(selectList);
+                        row_data_5.appendChild(selectList);
 
                         let optionOne = document.createElement('option');
                         let optionTwo = document.createElement('option');
@@ -159,6 +166,7 @@ function renderPaymentsOwed(session) {
                         row.appendChild(row_data_2);
                         row.appendChild(row_data_3);
                         row.appendChild(row_data_4);
+                        row.appendChild(row_data_5);
                         tbody.appendChild(row);
                     }
                 }
@@ -200,12 +208,15 @@ function renderPaymentsOwed(session) {
             let heading_3 = document.createElement('th');
             heading_3.innerHTML = "Due Date";
             let heading_4 = document.createElement('th');
-            heading_4.innerHTML = "Status";
+            heading_4.innerHTML = "Amount";
+            let heading_5 = document.createElement('th');
+            heading_5.innerHTML = "Status";
 
             row_heading.appendChild(heading_1);
             row_heading.appendChild(heading_2);
             row_heading.appendChild(heading_3);
             row_heading.appendChild(heading_4);
+            row_heading.appendChild(heading_5);
             thead.appendChild(row_heading);
 
 
@@ -229,13 +240,15 @@ function renderPaymentsOwed(session) {
                         let row_data_3 = document.createElement('td');
                         row_data_3.innerHTML = `${payment.due_date}`;
                         let row_data_4 = document.createElement('td');
+                        row_data_4.innerHTML = `${payment.amount} ${payment.user_id} ${payment.event_creator_id}`;
+                        let row_data_5 = document.createElement('td');
                         // row_data_4.innerHTML = `${status}`;
 
                         const selectListOwed = document.createElement('select');
                         selectListOwed.classList.add('selectPaymentOwed');
                         selectListOwed.setAttribute('identifier', payment.payments_id)
 
-                        row_data_4.appendChild(selectListOwed);
+                        row_data_5.appendChild(selectListOwed);
 
                         let optionOne = document.createElement('option');
                         let optionTwo = document.createElement('option');
@@ -244,20 +257,21 @@ function renderPaymentsOwed(session) {
                         optionTwo.value = 'PAID - CONFIRMED';
                         optionTwo.text = 'PAID - CONFIRMED';
 
-                        console.log(payment.payments_id, status)
+                        // console.log(payment.payments_id, status)
 
                         if(status.includes('PAID')) {
-                            selectListOwed.add(optionOne, null);
                             selectListOwed.add(optionTwo, null);
+                            selectListOwed.add(optionOne, null);
                         } else {
-                            selectListOwed.add(optionTwo, null);
                             selectListOwed.add(optionOne, null);
+                            selectListOwed.add(optionTwo, null);
                         }
 
                         row.appendChild(row_data_1);
                         row.appendChild(row_data_2);
                         row.appendChild(row_data_3);
                         row.appendChild(row_data_4);
+                        row.appendChild(row_data_5);
                         tbody.appendChild(row);
 
                     }
