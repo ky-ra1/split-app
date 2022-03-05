@@ -45,7 +45,7 @@ function renderPaymentsOwed(session) {
                     }
                     if(!payment.received_status) {
                         paymentsOwingSection.innerHTML += `
-                            <p>${payment.event_name} | ${payment.due_date} | ${status}</p>
+                            <p>${payment.event_name} |  ${payment.username} | ${payment.due_date} | ${status}</p>
                         `
                     }
                 } else if (payment.user_id === payment.event_creator_id) {
@@ -57,7 +57,7 @@ function renderPaymentsOwed(session) {
                     }
                     if(!payment.received_status) {
                         paymentsOwedToMe.innerHTML += `
-                            <p>${payment.event_name} | ${payment.due_date} | ${status}</p>
+                            <p>${payment.event_name} | ${payment.username} | ${payment.due_date} | ${status}</p>
                         `
                     }
                 }
@@ -75,7 +75,6 @@ function renderPaymentsEventForMainPage(session) {
     user_id = session.user_id; //Kyra is working on this// add code to get user id
 
     const page = document.getElementById('page');
-    console.log(page);
     page.innerHTML += `
         <h1>Payments Events</h1>
     `
@@ -129,13 +128,10 @@ function renderPaymentHistory(session) {
 
             paymentsHistory.forEach(payment => {
                 status = 'PAID - Confirmed';
-
                 console.log(payment);
-                
-
-                if(payment.paid_status && payment.received_status) {
+                if(payment.paid_status && payment.received_status && payment.user_id !== payment.event_creator_id) {
                     paymentHistorySection.innerHTML += `
-                        <p>${payment.event_name} | ${payment.due_date} | ${payment.amount} | ${status}</p>
+                        <p>${payment.event_name} | ${payment.username} | ${payment.due_date} | ${payment.amount} | ${status}</p>
                     `
                 }
             });
@@ -158,9 +154,9 @@ function renderPaymentHistory(session) {
 
             paymentsEventHistory.forEach(event => {
                 status = 'Completed';
-                paymentEventHistorySection.innerHTML += `
-                    <p>${event.event_name} | ${event.total_amount} | ${status}</p>
-                `
+                    paymentEventHistorySection.innerHTML += `
+                        <p>${event.event_name} | ${event.total_amount} | ${status}</p>
+                    `
             });
         })
         .catch((error) => {
