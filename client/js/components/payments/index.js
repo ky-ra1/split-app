@@ -106,11 +106,16 @@ function renderPaymentHistory(session) {
 
     const page = document.getElementById('page');
     page.innerHTML += `
-        <h1>Payments History</h1>
+        <h1>History</h1>
     `
 
     page.innerHTML += `
-        <section id="payment_history_section">
+        <section id="payments_history_section">
+        </section>
+    `;
+
+    page.innerHTML += `
+        <section id="payments_event_history_section">
         </section>
     `;
 
@@ -123,8 +128,7 @@ function renderPaymentHistory(session) {
             paymentsHistory.forEach(payment => {
                 let status = 'PAID - Confirmed';
                 
-                console.log((payment.paid_status && payment.received_status));
-                
+
                 if(payment.paid_status && payment.received_status) {
                     paymentHistorySection.innerHTML += `
                         <p>${payment.event_name} | ${payment.due_date} | ${status}</p>
@@ -132,6 +136,25 @@ function renderPaymentHistory(session) {
                 }
             });
         })
+
+    axios
+        .get(`/api/payments/getPaymentsPaid/${user_id}`) // need to change
+        .then((response) => {
+            const paymentsHistory = response.data;
+            const paymentHistorySection = document.getElementById('payment_history_section');
+
+            paymentsHistory.forEach(payment => {
+                let status = 'PAID - Confirmed';
+                
+
+                if(payment.paid_status && payment.received_status) {
+                    paymentHistorySection.innerHTML += `
+                        <p>${payment.event_name} | ${payment.due_date} | ${status}</p>
+                    `
+                }
+            });
+        })
+
         .catch((error) => {
             //ERROR handling
             return error;

@@ -27,6 +27,12 @@ const PaymentsEvent = {
             return response.rows;
         });
     },
+    getCompletedEventsByCreatorId: (id) => {
+        const query = `SELECT * FROM payments_event WHERE completed = true AND event_creator_id = $1`;
+        return db.query(query, [id]).then(response => {
+            return response.rows ? response.rows[0] : {};
+        });
+    },  
     create: (body) => {
         const query = `INSERT INTO payments_event (event_name, total_amount, event_creator_id, description, creation_date, due_date, remaining_amount, completed) VALUES ($1, $2, $3, $4, $5, $6, $7, false) RETURNING *`;
         return db
