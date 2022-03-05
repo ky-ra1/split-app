@@ -7,8 +7,8 @@ VALUES ('Jane', 'janedoe', 'test', 'jane.doe@test.com'),
 ('Alex', 'alexdoe', 'test', 'alex.doe@test.com');
 
 INSERT INTO payments_event
-(event_name, total_amount, event_creator_id, description, creation_date, due_date)
-VALUES ('Work dinner', 300.00, 1, 'Dinner with work people on Feb 27th 2022', '2022-02-27', '2022-03-01');
+(event_name, total_amount, event_creator_id, description, creation_date, due_date, completed, remaining_amount)
+VALUES ('Work dinner', 300.00, 1, 'Dinner with work people on Feb 27th 2022', '2022-02-27', '2022-03-01', false, 300.00);
 
 INSERT INTO payments
 (user_id, amount, percentage, paid_status, received_status, paid_date, payment_event_id)
