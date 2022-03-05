@@ -35,6 +35,34 @@ function renderPaymentsOwed(session) {
                 'payments_owing_section'
             );
 
+
+            let table = document.createElement('table');
+            table.setAttribute('id', 'paymentsOwingTable');
+            let thead = document.createElement('thead');
+            thead.setAttribute('id', 'paymentsOwingTableHead');
+            let tbody = document.createElement('tbody');
+            tbody.setAttribute('id', 'paymentsOwingTableBody');
+
+            table.appendChild(thead);
+            table.appendChild(tbody);
+
+            let row_heading = document.createElement('tr');
+            let heading_1 = document.createElement('th');
+            heading_1.innerHTML = "Event Name";
+            let heading_2 = document.createElement('th');
+            heading_2.innerHTML = "Username";
+            let heading_3 = document.createElement('th');
+            heading_3.innerHTML = "Due Date";
+            let heading_4 = document.createElement('th');
+            heading_4.innerHTML = "Status";
+
+            row_heading.appendChild(heading_1);
+            row_heading.appendChild(heading_2);
+            row_heading.appendChild(heading_3);
+            row_heading.appendChild(heading_4);
+            thead.appendChild(row_heading);
+
+
             payments.forEach((payment) => {
                 if (payment.user_id !== payment.event_creator_id) {
                     let status = '';
@@ -47,12 +75,26 @@ function renderPaymentsOwed(session) {
                         status = 'PAID - Payer Notified';
                     }
                     if (!payment.received_status) {
-                        paymentsOwingSection.innerHTML += `
-                            <p>${payment.event_name} |  ${payment.username} | ${payment.due_date} | ${status}</p>
-                        `;
+
+                        let row = document.createElement('tr');
+                        let row_data_1 = document.createElement('td');
+                        row_data_1.innerHTML = `${payment.event_name}`;
+                        let row_data_2 = document.createElement('td');
+                        row_data_2.innerHTML = `${payment.username}`;
+                        let row_data_3 = document.createElement('td');
+                        row_data_3.innerHTML = `${payment.due_date}`;
+                        let row_data_4 = document.createElement('td');
+                        row_data_4.innerHTML = `${status}`;
+
+                        row.appendChild(row_data_1);
+                        row.appendChild(row_data_2);
+                        row.appendChild(row_data_3);
+                        row.appendChild(row_data_4);
+                        tbody.appendChild(row);
                     }
                 }
             });
+            paymentsOwingSection.appendChild(table);
         })
         .catch((error) => {
             clearErrors();
@@ -67,6 +109,33 @@ function renderPaymentsOwed(session) {
                 'payments_owed_to_me'
             );
 
+            let table = document.createElement('table');
+            table.setAttribute('id', 'paymentsOwingTable');
+            let thead = document.createElement('thead');
+            thead.setAttribute('id', 'paymentsOwingTableHead');
+            let tbody = document.createElement('tbody');
+            tbody.setAttribute('id', 'paymentsOwingTableBody');
+
+            table.appendChild(thead);
+            table.appendChild(tbody);
+
+            let row_heading = document.createElement('tr');
+            let heading_1 = document.createElement('th');
+            heading_1.innerHTML = "Event Name";
+            let heading_2 = document.createElement('th');
+            heading_2.innerHTML = "Username";
+            let heading_3 = document.createElement('th');
+            heading_3.innerHTML = "Due Date";
+            let heading_4 = document.createElement('th');
+            heading_4.innerHTML = "Status";
+
+            row_heading.appendChild(heading_1);
+            row_heading.appendChild(heading_2);
+            row_heading.appendChild(heading_3);
+            row_heading.appendChild(heading_4);
+            thead.appendChild(row_heading);
+
+
             payments.forEach((payment) => {
                 if (payment.user_id !== payment.event_creator_id) {
                     let status = '';
@@ -79,11 +148,27 @@ function renderPaymentsOwed(session) {
                         status = 'PAID - Payer Notified';
                     }
                     if (!payment.received_status) {
-                        paymentsOwedToMe.innerHTML += `
-                            <p>${payment.event_name} | ${payment.username} | ${payment.due_date} | ${status}</p>
-                        `;
+
+
+                        let row = document.createElement('tr');
+                        let row_data_1 = document.createElement('td');
+                        row_data_1.innerHTML = `${payment.event_name}`;
+                        let row_data_2 = document.createElement('td');
+                        row_data_2.innerHTML = `${payment.username}`;
+                        let row_data_3 = document.createElement('td');
+                        row_data_3.innerHTML = `${payment.due_date}`;
+                        let row_data_4 = document.createElement('td');
+                        row_data_4.innerHTML = `${status}`;
+
+                        row.appendChild(row_data_1);
+                        row.appendChild(row_data_2);
+                        row.appendChild(row_data_3);
+                        row.appendChild(row_data_4);
+                        tbody.appendChild(row);
+
                     }
                 }
+                paymentsOwedToMe.appendChild(table);
             });
         })
         .catch((error) => {
@@ -107,6 +192,29 @@ function renderPaymentsEventForMainPage(session) {
         </section>
     `;
 
+    let table = document.createElement('table');
+    table.setAttribute('id', 'paymentsOwingTable');
+    let thead = document.createElement('thead');
+    thead.setAttribute('id', 'paymentsOwingTableHead');
+    let tbody = document.createElement('tbody');
+    tbody.setAttribute('id', 'paymentsOwingTableBody');
+
+    table.appendChild(thead);
+    table.appendChild(tbody);
+
+    let row_heading = document.createElement('tr');
+    let heading_1 = document.createElement('th');
+    heading_1.innerHTML = "Event Name";
+    let heading_2 = document.createElement('th');
+    heading_2.innerHTML = "Creation Date";
+    let heading_3 = document.createElement('th');
+    heading_3.innerHTML = "Remaining";
+
+    row_heading.appendChild(heading_1);
+    row_heading.appendChild(heading_2);
+    row_heading.appendChild(heading_3);
+    thead.appendChild(row_heading);
+
     axios
         .get(`/api/paymentsEvent/getEventsByCreatorId/${user_id}`) // need to change
         .then((response) => {
@@ -115,7 +223,7 @@ function renderPaymentsEventForMainPage(session) {
                 'payments_event_section'
             );
             paymentEvents.forEach((paymentEvent) => {
-                console.log(paymentEvent);
+
                 paymentsEventSection.innerHTML += `
                     <p>${paymentEvent.event_name} on ${paymentEvent.creation_date} | Remaining amount: ${paymentEvent.remaining_amount}</p>
                 `;
@@ -167,6 +275,7 @@ function renderPaymentHistory(session) {
                     `;
                 }
             });
+
         })
         .catch((error) => {
             clearErrors();

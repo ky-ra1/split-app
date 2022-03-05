@@ -56,11 +56,10 @@ router.post('/', (req, res) => {
                 }
             }
 
-            dbUsers = [];
-            for (const idx in response) {
-                for (const idx in enteredUsers) {
-                    if (response[idx].user === enteredUsers[idx].username) {
-                        enteredUsers[idx]['user_id'] = response[idx].id;
+            for (const idxEnteredUsers in enteredUsers) {
+                for (const idxResponse in response) {
+                    if (response[idxResponse].username === enteredUsers[idxEnteredUsers].user) {
+                        enteredUsers[idxEnteredUsers]['user_id'] = response[idxResponse].id;
                     }
                 }
             }
