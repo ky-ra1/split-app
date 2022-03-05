@@ -240,7 +240,7 @@ function renderPaymentsOwed(session) {
                         let row_data_3 = document.createElement('td');
                         row_data_3.innerHTML = `${payment.due_date}`;
                         let row_data_4 = document.createElement('td');
-                        row_data_4.innerHTML = `${payment.amount} ${payment.user_id} ${payment.event_creator_id}`;
+                        row_data_4.innerHTML = `${payment.amount}`;
                         let row_data_5 = document.createElement('td');
                         // row_data_4.innerHTML = `${status}`;
 
