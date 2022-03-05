@@ -15,11 +15,18 @@ router.get('/getById/:id', (req, res) => {
     })
 });
 
-router.get('/getPaymentsOwed/:id', (req, res) => {
-    payments.getPaymentsOwed(req.params.id).then((payment) => {
+router.get('/getPaymentsOwedToMe/:id', (req, res) => {
+    payments.getPaymentsOwedToMe(req.params.id).then((payment) => {
         res.json(payment);
     });
 });
+
+router.get('/getPaymentsOwingToMe/:id', (req, res) => {
+    payments.getPaymentsOwingToMe(req.params.id).then((payment) => {
+        res.json(payment);
+    });
+});
+
 
 router.get('/getPaymentsPaid/:id', (req, res) => {
     payments.getPaymentsPaid(req.params.id).then((payment) => {

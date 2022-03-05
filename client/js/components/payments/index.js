@@ -28,13 +28,13 @@ function renderPaymentsOwed(session) {
 
     //FIX API CALL to get the event creator, currently displaying event name rather than event creator
     axios
-        .get(`/api/payments/getPaymentsOwed/${user_id}`)
+        .get(`/api/payments/getPaymentsOwingToMe/${user_id}`)
         .then((response) => {
             const payments = response.data;
-
             const paymentsOwingSection = document.getElementById('payments_owing_section');
-            const paymentsOwedToMe = document.getElementById('payments_owed_to_me');
 
+
+            console.log('owing to me', payments);
             payments.forEach(payment => {
                 if(payment.user_id !== payment.event_creator_id) {
                     let status = '';
@@ -48,7 +48,23 @@ function renderPaymentsOwed(session) {
                             <p>${payment.event_name} |  ${payment.username} | ${payment.due_date} | ${status}</p>
                         `
                     }
-                } else if (payment.user_id === payment.event_creator_id) {
+                } 
+            });
+        })
+        .catch((error) => {
+            //ERROR handling
+            return error;
+        });
+
+
+        axios
+        .get(`/api/payments/getPaymentsOwedToMe/${user_id}`)
+        .then((response) => {
+            const payments = response.data;
+            const paymentsOwedToMe = document.getElementById('payments_owed_to_me');
+
+            payments.forEach(payment => {
+                if (payment.user_id !== payment.event_creator_id) {
                     let status = '';
                     if(!payment.paid_status && !payment.received_status) {
                         status = 'UNPAID';
@@ -56,6 +72,7 @@ function renderPaymentsOwed(session) {
                         status = 'PAID - Payer Notified';
                     }
                     if(!payment.received_status) {
+                        console.log('i triggered');
                         paymentsOwedToMe.innerHTML += `
                             <p>${payment.event_name} | ${payment.username} | ${payment.due_date} | ${status}</p>
                         `
@@ -111,6 +128,7 @@ function renderPaymentHistory(session) {
 
     let status;
 
+    //this gets payments that have been completed, we will need to add in payments we have paid
     axios
         .get(`/api/payments/getPaymentsPaid/${user_id}`) // need to change
         .then((response) => {
@@ -128,7 +146,6 @@ function renderPaymentHistory(session) {
 
             paymentsHistory.forEach(payment => {
                 status = 'PAID - Confirmed';
-                console.log(payment);
                 if(payment.paid_status && payment.received_status && payment.user_id !== payment.event_creator_id) {
                     paymentHistorySection.innerHTML += `
                         <p>${payment.event_name} | ${payment.username} | ${payment.due_date} | ${payment.amount} | ${status}</p>
