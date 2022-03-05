@@ -32,8 +32,9 @@ router.get('/getEventsByCreatorId/:id', (req, res) => {
 });
 
 router.get('/getCompletedEvents/:id', (req, res) => {
-    paymentsEventModel.getCompletedEventsByCreatorId(req.params.id)
-        .then(paymentEvents => {
+    paymentsEventModel
+        .getCompletedEventsByCreatorId(req.params.id)
+        .then((paymentEvents) => {
             res.json(paymentEvents);
         });
 });
@@ -75,7 +76,11 @@ router.post('/', (req, res) => {
                 res.status(201).json(paymentEvent);
             });
         })
-        .catch((error) => {});
+        .catch((error) => {
+            res.status(400).json({
+                message: 'Username not found',
+            });
+        });
 });
 
 //TO DO PATCH
