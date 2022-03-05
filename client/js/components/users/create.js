@@ -2,8 +2,10 @@ function renderSignupForm() {
     const page = document.getElementById('page');
     page.innerHTML = `
         <h2>Create an account with Split</h2>
+        
+    
         <form id="signup" action="/api/users" method="POST">
-            <label>Name:</label>
+            <label lass="input-group-text" id="inputGroup-sizing-default">Name:</label>
             <input type="text" name="first_name" />
             <label>Username:</label>
             <input type="text" name="username" />
@@ -12,8 +14,10 @@ function renderSignupForm() {
             <label>Password:</label>
             <input type="password" name="password" />
 
-            <button type="submit">Sign up</button>
+            <button id="signUpbutton"class="btn btn-white ml-2" type="submit">Sign up</button>
         </form>
+        </div>
+
     `;
 
     const form = document.getElementById('signup');
