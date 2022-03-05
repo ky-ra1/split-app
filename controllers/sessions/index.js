@@ -8,6 +8,7 @@ const router = express.Router();
 router.post('/', (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
+
     function incorrectResponse(res) {
         res.status(400).json({
             message: 'Incorrect email or password',

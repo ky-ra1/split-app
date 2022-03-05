@@ -31,6 +31,13 @@ router.get('/getEventsByCreatorId/:id', (req, res) => {
         });
 });
 
+router.get('/getCompletedEvents/:id', (req, res) => {
+    paymentsEventModel.getCompletedEventsByCreatorId(req.params.id)
+        .then(paymentEvents => {
+            res.json(paymentEvents);
+        });
+});
+
 router.post('/', (req, res) => {
     const { payments: paymentsData, ...data } = req.body;
     usersModel
