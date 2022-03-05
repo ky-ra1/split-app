@@ -29,7 +29,7 @@ function renderPaymentEvent(user_id) {
             page.innerHTML += `<div>`;
         })
         .catch((error) => {
-            //TODO ERROR handling
-            return error;
+            clearErrors();
+            displayError(error.response.data.message);
         });
 }

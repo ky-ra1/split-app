@@ -35,6 +35,7 @@ function renderPaymentsOwed(session) {
                 'payments_owing_section'
             );
 
+
             let table = document.createElement('table');
             table.setAttribute('id', 'paymentsOwingTable');
             let thead = document.createElement('thead');
@@ -96,8 +97,8 @@ function renderPaymentsOwed(session) {
             paymentsOwingSection.appendChild(table);
         })
         .catch((error) => {
-            //ERROR handling
-            return error;
+            clearErrors();
+            displayError(error.response.data.message);
         });
 
     axios
@@ -134,6 +135,7 @@ function renderPaymentsOwed(session) {
             row_heading.appendChild(heading_4);
             thead.appendChild(row_heading);
 
+
             payments.forEach((payment) => {
                 if (payment.user_id !== payment.event_creator_id) {
                     let status = '';
@@ -146,6 +148,7 @@ function renderPaymentsOwed(session) {
                         status = 'PAID - Payer Notified';
                     }
                     if (!payment.received_status) {
+
 
                         let row = document.createElement('tr');
                         let row_data_1 = document.createElement('td');
@@ -162,14 +165,15 @@ function renderPaymentsOwed(session) {
                         row.appendChild(row_data_3);
                         row.appendChild(row_data_4);
                         tbody.appendChild(row);
+
                     }
                 }
                 paymentsOwedToMe.appendChild(table);
             });
         })
         .catch((error) => {
-            //ERROR handling
-            return error;
+            clearErrors();
+            displayError(error.response.data.message);
         });
 }
 
@@ -220,14 +224,15 @@ function renderPaymentsEventForMainPage(session) {
                 'payments_event_section'
             );
             paymentEvents.forEach((paymentEvent) => {
+
                 paymentsEventSection.innerHTML += `
                     <p>${paymentEvent.event_name} on ${paymentEvent.creation_date} | Remaining amount: ${paymentEvent.remaining_amount}</p>
                 `;
             });
         })
         .catch((error) => {
-            //ERROR handling
-            return error;
+            clearErrors();
+            displayError(error.response.data.message);
         });
 }
 //payment history
@@ -271,6 +276,11 @@ function renderPaymentHistory(session) {
                     `;
                 }
             });
+
+        })
+        .catch((error) => {
+            clearErrors();
+            displayError(error.response.data.message);
         });
 
     axios
@@ -298,7 +308,7 @@ function renderPaymentHistory(session) {
             });
         })
         .catch((error) => {
-            //ERROR handling
-            return error;
+            clearErrors();
+            displayError(error.response.data.message);
         });
 }
