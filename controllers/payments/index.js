@@ -62,8 +62,9 @@ router.patch('/updateReceivedStatus/', (req, res) => {
                         completedPayments += 1;
                     }
                 });
-                if(completedPayments === response.rows.length) {
-                    PaymentsEvent.updateCompletedStatus(response.rows[0].payment_event_id).then(response => {
+                console.log(updateBody.status)
+                if(completedPayments === response.rows.length || !updateBody.status) {
+                    PaymentsEvent.updateCompletedStatus(response.rows[0].payment_event_id, updateBody.status).then(response => {
                         return response;
                     });
                 }

@@ -48,11 +48,18 @@ const PaymentsEvent = {
             });   
         }
     },
-    updateCompletedStatus: (event_id) => {
-        const query = 'UPDATE payments_event SET completed = true WHERE id = $1 RETURNING *';
-        return db.query(query, [event_id]).then(response => {
-            return response.rows ? response.rows[0] : {};;
-        })
+    updateCompletedStatus: (event_id, status) => {
+        if(status) {
+            const query = 'UPDATE payments_event SET completed = true WHERE id = $1 RETURNING *';
+            return db.query(query, [event_id]).then(response => {
+                return response.rows ? response.rows[0] : {};
+            })
+        } else {
+            const query = 'UPDATE payments_event SET completed = false WHERE id = $1 RETURNING *';
+            return db.query(query, [event_id]).then(response => {
+                return response.rows ? response.rows[0] : {};
+            })
+        }
     },
     create: (body) => {
         const query = `INSERT INTO payments_event (event_name, total_amount, event_creator_id, description, creation_date, due_date, remaining_amount, completed) VALUES ($1, $2, $3, $4, $5, $6, $7, false) RETURNING *`;
