@@ -33,12 +33,20 @@ const PaymentsEvent = {
             return response.rows;
         });
     },  
-    updateRemainingAmount: ({ payment_event_id, amount }) => {
-        const query = 'UPDATE payments_event SET remaining_amount = remaining_amount - $1 WHERE id = $2 RETURNING *';
-        // console.log(payment_event_id, amount)
-        return db.query(query, [amount, payment_event_id]).then((response) => {
-            return response.rows ? response.rows[0] : {};
-        });
+    updateRemainingAmount: ({ payment_event_id, amount, status }) => {
+        if(status) {
+            const query = 'UPDATE payments_event SET remaining_amount = remaining_amount - $1 WHERE id = $2 RETURNING *';
+            // console.log(payment_event_id, amount)
+            return db.query(query, [amount, payment_event_id]).then((response) => {
+                return response.rows ? response.rows[0] : {};
+            });
+        } else {
+            const query = 'UPDATE payments_event SET remaining_amount = remaining_amount + $1 WHERE id = $2 RETURNING *';
+            // console.log(payment_event_id, amount)
+            return db.query(query, [amount, payment_event_id]).then((response) => {
+                return response.rows ? response.rows[0] : {};
+            });   
+        }
     },
     updateCompletedStatus: (event_id) => {
         const query = 'UPDATE payments_event SET completed = true WHERE id = $1 RETURNING *';

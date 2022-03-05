@@ -46,25 +46,29 @@ router.patch('/updateReceivedStatus/', (req, res) => {
         const updateBody = {
             amount: payment.rows[0].amount,
             payment_event_id: payment.rows[0].payment_event_id,
+            status: true
         };
+    
+        //modify status from update body to be false if the user is moving a paid item back to unpaid
+        if(!req.body.received_status) {
+            updateBody.status = false;
+        }
 
-        if(req.body.received_status) {
-            PaymentsEvent.updateRemainingAmount(updateBody).then(event => {
-                payments.getPaymentByEventId(event.event_creator_id).then(response => {
-                    let completedPayments = 0;
-                    response.rows.forEach(payments => {
-                        if(payments.received_status && payments.paid_status) {
-                            completedPayments += 1;
-                        }
-                    });
-                    if(completedPayments === response.rows.length) {
-                        PaymentsEvent.updateCompletedStatus(response.rows[0].payment_event_id).then(response => {
-                            return response;
-                        });
+        PaymentsEvent.updateRemainingAmount(updateBody).then(event => {
+            payments.getPaymentByEventId(event.event_creator_id).then(response => {
+                let completedPayments = 0;
+                response.rows.forEach(payments => {
+                    if(payments.received_status && payments.paid_status) {
+                        completedPayments += 1;
                     }
                 });
+                if(completedPayments === response.rows.length) {
+                    PaymentsEvent.updateCompletedStatus(response.rows[0].payment_event_id).then(response => {
+                        return response;
+                    });
+                }
             });
-        }
+        });
 
         res.json(payment);
     });
