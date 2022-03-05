@@ -75,6 +75,7 @@ function renderPaymentsEventForMainPage(session) {
     user_id = session.user_id; //Kyra is working on this// add code to get user id
 
     const page = document.getElementById('page');
+    console.log(page);
     page.innerHTML += `
         <h1>Payments Events</h1>
     `
@@ -109,52 +110,59 @@ function renderPaymentHistory(session) {
         <h1>History</h1>
     `
 
-    page.innerHTML += `
-        <section id="payments_history_section">
-        </section>
-    `;
-
-    page.innerHTML += `
-        <section id="payments_event_history_section">
-        </section>
-    `;
+    let status;
 
     axios
         .get(`/api/payments/getPaymentsPaid/${user_id}`) // need to change
         .then((response) => {
             const paymentsHistory = response.data;
-            const paymentHistorySection = document.getElementById('payment_history_section');
+
+            if(paymentsHistory.length > 0) {
+                page.innerHTML += `
+                    <section id="payments_history_section">
+                        <h3>Payment History</h3>
+                    </section>
+                `;
+            }
+
+            const paymentHistorySection = document.getElementById('payments_history_section');
 
             paymentsHistory.forEach(payment => {
-                let status = 'PAID - Confirmed';
+                status = 'PAID - Confirmed';
+
+                console.log(payment);
                 
 
                 if(payment.paid_status && payment.received_status) {
                     paymentHistorySection.innerHTML += `
-                        <p>${payment.event_name} | ${payment.due_date} | ${status}</p>
+                        <p>${payment.event_name} | ${payment.due_date} | ${payment.amount} | ${status}</p>
                     `
                 }
             });
         })
 
     axios
-        .get(`/api/payments/getPaymentsPaid/${user_id}`) // need to change
+        .get(`/api/paymentsEvent/getCompletedEvents/${user_id}`) // need to change
         .then((response) => {
-            const paymentsHistory = response.data;
-            const paymentHistorySection = document.getElementById('payment_history_section');
+            const paymentsEventHistory = response.data;
 
-            paymentsHistory.forEach(payment => {
-                let status = 'PAID - Confirmed';
-                
+            if(paymentsEventHistory.length > 0) {
+                page.innerHTML += `
+                    <section id="payments_event_history_section">
+                        <h3>Payment Event History</h3>
+                    </section>
+                `;
+            }
 
-                if(payment.paid_status && payment.received_status) {
-                    paymentHistorySection.innerHTML += `
-                        <p>${payment.event_name} | ${payment.due_date} | ${status}</p>
-                    `
-                }
+            const paymentEventHistorySection = document.getElementById('payments_event_history_section');
+
+            paymentsEventHistory.forEach(event => {
+                status = 'Completed';
+                paymentEventHistorySection.innerHTML += `
+                    <p>${event.event_name} | ${event.total_amount} | ${status}</p>
+                `
             });
         })
-
         .catch((error) => {
             //ERROR handling
             return error;

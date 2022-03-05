@@ -30,7 +30,7 @@ const PaymentsEvent = {
     getCompletedEventsByCreatorId: (id) => {
         const query = `SELECT * FROM payments_event WHERE completed = true AND event_creator_id = $1`;
         return db.query(query, [id]).then(response => {
-            return response.rows ? response.rows[0] : {};
+            return response.rows;
         });
     },  
     create: (body) => {
