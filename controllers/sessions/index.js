@@ -8,34 +8,34 @@ const router = express.Router();
 router.post('/', (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
-    // function incorrectResponse(res) {
-    //     res.status(400).json({
-    //         message: "Incorrect username or password",
-    //     });
-    // }
-    Users.getByEmail(email).then((user) => {
-        const valid = user && bcrypt.compareSync(password, user.password);
+    function incorrectResponse(res) {
+        res.status(400).json({
+            message: 'Incorrect email or password',
+        });
+    }
+    Users.getByEmail(email)
+        .then((user) => {
+            const valid = user && bcrypt.compareSync(password, user.password);
 
-        if (valid) {
-            req.session.user_id = user.id;
-            req.session.email = user.email;
-            req.session.first_name = user.first_name;
-            req.session.username = user.username;
+            if (valid) {
+                req.session.user_id = user.id;
+                req.session.email = user.email;
+                req.session.first_name = user.first_name;
+                req.session.username = user.username;
 
-            res.json({
-                user_id: user.id,
-                email: email,
-                first_name: user.first_name,
-                username: user.username,
-            });
-        }
-        // } else {
-        //     incorrectResponse(res);
-        // }
-        // })
-        // .catch((error) => {
-        //     incorrectResponse(res);
-    });
+                res.json({
+                    user_id: user.id,
+                    email: email,
+                    first_name: user.first_name,
+                    username: user.username,
+                });
+            } else {
+                incorrectResponse(res);
+            }
+        })
+        .catch((error) => {
+            incorrectResponse(res);
+        });
 });
 
 // Get Session (Login)
