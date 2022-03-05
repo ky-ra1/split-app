@@ -33,8 +33,6 @@ function renderPaymentsOwed(session) {
             const payments = response.data;
             const paymentsOwingSection = document.getElementById('payments_owing_section');
 
-
-            console.log('owing to me', payments);
             payments.forEach(payment => {
                 if(payment.user_id !== payment.event_creator_id) {
                     let status = '';
@@ -72,7 +70,6 @@ function renderPaymentsOwed(session) {
                         status = 'PAID - Payer Notified';
                     }
                     if(!payment.received_status) {
-                        console.log('i triggered');
                         paymentsOwedToMe.innerHTML += `
                             <p>${payment.event_name} | ${payment.username} | ${payment.due_date} | ${status}</p>
                         `
@@ -107,8 +104,9 @@ function renderPaymentsEventForMainPage(session) {
             const paymentEvents = response.data;
             const paymentsEventSection = document.getElementById('payments_event_section');
             paymentEvents.forEach(paymentEvent => {
+                console.log(paymentEvent);
                 paymentsEventSection.innerHTML += `
-                    <p>${paymentEvent.event_name} on ${paymentEvent.creation_date}</p>
+                    <p>${paymentEvent.event_name} on ${paymentEvent.creation_date} | Remaining amount: ${paymentEvent.remaining_amount}</p>
                 `
             });
         })
