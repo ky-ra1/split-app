@@ -1,5 +1,5 @@
 // // Ask if the user is logged in first
-// renderAppWithoutSession(); // Or render a loading spinner
+renderAppWithoutSession(); // Or render a loading spinner
 // // then look for logged in user
 // renderAppWithSession();
 

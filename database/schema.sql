@@ -19,10 +19,12 @@ CREATE TABLE payments_event (
     id SERIAL PRIMARY KEY,
     event_name VARCHAR(20),
     total_amount NUMERIC,
+    remaining_amount NUMERIC,
     event_creator_id INTEGER,
     description TEXT,
     creation_date DATE,
-    due_date DATE
+    due_date DATE,
+    completed boolean
 );
 
 CREATE TABLE payments (

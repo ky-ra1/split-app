@@ -28,7 +28,7 @@ const PaymentsEvent = {
         });
     },
     create: (body) => {
-        const query = `INSERT INTO payments_event (event_name, total_amount, event_creator_id, description, creation_date, due_date) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`;
+        const query = `INSERT INTO payments_event (event_name, total_amount, event_creator_id, description, creation_date, due_date, remaining_amount, completed) VALUES ($1, $2, $3, $4, $5, $6, $7, false) RETURNING *`;
         return db
             .query(query, [
                 body.event_name,
@@ -37,6 +37,8 @@ const PaymentsEvent = {
                 body.description,
                 body.creation_date,
                 body.due_date,
+                body.total_amount,
+
             ])
             .then((response) => {
                 return response.rows ? response.rows[0] : {};
