@@ -41,7 +41,7 @@ router.patch('/updatePaidStatus/', (req, res) => {
     });
 });
 
-router.put('/updateReceivedStatus/', (req, res) => {
+router.patch('/updateReceivedStatus/', (req, res) => {
     payments.updateReceivedStatus(req.body).then((payment) => {
         res.json(payment);
     });

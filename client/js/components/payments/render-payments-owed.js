@@ -1,26 +1,53 @@
-function addSelectListeners() {
+function addSelectListenersForOwing() {
     const selectElements = document.querySelectorAll('.selectPaymentOwing');
 
     for(let i = 0; i < selectElements.length; i++) {
         selectElements[i].addEventListener('change', (event) => {
-            // event.target.value;
-
-
-            //send id; status - event.target.value
-            // boolean
-                //true if changing to paid
-                //false if changing to unpaid
+            let paid_status;
+            if(event.target.value.includes('UNPAID')) {
+                paid_status = false;
+            } else {
+                paid_status = true;
+            }
 
             const body = {
                 id: parseInt(event.target.attributes.identifier.textContent),
-                paid_status: false
+                paid_status: paid_status,
             }
 
             axios
                 .patch('/api/payments/updatePaidStatus', body) 
                 .then(response => {
-                    event.value.value = 'PAID'
-                    event.value.text = 'PAID'
+                    //show status updated successfully
+                })
+                .catch(error => {
+                    //do some erroring things
+                });
+        });
+    }
+}
+
+function addSelectListenersForOwed() {
+    const selectElements = document.querySelectorAll('.selectPaymentOwed');
+
+    for(let i = 0; i < selectElements.length; i++) {
+        selectElements[i].addEventListener('change', (event) => {
+            let received_status;
+            if(event.target.value.includes('PAID')) {
+                received_status = true;
+            } else {
+                received_status = false;
+            }
+
+            const body = {
+                id: parseInt(event.target.attributes.identifier.textContent),
+                received_status: received_status,
+            }
+
+            axios
+                .patch('/api/payments/updateReceivedStatus', body) 
+                .then(response => {
+                    //show status updated successfully
                 })
                 .catch(error => {
                     //do some erroring things
@@ -115,12 +142,12 @@ function renderPaymentsOwed(session) {
 
                         let optionOne = document.createElement('option');
                         let optionTwo = document.createElement('option');
-                        optionOne.value = 'PAID';
-                        optionOne.text = 'PAID';
+                        optionOne.value = 'PAID - PAYER NOTIFIED';
+                        optionOne.text = 'PAID- PAYER NOTIFIED';
                         optionTwo.value = 'UNPAID';
                         optionTwo.text = 'UNPAID';
 
-                        if(status === 'PAID') {
+                        if(status.includes('PAID')) {
                             selectList.add(optionOne, null);
                             selectList.add(optionTwo, null);
                         } else {
@@ -138,7 +165,7 @@ function renderPaymentsOwed(session) {
             });
             
             setTimeout(() => {
-                addSelectListeners()
+                addSelectListenersForOwing()
             }, 1000);
         })
         .catch((error) => {
@@ -163,6 +190,7 @@ function renderPaymentsOwed(session) {
 
             table.appendChild(thead);
             table.appendChild(tbody);
+            paymentsOwedToMe.appendChild(table);
 
             let row_heading = document.createElement('tr');
             let heading_1 = document.createElement('th');
@@ -185,16 +213,14 @@ function renderPaymentsOwed(session) {
                 if (payment.user_id !== payment.event_creator_id) {
                     let status = '';
                     if (!payment.paid_status && !payment.received_status) {
-                        status = 'UNPAID';
+                        status = 'PAYMENT PENDING';
                     } else if (
                         payment.paid_status &&
                         !payment.received_status
                     ) {
-                        status = 'PAID - Payer Notified';
+                        status = 'PAID - CONFIRMED';
                     }
                     if (!payment.received_status) {
-
-
                         let row = document.createElement('tr');
                         let row_data_1 = document.createElement('td');
                         row_data_1.innerHTML = `${payment.event_name}`;
@@ -203,7 +229,30 @@ function renderPaymentsOwed(session) {
                         let row_data_3 = document.createElement('td');
                         row_data_3.innerHTML = `${payment.due_date}`;
                         let row_data_4 = document.createElement('td');
-                        row_data_4.innerHTML = `${status}`;
+                        // row_data_4.innerHTML = `${status}`;
+
+                        const selectListOwed = document.createElement('select');
+                        selectListOwed.classList.add('selectPaymentOwed');
+                        selectListOwed.setAttribute('identifier', payment.payments_id)
+
+                        row_data_4.appendChild(selectListOwed);
+
+                        let optionOne = document.createElement('option');
+                        let optionTwo = document.createElement('option');
+                        optionOne.value = 'PAYMENT PENDING';
+                        optionOne.text = 'PAYMENT PENDING';
+                        optionTwo.value = 'PAID - CONFIRMED';
+                        optionTwo.text = 'PAID - CONFIRMED';
+
+                        console.log(payment.payments_id, status)
+
+                        if(status.includes('PAID')) {
+                            selectListOwed.add(optionOne, null);
+                            selectListOwed.add(optionTwo, null);
+                        } else {
+                            selectListOwed.add(optionTwo, null);
+                            selectListOwed.add(optionOne, null);
+                        }
 
                         row.appendChild(row_data_1);
                         row.appendChild(row_data_2);
@@ -214,7 +263,11 @@ function renderPaymentsOwed(session) {
                     }
                 }
             });
-            paymentsOwedToMe.appendChild(table);
+
+            setTimeout(() => {
+                addSelectListenersForOwed();
+            }, 1000);
+
         })
         .catch((error) => {
             clearErrors();
