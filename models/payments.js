@@ -38,14 +38,14 @@ const Payments = {
             return response.rows;
         });
     },
-    updatePaidStatus: (paid_status, id) => {
+    updatePaidStatus: ({ paid_status, id }) => {
         const query =
             'UPDATE payments SET paid_status = $1 WHERE id = $2 RETURNING *';
         return db.query(query, [paid_status, id]).then((response) => {
             return response;
         });
     },
-    updateReceivedStatus: (received_status, id) => {
+    updateReceivedStatus: ({ received_status, id }) => {
         const query =
             'UPDATE payments SET received_status = $1, paid_date = current_date WHERE id = $2 RETURNING *';
         return db.query(query, [received_status, id]).then((response) => {

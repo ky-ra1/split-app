@@ -34,13 +34,14 @@ router.get('/getPaymentsPaid/:id', (req, res) => {
     });
 });
 
-router.put('/updatePaidStatus/', (req, res) => {
+router.patch('/updatePaidStatus/', (req, res) => {
+    console.log(req.body);
     payments.updatePaidStatus(req.body).then((payment) => {
         res.json(payment);
-    })
+    });
 });
 
-router.put('/updateReceivedStatus/', (req, res) => {
+router.patch('/updateReceivedStatus/', (req, res) => {
     payments.updateReceivedStatus(req.body).then((payment) => {
         res.json(payment);
     });
