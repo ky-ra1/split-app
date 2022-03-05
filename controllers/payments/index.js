@@ -1,5 +1,6 @@
 const express = require('express');
 const payments = require('../../models/payments');
+const PaymentsEvent = require('../../models/payments_event');
 
 const router = express.Router();
 
@@ -35,7 +36,6 @@ router.get('/getPaymentsPaid/:id', (req, res) => {
 });
 
 router.patch('/updatePaidStatus/', (req, res) => {
-    console.log(req.body);
     payments.updatePaidStatus(req.body).then((payment) => {
         res.json(payment);
     });
@@ -43,6 +43,15 @@ router.patch('/updatePaidStatus/', (req, res) => {
 
 router.patch('/updateReceivedStatus/', (req, res) => {
     payments.updateReceivedStatus(req.body).then((payment) => {
+        const updateBody = {
+            amount: payment.rows[0].amount,
+            payment_event_id: payment.rows[0].payment_event_id,
+        };
+
+        PaymentsEvent.updateRemainingAmount(updateBody).then(event => {
+            console.log(event);
+        });
+
         res.json(payment);
     });
 });
