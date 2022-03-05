@@ -52,6 +52,13 @@ const Payments = {
             return response;
         });
     },
+    getPaymentByEventId: (event_id) => {
+        const query = 'SELECT * FROM payments WHERE payment_event_id = $1';
+        return db.query(query, [event_id]).then(response => {
+            return response;
+        })
+    },
+    
     create: (body) => {
         const query = `INSERT INTO payments (user_id,amount,percentage,paid_status,received_status,paid_date,payment_event_id) VALUES ($1,$2,$3,false,false,null,$4) RETURNING *`;
         return db
