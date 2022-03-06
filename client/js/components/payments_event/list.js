@@ -15,7 +15,9 @@ function renderPaymentEvent(event_id) {
                     <div>
                         <p>Created by: ${item.event_creator_id}</p>
                         <p>Amount: ${item.amount}</p>
-                        <p>Due Date: ${item.due_date}</p>
+                        <p>Due Date: ${moment(item.due_date).format(
+                            'D MMMM YYYY'
+                        )}</p>
                         <p>Paid: ${
                             item.paid_status && item.received_status
                                 ? 'paid'

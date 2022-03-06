@@ -124,8 +124,10 @@ const renderCreatePaymentEventList = (session) => {
             error = 'Event Name is required';
         } else if (body.description === '') {
             error = 'Description is required';
-        } else if (body.due_date === '') {
+        } else if (body.due_date === null) {
             error = 'Due Date is required';
+        } else if (moment(body.due_date).isValid()) {
+            error = 'Due Date cannot be in the past';
         } else if (body.total_amount === '') {
             error = 'Total Amount is required';
         }

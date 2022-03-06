@@ -24,7 +24,7 @@ function renderLoginForm() {
                                 type="email"
                                 id="email"
                                 name="email"
-                                placeholder="Phone no or email id"
+                                placeholder="Email"
                                 class="form-control"
                             />
                         </div>
