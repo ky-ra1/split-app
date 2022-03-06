@@ -1,10 +1,8 @@
-function renderPaymentEvent(user_id) {
-    user_id = 1; //test data
-
+function renderPaymentEvent(event_id) {
     const page = document.getElementById('page');
 
     axios
-        .get(`/api/paymentEvents/getByCreatorId/${user_id}`)
+        .get(`/api/paymentEvents/getByCreatorId/${event_id}`)
         .then((response) => {
             page.innerHTML += `
                 <div>
@@ -15,7 +13,7 @@ function renderPaymentEvent(user_id) {
             response.data.forEach((item) => {
                 page.innerHTML += `
                     <div>
-                        <p>User: ${item.user_id}</p>
+                        <p>Created by: ${item.event_creator_id}</p>
                         <p>Amount: ${item.amount}</p>
                         <p>Due Date: ${item.due_date}</p>
                         <p>Paid: ${
