@@ -11,7 +11,7 @@ function renderHeader(session = {}) {
                 aria-controls="sidebar_left"
             >
                 <img
-                    src="https://cdn.dribbble.com/users/2763870/screenshots/6940332/s_split_dribbble_grid.png"
+                    src="https://static.thenounproject.com/png/180195-200.png"
                     data-bs-target="#sidebar_left"
                     data-bs-toggle="offcanvas"
                     class="img-fluid hlogo rounded"
@@ -74,12 +74,12 @@ function renderHeader(session = {}) {
                 aria-controls="sidebar_left"
             >
                 <img
-                    src="https://cdn.dribbble.com/users/2763870/screenshots/6940332/s_split_dribbble_grid.png"
+                    src="https://static.thenounproject.com/png/180195-200.png"
                     data-bs-target="#sidebar_left"
                     data-bs-toggle="offcanvas"
                     class="img-fluid hlogo rounded"
                     width="50"
-                />
+                />LIT
             </a>
            
             <div class="clearfix"></div>

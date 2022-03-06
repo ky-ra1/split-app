@@ -10,7 +10,7 @@ function renderLoginForm() {
                         <div class="row justify-content-center px-3 mb-3">
                             <img
                                 id="logo"
-                                src="https://cdn.dribbble.com/users/2763870/screenshots/6940332/s_split_dribbble_grid.png"
+                                src="https://static.thenounproject.com/png/180195-200.png"
                             />
                         </div>
                         <h3 class="mb-5 text-center heading">We are Split.</h3>
