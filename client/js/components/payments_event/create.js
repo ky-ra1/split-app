@@ -14,7 +14,7 @@ const renderCreatePaymentEventList = (session) => {
         <label for="totalAmount">Total Amount:</label><br>
         <input type="number" id="totalAmount" name="totalAmount"><br>
         <label for="dueDate">Due Date:</label><br>
-        <input type="date" id="dueDate" name="dueDate">  
+        <input type="text" id="dueDate" name="dueDate">  
         
         <h1>User Breakdown</h1>
         <span>Click to add user</span>
@@ -31,6 +31,11 @@ const renderCreatePaymentEventList = (session) => {
 
         <button type="submit" class="submitEvent">Submit</button>
     </form>`;
+
+    new Pikaday({
+        field: document.getElementById('dueDate'),
+        format: 'DD MMMM YYYY',
+    });
 
     // + button
     const addUserButton = document.querySelector('#add-user');
@@ -110,7 +115,7 @@ const renderCreatePaymentEventList = (session) => {
             event_creator_id: session.user_id,
             description: descriptionField.value,
             creation_date: new Date(),
-            due_date: dueDateField.value,
+            due_date: moment(dueDateField.value).toISOString(),
             payments: userData,
             // all payments in array
         };
