@@ -25,11 +25,11 @@ function renderPaymentsEventForMainPage(session) {
 
     let row_heading = document.createElement('tr');
     let heading_1 = document.createElement('th');
-    heading_1.innerHTML = "Event Name";
+    heading_1.innerHTML = 'Event Name';
     let heading_2 = document.createElement('th');
-    heading_2.innerHTML = "Creation Date";
+    heading_2.innerHTML = 'Creation Date';
     let heading_3 = document.createElement('th');
-    heading_3.innerHTML = "Remaining";
+    heading_3.innerHTML = 'Remaining';
 
     row_heading.appendChild(heading_1);
     row_heading.appendChild(heading_2);
@@ -44,7 +44,6 @@ function renderPaymentsEventForMainPage(session) {
                 'payments_event_section'
             );
             paymentEvents.forEach((paymentEvent) => {
-
                 paymentsEventSection.innerHTML += `
                     <p>${paymentEvent.event_name} on ${paymentEvent.creation_date} | Remaining amount: ${paymentEvent.remaining_amount}</p>
                 `;
@@ -52,6 +51,6 @@ function renderPaymentsEventForMainPage(session) {
         })
         .catch((error) => {
             clearErrors();
-            displayError(error.response.data.message);
+            // displayError(error.response.data.message);
         });
 }

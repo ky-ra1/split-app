@@ -1,10 +1,10 @@
 function addSelectListenersForOwing() {
     const selectElements = document.querySelectorAll('.selectPaymentOwing');
 
-    for(let i = 0; i < selectElements.length; i++) {
+    for (let i = 0; i < selectElements.length; i++) {
         selectElements[i].addEventListener('change', (event) => {
             let paid_status;
-            if(event.target.value.includes('UNPAID')) {
+            if (event.target.value.includes('UNPAID')) {
                 paid_status = false;
             } else {
                 paid_status = true;
@@ -13,15 +13,15 @@ function addSelectListenersForOwing() {
             const body = {
                 id: parseInt(event.target.attributes.identifier.textContent),
                 paid_status: paid_status,
-            }
+            };
             console.log(body);
 
             axios
-                .patch('/api/payments/updatePaidStatus', body) 
-                .then(response => {
+                .patch('/api/payments/updatePaidStatus', body)
+                .then((response) => {
                     //show status updated successfully
                 })
-                .catch(error => {
+                .catch((error) => {
                     //do some erroring things
                 });
         });
@@ -31,10 +31,10 @@ function addSelectListenersForOwing() {
 function addSelectListenersForOwed() {
     const selectElements = document.querySelectorAll('.selectPaymentOwed');
 
-    for(let i = 0; i < selectElements.length; i++) {
+    for (let i = 0; i < selectElements.length; i++) {
         selectElements[i].addEventListener('change', (event) => {
             let received_status;
-            if(event.target.value.includes('PAID')) {
+            if (event.target.value.includes('PAID')) {
                 received_status = true;
             } else {
                 received_status = false;
@@ -43,15 +43,15 @@ function addSelectListenersForOwed() {
             const body = {
                 id: parseInt(event.target.attributes.identifier.textContent),
                 received_status: received_status,
-            }
+            };
 
             axios
-                .patch('/api/payments/updateReceivedStatus', body) 
-                .then(response => {
-                    console.log(response)
+                .patch('/api/payments/updateReceivedStatus', body)
+                .then((response) => {
+                    console.log(response);
                     //show status updated successfully
                 })
-                .catch(error => {
+                .catch((error) => {
                     //do some erroring things
                 });
         });
@@ -84,7 +84,6 @@ function renderPaymentsOwed(session) {
                 'payments_owing_section'
             );
 
-
             let table = document.createElement('table');
             table.setAttribute('id', 'paymentsOwingTable');
             let thead = document.createElement('thead');
@@ -99,15 +98,15 @@ function renderPaymentsOwed(session) {
 
             let row_heading = document.createElement('tr');
             let heading_1 = document.createElement('th');
-            heading_1.innerHTML = "Event Name";
+            heading_1.innerHTML = 'Event Name';
             let heading_2 = document.createElement('th');
-            heading_2.innerHTML = "Username";
+            heading_2.innerHTML = 'Username';
             let heading_3 = document.createElement('th');
-            heading_3.innerHTML = "Due Date";
+            heading_3.innerHTML = 'Due Date';
             let heading_4 = document.createElement('th');
-            heading_4.innerHTML = "Amount";
+            heading_4.innerHTML = 'Amount';
             let heading_5 = document.createElement('th');
-            heading_5.innerHTML = "Status";
+            heading_5.innerHTML = 'Status';
 
             row_heading.appendChild(heading_1);
             row_heading.appendChild(heading_2);
@@ -115,7 +114,6 @@ function renderPaymentsOwed(session) {
             row_heading.appendChild(heading_4);
             row_heading.appendChild(heading_5);
             thead.appendChild(row_heading);
-
 
             payments.forEach((payment) => {
                 if (payment.user_id !== payment.event_creator_id) {
@@ -129,7 +127,6 @@ function renderPaymentsOwed(session) {
                         status = 'PAID - Payer Notified';
                     }
                     if (!payment.received_status) {
-
                         let row = document.createElement('tr');
                         let row_data_1 = document.createElement('td');
                         row_data_1.innerHTML = `${payment.event_name}`;
@@ -140,21 +137,24 @@ function renderPaymentsOwed(session) {
                         let row_data_4 = document.createElement('td');
                         row_data_4.innerHTML = `${payment.due_date}`;
                         let row_data_5 = document.createElement('td');
-                        
+
                         const selectList = document.createElement('select');
                         selectList.classList.add('selectPaymentOwing');
-                        selectList.setAttribute('identifier', payment.payments_id)
+                        selectList.setAttribute(
+                            'identifier',
+                            payment.payments_id
+                        );
 
                         row_data_5.appendChild(selectList);
 
                         let optionOne = document.createElement('option');
                         let optionTwo = document.createElement('option');
-                        optionOne.value = 'PAID - PAYER NOTIFIED';
-                        optionOne.text = 'PAID- PAYER NOTIFIED';
-                        optionTwo.value = 'UNPAID';
-                        optionTwo.text = 'UNPAID';
+                        optionOne.value = 'UNPAID';
+                        optionOne.text = 'UNPAID';
+                        optionTwo.value = 'PAID - PAYER NOTIFIED';
+                        optionTwo.text = 'PAID - PAYER NOTIFIED';
 
-                        if(status.includes('PAID')) {
+                        if (status.includes('UNPAID')) {
                             selectList.add(optionOne, null);
                             selectList.add(optionTwo, null);
                         } else {
@@ -171,9 +171,9 @@ function renderPaymentsOwed(session) {
                     }
                 }
             });
-            
+
             setTimeout(() => {
-                addSelectListenersForOwing()
+                addSelectListenersForOwing();
             }, 1000);
         })
         .catch((error) => {
@@ -202,15 +202,15 @@ function renderPaymentsOwed(session) {
 
             let row_heading = document.createElement('tr');
             let heading_1 = document.createElement('th');
-            heading_1.innerHTML = "Event Name";
+            heading_1.innerHTML = 'Event Name';
             let heading_2 = document.createElement('th');
-            heading_2.innerHTML = "Username";
+            heading_2.innerHTML = 'Username';
             let heading_3 = document.createElement('th');
-            heading_3.innerHTML = "Due Date";
+            heading_3.innerHTML = 'Due Date';
             let heading_4 = document.createElement('th');
-            heading_4.innerHTML = "Amount";
+            heading_4.innerHTML = 'Amount';
             let heading_5 = document.createElement('th');
-            heading_5.innerHTML = "Status";
+            heading_5.innerHTML = 'Status';
 
             row_heading.appendChild(heading_1);
             row_heading.appendChild(heading_2);
@@ -218,7 +218,6 @@ function renderPaymentsOwed(session) {
             row_heading.appendChild(heading_4);
             row_heading.appendChild(heading_5);
             thead.appendChild(row_heading);
-
 
             payments.forEach((payment) => {
                 if (payment.user_id !== payment.event_creator_id) {
@@ -246,7 +245,10 @@ function renderPaymentsOwed(session) {
 
                         const selectListOwed = document.createElement('select');
                         selectListOwed.classList.add('selectPaymentOwed');
-                        selectListOwed.setAttribute('identifier', payment.payments_id)
+                        selectListOwed.setAttribute(
+                            'identifier',
+                            payment.payments_id
+                        );
 
                         row_data_5.appendChild(selectListOwed);
 
@@ -259,7 +261,7 @@ function renderPaymentsOwed(session) {
 
                         // console.log(payment.payments_id, status)
 
-                        if(status.includes('PAID')) {
+                        if (status.includes('PAYMENT')) {
                             selectListOwed.add(optionOne, null);
                             selectListOwed.add(optionTwo, null);
                         } else {
@@ -273,7 +275,6 @@ function renderPaymentsOwed(session) {
                         row.appendChild(row_data_4);
                         row.appendChild(row_data_5);
                         tbody.appendChild(row);
-
                     }
                 }
             });
@@ -281,7 +282,6 @@ function renderPaymentsOwed(session) {
             setTimeout(() => {
                 addSelectListenersForOwed();
             }, 1000);
-
         })
         .catch((error) => {
             clearErrors();

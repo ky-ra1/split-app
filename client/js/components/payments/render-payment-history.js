@@ -39,7 +39,6 @@ function renderPaymentHistory(session) {
                     `;
                 }
             });
-
         })
         .catch((error) => {
             clearErrors();
@@ -71,7 +70,7 @@ function renderPaymentHistory(session) {
             });
         })
         .catch((error) => {
-            clearErrors();
-            displayError(error.response.data.message);
+            // clearErrors();
+            // displayError(error.response.data.message);
         });
 }
