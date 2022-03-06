@@ -18,7 +18,7 @@ function renderLoginForm() {
                         <form id="login" action="/api/sessions" method="POST">
                         <div class="form-group">
                             <label class="form-control-label text-muted"
-                                >Username</label
+                                >Email</label
                             >
                             <input
                                 type="email"
@@ -63,17 +63,7 @@ function renderLoginForm() {
                 <div class="my-auto mx-md-5 px-md-5 right">
                     <h3 class="text-white">Just Split</h3>
                     <small class="text-white"
-                        >Simplify the way we split costs. Track payments, where a user can login and they can view the payment amounts they're required to pay and is owed to them.
-
-                        The main user can put in their total amount and then add additional people with percentages of how much each person will pay and a due date for the payment. The percentage amounts are stored associated to the user to pay.
-
-                        You can add a tag that each user is assigned to for a specific payment event.
-
-                        The user can login and see the details of what that specific user needs to pay for all their combined payment events.
-
-                        They can also mark the payments they've made as 'Done'.
-
-                        When a user logs in that was a main user for a payment event, they'll see a list of payments pending and list of payments to be made.</small
+                        >The best way to split costs and track payments. </small
                     >
                 </div>
             </div>
