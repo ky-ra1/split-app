@@ -1,29 +1,30 @@
 const express = require('express');
+const isLoggedIn = require('../../middleware/is_logged_in');
 const paymentsEventModel = require('../../models/payments_event');
 const paymentModel = require('../../models/payments');
 const usersModel = require('../../models/users');
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
+router.get('/', isLoggedIn, (req, res) => {
     paymentsEventModel.getAll().then((paymentEvents) => {
         res.json(paymentEvents);
     });
 });
 
-router.get('/getByCreatorId/:id', (req, res) => {
+router.get('/getByCreatorId/:id', isLoggedIn, (req, res) => {
     paymentsEventModel.getByCreatorId(req.params.id).then((paymentEvents) => {
         res.json(paymentEvents);
     });
 });
 
-router.get('/getByEventId/:id', (req, res) => {
+router.get('/getByEventId/:id', isLoggedIn, (req, res) => {
     paymentsEventModel.getByCreatorId(req.params.id).then((paymentEvents) => {
         res.json(paymentEvents);
     });
 });
 
-router.get('/getEventsByCreatorId/:id', (req, res) => {
+router.get('/getEventsByCreatorId/:id', isLoggedIn, (req, res) => {
     paymentsEventModel
         .getEventsByCreatorId(req.params.id)
         .then((paymentEvents) => {
@@ -31,7 +32,7 @@ router.get('/getEventsByCreatorId/:id', (req, res) => {
         });
 });
 
-router.get('/getCompletedEvents/:id', (req, res) => {
+router.get('/getCompletedEvents/:id', isLoggedIn, (req, res) => {
     paymentsEventModel
         .getCompletedEventsByCreatorId(req.params.id)
         .then((paymentEvents) => {
@@ -39,7 +40,7 @@ router.get('/getCompletedEvents/:id', (req, res) => {
         });
 });
 
-router.post('/', (req, res) => {
+router.post('/', isLoggedIn, (req, res) => {
     const { payments: paymentsData, ...data } = req.body;
     usersModel
         .getAll()
@@ -58,8 +59,12 @@ router.post('/', (req, res) => {
 
             for (const idxEnteredUsers in enteredUsers) {
                 for (const idxResponse in response) {
-                    if (response[idxResponse].username === enteredUsers[idxEnteredUsers].user) {
-                        enteredUsers[idxEnteredUsers]['user_id'] = response[idxResponse].id;
+                    if (
+                        response[idxResponse].username ===
+                        enteredUsers[idxEnteredUsers].user
+                    ) {
+                        enteredUsers[idxEnteredUsers]['user_id'] =
+                            response[idxResponse].id;
                     }
                 }
             }
