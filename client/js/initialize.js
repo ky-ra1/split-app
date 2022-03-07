@@ -8,8 +8,10 @@ function renderAppWithoutSession() {
     renderLoginForm();
 }
 
+setSession();
+
 function renderAppWithSession() {
-    getSession().then((session) => {
+    fetchSession().then((session) => {
         renderHeader(session);
         // waiting on payments (client/js/components/payments/index.js)
         mainPageElement(session);

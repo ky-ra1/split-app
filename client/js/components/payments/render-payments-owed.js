@@ -18,7 +18,9 @@ function addSelectListenersForOwing() {
             axios
                 .patch('/api/payments/updatePaidStatus', body)
                 .then((response) => {
-                    //show status updated successfully
+                    setTimeout(() => {
+                        mainPageElement(getSession());
+                    }, 1000);
                 })
                 .catch((error) => {
                     //do some erroring things
@@ -47,7 +49,10 @@ function addSelectListenersForOwed() {
             axios
                 .patch('/api/payments/updateReceivedStatus', body)
                 .then((response) => {
-                    console.log(response);
+                    setTimeout(() => {
+                        mainPageElement(getSession());
+                    }, 1000);
+                    
                     //show status updated successfully
                 })
                 .catch((error) => {
@@ -230,9 +235,12 @@ function renderPaymentsOwed(session) {
                     //     status = 'PAID - CONFIRMED';
                     // }
 
-                    if(!payment.paid_status) {
+                    if (!payment.paid_status) {
                         status = 'UNPAID';
-                    } else if (payment.paid_status && !payment.received_status) {
+                    } else if (
+                        payment.paid_status &&
+                        !payment.received_status
+                    ) {
                         status = 'PAYMENT PENDING';
                     } else {
                         status = 'PAID - CONFIRMED';
@@ -258,7 +266,7 @@ function renderPaymentsOwed(session) {
                             payment.payments_id
                         );
 
-                        if(payment.paid_status) {
+                        if (payment.paid_status) {
                             row_data_5.appendChild(selectListOwed);
                         } else {
                             row_data_5.innerHTML = `<p>${status}</p>`;
@@ -292,7 +300,7 @@ function renderPaymentsOwed(session) {
             });
 
             setTimeout(() => {
-                addSelectListenersForOwed();
+                addSelectListenersForOwed(session);
             }, 1000);
         })
         .catch((error) => {
