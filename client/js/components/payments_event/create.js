@@ -5,8 +5,15 @@ const renderCreatePaymentEventList = (session) => {
     // get rid of all br tags after styling
 
     page.innerHTML = `
-    <h1>Add Payment Event</h1>
+    <div class="background">
+            <div class="shape"></div>
+            <div class="shape"></div>
+    </div>
+    
+    <div class="d-flex flex-lg-row flex-column-reverse">
+    
     <form id="eventDetails">
+    <h1>Add Payment Event</h1>
         <label for="eventName">Event Name:</label><br>
         <input type="text" id="eventName" name="eventName"><br>
         <label for="description">Description:</label><br>
@@ -29,8 +36,10 @@ const renderCreatePaymentEventList = (session) => {
             </section>
         </div>
 
-        <button type="submit" class="submitEvent">Submit</button>
-    </form>`;
+        <button class="btn-block btn-color" type="submit">Submit</button>
+    </form>
+    
+    </div>`;
 
     new Pikaday({
         field: document.getElementById('dueDate'),
