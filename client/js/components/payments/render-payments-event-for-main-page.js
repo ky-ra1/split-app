@@ -64,15 +64,15 @@ function renderPaymentsEventForMainPage(session) {
                 row_data_3.innerHTML = `${paymentEvent.remaining_amount}`;
 
                 let status = 'Incomplete';
-                if(paymentEvent.completed) {
+                if (paymentEvent.completed) {
                     status = 'Complete';
                 }
 
                 let row_data_4 = document.createElement('td');
-                row_data_4.innerHTML = `${status}`
+                row_data_4.innerHTML = `${status}`;
 
                 let row_data_5 = document.createElement('td');
-                row_data_5.innerHTML = `<span class="event-details" identifier="${paymentEvent.id}">View More</span>`; 
+                row_data_5.innerHTML = `<span class="event-details" identifier="${paymentEvent.id}">View More</span>`;
 
                 row.appendChild(row_data_1);
                 row.appendChild(row_data_2);
@@ -94,6 +94,6 @@ function renderPaymentsEventForMainPage(session) {
         })
         .catch((error) => {
             clearErrors();
-            // displayError(error.response.data.message);
+            displayError(error);
         });
 }

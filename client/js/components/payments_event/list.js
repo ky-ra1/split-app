@@ -31,6 +31,6 @@ function renderPaymentEvent(event_id) {
         })
         .catch((error) => {
             clearErrors();
-            // displayError(error.response.data.message);
+            displayError(error);
         });
 }

@@ -42,6 +42,6 @@ function renderPaymentHistory(session) {
         })
         .catch((error) => {
             clearErrors();
-            displayError(error.response.data.message);
+            displayError(error);
         });
 }
