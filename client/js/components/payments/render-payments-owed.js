@@ -133,9 +133,13 @@ function renderPaymentsOwed(session) {
                         let row_data_2 = document.createElement('td');
                         row_data_2.innerHTML = `${payment.username}`;
                         let row_data_3 = document.createElement('td');
-                        row_data_3.innerHTML = `${payment.due_date}`;
+                        row_data_3.innerHTML = `${moment(
+                            payment.due_date
+                        ).format('D MMMM YYYY')}`;
                         let row_data_4 = document.createElement('td');
-                        row_data_4.innerHTML = `${payment.due_date}`;
+                        row_data_4.innerHTML = `${moment(
+                            payment.due_date
+                        ).format('D MMMM YYYY')}`;
                         let row_data_5 = document.createElement('td');
 
                         const selectList = document.createElement('select');
@@ -237,7 +241,9 @@ function renderPaymentsOwed(session) {
                         let row_data_2 = document.createElement('td');
                         row_data_2.innerHTML = `${payment.username}`;
                         let row_data_3 = document.createElement('td');
-                        row_data_3.innerHTML = `${payment.due_date}`;
+                        row_data_3.innerHTML = `${moment(
+                            payment.due_date
+                        ).format('D MMMM YYYY')}`;;
                         let row_data_4 = document.createElement('td');
                         row_data_4.innerHTML = `${payment.amount}`;
                         let row_data_5 = document.createElement('td');
