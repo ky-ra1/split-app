@@ -1,7 +1,8 @@
 function renderLoginForm() {
     const page = document.getElementById('page');
     page.innerHTML = `
-        <div class="container px-4 py-5 mx-auto">
+    <div id="both_containers">
+    <div class="container px-4 py-5 mx-auto">
     <div class="card card0">
         <div class="d-flex flex-lg-row flex-column-reverse">
             <div class="card card1">
@@ -49,6 +50,15 @@ function renderLoginForm() {
                     </div>
                 </div>
 
+                
+            </div>
+            <div class="card card2">
+                <div class="my-auto mx-md-5 px-md-5 right">
+                    <h3 class="text-white">Just Split</h3>
+                    <small class="text-white"
+                        >The best way to split costs and track payments. </small
+                    >
+                </div>
                 <div class="bottom text-center mb-5">
                     <p href="#" class="sm-text mx-auto mb-3">
                         Don't have an account?<button id="createNewAccount" 
@@ -57,14 +67,6 @@ function renderLoginForm() {
                             Create new
                         </button>
                     </p>
-                </div>
-            </div>
-            <div class="card card2">
-                <div class="my-auto mx-md-5 px-md-5 right">
-                    <h3 class="text-white">Just Split</h3>
-                    <small class="text-white"
-                        >The best way to split costs and track payments. </small
-                    >
                 </div>
             </div>
         </div>
