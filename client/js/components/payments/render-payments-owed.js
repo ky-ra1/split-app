@@ -23,7 +23,8 @@ function addSelectListenersForOwing() {
                     }, 1000);
                 })
                 .catch((error) => {
-                    //do some erroring things
+                    clearErrors();
+                    displayError(error);
                 });
         });
     }
@@ -52,7 +53,7 @@ function addSelectListenersForOwed() {
                     setTimeout(() => {
                         mainPageElement(getSession());
                     }, 1000);
-                    
+
                     //show status updated successfully
                 })
                 .catch((error) => {
@@ -182,7 +183,7 @@ function renderPaymentsOwed(session) {
         })
         .catch((error) => {
             clearErrors();
-            // displayError(error.response.data.message);
+            displayError(error);
         });
 
     axios
@@ -305,6 +306,6 @@ function renderPaymentsOwed(session) {
         })
         .catch((error) => {
             clearErrors();
-            displayError(error.response.data.message);
+            displayError(error);
         });
 }
