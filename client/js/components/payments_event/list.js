@@ -8,6 +8,7 @@ function renderPaymentEvent(event_id) {
                 <div>
                     <h1>${response.data[0].event_name}</h1>
                     <p>Total Amount: ${response.data[0].total_amount}</p>
+                </div>
                 `;
 
             response.data.forEach((item) => {
