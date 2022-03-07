@@ -59,6 +59,13 @@ const Payments = {
             });
         }
     },
+    updateBothStatus: (body) => {
+        const query =
+            'UPDATE payments SET paid_status = true, received_status = true, paid_date = current_date WHERE payment_event_id = $1 and user_id = $2 RETURNING *';
+        return db.query(query, [body.event_id, body.user_id]).then((response) => {
+            return response;
+        });        
+    },
     getPaymentByEventId: (event_id) => {
         const query = 'SELECT * FROM payments WHERE payment_event_id = $1';
         return db.query(query, [event_id]).then(response => {

@@ -148,7 +148,20 @@ const renderCreatePaymentEventList = (session) => {
                 axios
                     .post('/api/paymentsEvent', body)
                     .then((response) => {
-                        mainPageElement(session);
+                        const updateBody = {
+                            user_id: session.user_id,
+                            event_id: response.data.id,
+                        }
+                        axios
+                            .patch('/api/payments/updateBothStatus', updateBody)
+                            .then(response => {
+                                mainPageElement(session);
+                            })
+                            .catch(error => {
+                                clearErrors();
+                                displayError(error.response.data.message);                                
+                            })
+
                     })
                     .catch((error) => {
                         clearErrors();
