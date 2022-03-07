@@ -47,6 +47,8 @@ button:focus {
 .card {
     border-radius: 0;
     border: none;
+
+    box-shadow: 0 0 40px rgba(8, 7, 16, 0.411);
 }
 
 .card1 {
@@ -179,42 +181,9 @@ a:hover {
 
 /* create_payment_page */
 
-.background {
-    width: 430px;
-    height: 520px;
-    position: absolute;
-    transform: translate(-50%, -50%);
-    left: 50%;
-    top: 50%;
-}
-.background .shape {
-    margin-top: 400 px;
-    height: 200px;
-    width: 200px;
-    position: absolute;
-    border-radius: 50%;
-}
-.shape:first-child {
-    background: linear-gradient(#c200fb, #fc2f00);
-    left: -80px;
-    top: -30px;
-}
-.shape:last-child {
-    background: linear-gradient(to right, #fc2f00, #ffbc0a);
-    right: -50px;
-    bottom: -400px;
-}
-
 #eventDetails {
-    /* height: 520px; */
-    margin-top: 180px;
-    width: 400px;
-    background-color: rgba(255, 255, 255, 0.13);
-    position: absolute;
-    transform: translate(-50%, -50%);
-    top: 50%;
-    left: 50%;
-    border-radius: 5px;
+    margin-top: 30px;
+    background-color: rgb(255, 255, 255);
     backdrop-filter: blur(10px);
     border: 2px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);

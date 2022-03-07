@@ -1,16 +1,18 @@
 const renderCreatePaymentEventList = (session) => {
+    function changebackgroundtocolor() {
+        document.body.style.backgroundImage =
+            'linear-gradient(to left, #c200fb, #ffbc0a';
+    }
+    changebackgroundtocolor();
     const page = document.getElementById('page');
     let userCount = 1;
 
     // get rid of all br tags after styling
 
     page.innerHTML = `
-    <div class="background">
-            <div class="shape"></div>
-            <div class="shape"></div>
-    </div>
     
-    <div class="d-flex flex-lg-row flex-column-reverse">
+    <div class="container mx-auto">
+    <div class="d-flex-center">
     
     <form id="eventDetails">
     <h1>Add Payment Event</h1>
@@ -38,7 +40,7 @@ const renderCreatePaymentEventList = (session) => {
 
         <button class="btn-block btn-color" type="submit">Submit</button>
     </form>
-    
+    </div>
     </div>`;
 
     new Pikaday({
@@ -151,17 +153,16 @@ const renderCreatePaymentEventList = (session) => {
                         const updateBody = {
                             user_id: session.user_id,
                             event_id: response.data.id,
-                        }
+                        };
                         axios
                             .patch('/api/payments/updateBothStatus', updateBody)
-                            .then(response => {
+                            .then((response) => {
                                 mainPageElement(session);
                             })
-                            .catch(error => {
+                            .catch((error) => {
                                 clearErrors();
-                                displayError(error.response.data.message);                                
-                            })
-
+                                displayError(error.response.data.message);
+                            });
                     })
                     .catch((error) => {
                         clearErrors();
