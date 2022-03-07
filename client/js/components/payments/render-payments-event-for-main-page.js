@@ -85,7 +85,6 @@ function renderPaymentsEventForMainPage(session) {
                 const events = document.querySelectorAll('.event-details');
                 events.forEach((event) => {
                     event.addEventListener('click', (e) => {
-                        console.log(e);
                         renderPaymentEvent(
                             e.target.attributes.identifier.textContent
                         );

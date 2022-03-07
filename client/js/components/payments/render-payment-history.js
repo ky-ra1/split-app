@@ -44,33 +44,4 @@ function renderPaymentHistory(session) {
             clearErrors();
             displayError(error.response.data.message);
         });
-
-    axios
-        .get(`/api/paymentsEvent/getCompletedEvents/${user_id}`) // need to change
-        .then((response) => {
-            const paymentsEventHistory = response.data;
-
-            if (paymentsEventHistory.length > 0) {
-                page.innerHTML += `
-                    <section id="payments_event_history_section">
-                        <h3>Payment Event History</h3>
-                    </section>
-                `;
-            }
-
-            const paymentEventHistorySection = document.getElementById(
-                'payments_event_history_section'
-            );
-
-            paymentsEventHistory.forEach((event) => {
-                status = 'Completed';
-                paymentEventHistorySection.innerHTML += `
-                        <p>${event.event_name} | ${event.total_amount} | ${status}</p>
-                    `;
-            });
-        })
-        .catch((error) => {
-            // clearErrors();
-            // displayError(error.response.data.message);
-        });
 }
