@@ -259,7 +259,7 @@ function renderPaymentsOwed(session) {
                         let row_data_3 = document.createElement('td');
                         row_data_3.innerHTML = `${moment(
                             payment.due_date
-                        ).format('D MMMM YYYY')}`;;
+                        ).format('D MMMM YYYY')}`;
                         let row_data_4 = document.createElement('td');
                         row_data_4.innerHTML = `${payment.amount}`;
                         let row_data_5 = document.createElement('td');
