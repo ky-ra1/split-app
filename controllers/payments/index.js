@@ -35,6 +35,12 @@ router.get('/getPaymentsPaid/:id', isLoggedIn, (req, res) => {
     });
 });
 
+router.patch('/updateBothStatus', isLoggedIn, (req, res) => {
+    payments.updateBothStatus(req.body).then(payment => {
+        res.json(payment);
+    });
+});
+
 router.patch('/updatePaidStatus/', isLoggedIn, (req, res) => {
     payments.updatePaidStatus(req.body).then((payment) => {
         res.json(payment);
