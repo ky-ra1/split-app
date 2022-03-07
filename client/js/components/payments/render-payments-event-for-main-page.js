@@ -5,7 +5,7 @@ function renderPaymentsEventForMainPage(session) {
 
     const page = document.getElementById('page');
     page.innerHTML += `
-        <h1>Payments Events</h1>
+        <h1>Payments Event</h1>
     `;
 
     page.innerHTML += `
@@ -60,9 +60,7 @@ function renderPaymentsEventForMainPage(session) {
                 let row_data_3 = document.createElement('td');
                 row_data_3.innerHTML = `${paymentEvent.remaining_amount}`;
                 let row_data_4 = document.createElement('td');
-                row_data_4.innerHTML = `<a href="${renderPaymentEvent(
-                    paymentEvent.id
-                )}">View Details</a>`; // link needs to be fixed to pass event id to event list page
+                row_data_4.innerHTML = `<span class="event-details" identifier="${paymentEvent.id}">View Details</span>`; // link needs to be fixed to pass event id to event list page
 
                 row.appendChild(row_data_1);
                 row.appendChild(row_data_2);
@@ -70,6 +68,17 @@ function renderPaymentsEventForMainPage(session) {
                 row.appendChild(row_data_4);
                 tbody.appendChild(row);
             });
+            setTimeout(() => {
+                const events = document.querySelectorAll('.event-details');
+                events.forEach((event) => {
+                    event.addEventListener('click', (e) => {
+                        console.log(e);
+                        renderPaymentEvent(
+                            e.target.attributes.identifier.textContent
+                        );
+                    });
+                });
+            }, 1000);
         })
         .catch((error) => {
             clearErrors();
