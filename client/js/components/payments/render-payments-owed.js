@@ -68,7 +68,7 @@ function renderPaymentsOwed(session) {
 
     page.innerHTML += `
         <section id="payments_owing_section">
-            <h3>Payments Owing<h3>
+            <h3>Payments Owing</h3>
         </section>
         <section id="payments_owed_to_me">
             <h3>Payments Owed To Me</h3>

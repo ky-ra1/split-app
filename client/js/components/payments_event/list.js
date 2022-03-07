@@ -26,7 +26,7 @@ function renderPaymentEvent(event_id) {
                     </div>
                 `;
             });
-            page.innerHTML += `<div>`;
+            page.innerHTML += `</div>`;
         })
         .catch((error) => {
             clearErrors();
