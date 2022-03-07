@@ -23,6 +23,12 @@ router.get('/getByEmail/:email', (req, res) => {
     });
 });
 
+router.get('/', (req, res) => {
+    Users.getAll().then(email => {
+        res.json(email);
+    })
+});
+
 router.post('/', userCreateValidator, (req, res) => {
     const user = req.body;
 
