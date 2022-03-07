@@ -14,7 +14,6 @@ function addSelectListenersForOwing() {
                 id: parseInt(event.target.attributes.identifier.textContent),
                 paid_status: paid_status,
             };
-            console.log(body);
 
             axios
                 .patch('/api/payments/updatePaidStatus', body)
@@ -222,14 +221,23 @@ function renderPaymentsOwed(session) {
             payments.forEach((payment) => {
                 if (payment.user_id !== payment.event_creator_id) {
                     let status = '';
-                    if (!payment.paid_status && !payment.received_status) {
+                    // if (!payment.paid_status && !payment.received_status) {
+                    //     status = 'PAYMENT PENDING';
+                    // } else if (
+                    //     payment.paid_status &&
+                    //     !payment.received_status
+                    // ) {
+                    //     status = 'PAID - CONFIRMED';
+                    // }
+
+                    if(!payment.paid_status) {
+                        status = 'UNPAID';
+                    } else if (payment.paid_status && !payment.received_status) {
                         status = 'PAYMENT PENDING';
-                    } else if (
-                        payment.paid_status &&
-                        !payment.received_status
-                    ) {
+                    } else {
                         status = 'PAID - CONFIRMED';
                     }
+
                     if (!payment.received_status) {
                         let row = document.createElement('tr');
                         let row_data_1 = document.createElement('td');
@@ -250,7 +258,11 @@ function renderPaymentsOwed(session) {
                             payment.payments_id
                         );
 
-                        row_data_5.appendChild(selectListOwed);
+                        if(payment.paid_status) {
+                            row_data_5.appendChild(selectListOwed);
+                        } else {
+                            row_data_5.innerHTML = `<p>${status}</p>`;
+                        }
 
                         let optionOne = document.createElement('option');
                         let optionTwo = document.createElement('option');

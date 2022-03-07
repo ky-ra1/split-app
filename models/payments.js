@@ -46,7 +46,6 @@ const Payments = {
         });
     },
     updateReceivedStatus: ({ received_status, id }) => {
-        console.log(received_status)
         if(received_status) {
             const query =
                 'UPDATE payments SET received_status = $1, paid_date = current_date WHERE id = $2 RETURNING *';

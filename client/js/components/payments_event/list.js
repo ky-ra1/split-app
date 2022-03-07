@@ -11,7 +11,6 @@ function renderPaymentEvent(event_id) {
                     <p>Total Amount: ${response.data.rows[0].total_amount}</p>
                 `;
             response.data.rows.forEach((item) => {
-                console.log(item);
                 page.innerHTML += `
                     <div>
                         <p>Created by: ${item.event_creator_id}</p>
