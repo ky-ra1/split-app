@@ -19,7 +19,7 @@ router.get('/getByCreatorId/:id', isLoggedIn, (req, res) => {
 });
 
 router.get('/getByEventId/:id', isLoggedIn, (req, res) => {
-    paymentsEventModel.getByCreatorId(req.params.id).then((paymentEvents) => {
+    paymentsEventModel.getByEventId(req.params.id).then((paymentEvents) => {
         res.json(paymentEvents);
     });
 });

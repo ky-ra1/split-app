@@ -15,10 +15,10 @@ const PaymentsEvent = {
         });
     },
     getByEventId: (eventId) => {
-        // const query = `SELECT payments.id AS payments_id, payments.user_id, payments.amount, payments.received_status, payments.paid_status, payments_event.id AS payments_event_id, payments_event.event_name, payments_event.event_creator_id, payments_event.total_amount, payments_event.creation_date, payments_event.due_date FROM payments_event INNER JOIN payments ON (payments_event.id = payments.payment_event_id) WHERE payments_event_id = $1`;
-        const query = `SELECT * FROM payments_event WHERE id = $1`;
+        const query = `SELECT payments.id AS payments_id, payments.user_id, payments.amount, payments.received_status, payments.paid_status, payments_event.id AS payments_event_id, payments_event.event_name, payments_event.event_creator_id, payments_event.total_amount, payments_event.creation_date, payments_event.due_date, payments.payment_event_id FROM payments_event INNER JOIN payments ON (payments_event.id = payments.payment_event_id) WHERE payments.payment_event_id = $1`;
+        // const query = `SELECT * FROM payments_event WHERE id = $1`;
         return db.query(query, [eventId]).then((response) => {
-            return response.rows ? response.rows[0] : {};
+            return response;
         });
     },
     getEventsByCreatorId: (userId) => {
@@ -29,36 +29,44 @@ const PaymentsEvent = {
     },
     getCompletedEventsByCreatorId: (id) => {
         const query = `SELECT * FROM payments_event WHERE completed = true AND event_creator_id = $1`;
-        return db.query(query, [id]).then(response => {
+        return db.query(query, [id]).then((response) => {
             return response.rows;
         });
-    },  
+    },
     updateRemainingAmount: ({ payment_event_id, amount, status }) => {
-        if(status) {
-            const query = 'UPDATE payments_event SET remaining_amount = remaining_amount - $1 WHERE id = $2 RETURNING *';
+        if (status) {
+            const query =
+                'UPDATE payments_event SET remaining_amount = remaining_amount - $1 WHERE id = $2 RETURNING *';
             // console.log(payment_event_id, amount)
-            return db.query(query, [amount, payment_event_id]).then((response) => {
-                return response.rows ? response.rows[0] : {};
-            });
+            return db
+                .query(query, [amount, payment_event_id])
+                .then((response) => {
+                    return response.rows ? response.rows[0] : {};
+                });
         } else {
-            const query = 'UPDATE payments_event SET remaining_amount = remaining_amount + $1 WHERE id = $2 RETURNING *';
+            const query =
+                'UPDATE payments_event SET remaining_amount = remaining_amount + $1 WHERE id = $2 RETURNING *';
             // console.log(payment_event_id, amount)
-            return db.query(query, [amount, payment_event_id]).then((response) => {
-                return response.rows ? response.rows[0] : {};
-            });   
+            return db
+                .query(query, [amount, payment_event_id])
+                .then((response) => {
+                    return response.rows ? response.rows[0] : {};
+                });
         }
     },
     updateCompletedStatus: (event_id, status) => {
-        if(status) {
-            const query = 'UPDATE payments_event SET completed = true WHERE id = $1 RETURNING *';
-            return db.query(query, [event_id]).then(response => {
+        if (status) {
+            const query =
+                'UPDATE payments_event SET completed = true WHERE id = $1 RETURNING *';
+            return db.query(query, [event_id]).then((response) => {
                 return response.rows ? response.rows[0] : {};
-            })
+            });
         } else {
-            const query = 'UPDATE payments_event SET completed = false WHERE id = $1 RETURNING *';
-            return db.query(query, [event_id]).then(response => {
+            const query =
+                'UPDATE payments_event SET completed = false WHERE id = $1 RETURNING *';
+            return db.query(query, [event_id]).then((response) => {
                 return response.rows ? response.rows[0] : {};
-            })
+            });
         }
     },
     create: (body) => {
@@ -72,7 +80,6 @@ const PaymentsEvent = {
                 body.creation_date,
                 body.due_date,
                 body.total_amount,
-
             ])
             .then((response) => {
                 return response.rows ? response.rows[0] : {};
