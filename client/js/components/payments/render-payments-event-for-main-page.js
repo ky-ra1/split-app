@@ -41,12 +41,15 @@ function renderPaymentsEventForMainPage(session) {
             let heading_3 = document.createElement('th');
             heading_3.innerHTML = 'Remaining Amount';
             let heading_4 = document.createElement('th');
-            heading_4.innerHTML = 'Details';
+            heading_4.innerHTML = 'Status';
+            let heading_5 = document.createElement('th');
+            heading_5.innerHTML = 'Details';
 
             row_heading.appendChild(heading_1);
             row_heading.appendChild(heading_2);
             row_heading.appendChild(heading_3);
             row_heading.appendChild(heading_4);
+            row_heading.appendChild(heading_5);
             thead.appendChild(row_heading);
 
             paymentEvents.forEach((paymentEvent) => {
@@ -59,13 +62,23 @@ function renderPaymentsEventForMainPage(session) {
                 ).format('D MMMM YYYY')}`;
                 let row_data_3 = document.createElement('td');
                 row_data_3.innerHTML = `${paymentEvent.remaining_amount}`;
+
+                let status = 'Incomplete';
+                if(paymentEvent.completed) {
+                    status = 'Complete';
+                }
+
                 let row_data_4 = document.createElement('td');
-                row_data_4.innerHTML = `<span class="event-details" identifier="${paymentEvent.id}">View Details</span>`; // link needs to be fixed to pass event id to event list page
+                row_data_4.innerHTML = `${status}`
+
+                let row_data_5 = document.createElement('td');
+                row_data_5.innerHTML = `<span class="event-details" identifier="${paymentEvent.id}">View More</span>`; 
 
                 row.appendChild(row_data_1);
                 row.appendChild(row_data_2);
                 row.appendChild(row_data_3);
                 row.appendChild(row_data_4);
+                row.appendChild(row_data_5);
                 tbody.appendChild(row);
             });
             setTimeout(() => {

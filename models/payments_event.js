@@ -8,7 +8,7 @@ const PaymentsEvent = {
         });
     },
     getByCreatorId: (userId) => {
-        const query = `SELECT payments.id AS payments_id, payments.user_id, payments.amount, payments.received_status, payments.paid_status, payments_event.id AS payments_event_id, payments_event.event_name, payments_event.event_creator_id, payments_event.total_amount, payments_event.creation_date, payments_event.due_date FROM payments_event INNER JOIN payments ON (payments_event.id = payments.payment_event_id) WHERE event_creator_id = $1`;
+        const query = `SELECT payments.id AS payments_id, payments.user_id, payments.amount, payments.received_status, payments.paid_status, payments_event.id AS payments_event_id, payments_event.event_name, payments_event.event_creator_id, payments_event.total_amount, payments_event.creation_date, payments_event.due_date, payments_event.completed FROM payments_event INNER JOIN payments ON (payments_event.id = payments.payment_event_id) WHERE event_creator_id = $1`;
         // const query = `SELECT * FROM payments_event WHERE event_creator_id = $1`
         return db.query(query, [userId]).then((response) => {
             return response.rows ? response.rows : {};
@@ -22,7 +22,7 @@ const PaymentsEvent = {
         });
     },
     getEventsByCreatorId: (userId) => {
-        const query = `SELECT * FROM payments_event WHERE event_creator_id = $1`;
+        const query = `SELECT * FROM payments_event WHERE event_creator_id = $1 ORDER BY completed ASC`;
         return db.query(query, [userId]).then((response) => {
             return response.rows;
         });
