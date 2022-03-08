@@ -1,9 +1,4 @@
 const renderCreatePaymentEventList = (session) => {
-    function changebackgroundtocolor() {
-        document.body.style.backgroundImage =
-            'linear-gradient(to left, #c200fb, #ffbc0a';
-    }
-    changebackgroundtocolor();
     const page = document.getElementById('page');
     let userCount = 1;
 
@@ -31,7 +26,9 @@ const renderCreatePaymentEventList = (session) => {
         <div id="add-user-section">
             <section class="user-section">
                 <label for="user">User ${userCount}:</label><br>
-                <input type="text" id="${userCount}" class="user" name="user"> 
+                <input type="text" id="${userCount}" class="user" name="user" value="${
+        getSession().username
+    }" readonly> 
                 <label for="percentage">Percentage: </label>
                 <input type="number" id="percentage-${userCount}" class="percentage" name="percentage">   
                 <span id="display-${userCount}"></span><br>
