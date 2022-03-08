@@ -38,8 +38,9 @@ function renderSignupForm() {
                                     We are Split.
                                 </h3>
                                 <h6 class="msg-info">
-                                    Please login to your account
+                                    Sign up to Split
                                 </h6>
+                                <p style="text-align: center; color: red" id="displayError"></p>
                                 <form
                                     id="signup"
                                     action="/api/sessions"
@@ -66,7 +67,7 @@ function renderSignupForm() {
                                         <input
                                             type="text"
                                             name="username"
-                                            placeholder="username"
+                                            placeholder="Username"
                                             class="form-control"
                                         />
                                     </div>
@@ -78,7 +79,7 @@ function renderSignupForm() {
                                         <input
                                             type="text"
                                             name="email"
-                                            placeholder="email"
+                                            placeholder="Email"
                                             class="form-control"
                                         />
                                     </div>
@@ -148,6 +149,8 @@ function renderSignupForm() {
             error = 'Email is required';
         }
 
+        const displayError = document.querySelector('#displayError');
+
         if (!error) {
             axios
                 .post('/api/users', body)
@@ -156,11 +159,12 @@ function renderSignupForm() {
                 })
                 .catch((error) => {
                     clearErrors();
-                    displayError(error.response.data.message);
+                    displayError.innerText =
+                        'Please select a new username and/or email';
                 });
         } else {
             clearErrors();
-            displayError(error);
+            displayError.innerText = error;
         }
     });
 }

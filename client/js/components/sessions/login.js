@@ -16,6 +16,7 @@ function renderLoginForm() {
                         </div>
                         <h3 class="mb-5 text-center heading">We are Split.</h3>
                         <h6 class="msg-info">Please login to your account</h6>
+                        <p style="text-align: center; color: red" id="displayError"></p>
                         <form id="login" action="/api/sessions" method="POST">
                         <div class="form-group">
                             <label class="form-control-label text-muted"
@@ -96,6 +97,8 @@ function renderLoginForm() {
             error = 'Password is required';
         }
 
+        const displayError = document.querySelector('#displayError');
+
         if (!error) {
             axios
                 .post('/api/sessions', body)
@@ -103,12 +106,13 @@ function renderLoginForm() {
                     renderAppWithSession();
                 })
                 .catch((error) => {
+                    displayError.innerText =
+                        'Please check your email or password';
                     clearErrors();
-                    displayError(error.response.data.message);
                 });
         } else {
+            displayError.innerText = error;
             clearErrors();
-            displayError(error);
         }
     });
 }
