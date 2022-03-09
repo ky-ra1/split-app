@@ -7,14 +7,14 @@ function renderSignupForm() {
                 <div class="d-flex flex-lg-row flex-column-reverse">
                     <div class="card card2">
                         <div class="my-auto mx-md-5 px-md-5 right">
-                            <h3 class="text-white">Just Split</h3>
-                            <small class="text-white"
-                                >The best way to split costs and track payments.
-                            </small>
+                        <h3 class="text-white" style="font-weight: 600">Just Split</h3>
+                        <small class="text-white" style="font-size: 1.2em">
+                            No more awkward conversations with your mates. The best way to split costs and track payments. </small
+                        >
                         </div>
                         <div class="bottom text-center mb-5">
-                            <p href="#" class="sm-text mx-auto mb-3">
-                                Already have an account?<button
+                            <p href="#" class="sm-text mx-auto mb-3" style="font-weight: 550">
+                                Already have an account?  <button
                                     id="login_button"
                                     class="btn btn-white ml-2"
                                 >
@@ -35,11 +35,12 @@ function renderSignupForm() {
                                     />
                                 </div>
                                 <h3 class="mb-5 text-center heading">
-                                    We are Split.
+                                    Split with us
                                 </h3>
                                 <h6 class="msg-info">
-                                    Please login to your account
+                                    Sign up to Split. You know you want to.
                                 </h6>
+                                <p style="text-align: center; color: red" id="displayError"></p>
                                 <form
                                     id="signup"
                                     action="/api/sessions"
@@ -66,7 +67,7 @@ function renderSignupForm() {
                                         <input
                                             type="text"
                                             name="username"
-                                            placeholder="username"
+                                            placeholder="Username"
                                             class="form-control"
                                         />
                                     </div>
@@ -78,7 +79,7 @@ function renderSignupForm() {
                                         <input
                                             type="text"
                                             name="email"
-                                            placeholder="email"
+                                            placeholder="Email"
                                             class="form-control"
                                         />
                                     </div>
@@ -148,6 +149,8 @@ function renderSignupForm() {
             error = 'Email is required';
         }
 
+        const displayError = document.querySelector('#displayError');
+
         if (!error) {
             axios
                 .post('/api/users', body)
@@ -156,11 +159,12 @@ function renderSignupForm() {
                 })
                 .catch((error) => {
                     clearErrors();
-                    displayError(error.response.data.message);
+                    displayError.innerText =
+                        'Please select a new username and/or email';
                 });
         } else {
             clearErrors();
-            displayError(error);
+            displayError.innerText = error;
         }
     });
 }

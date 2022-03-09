@@ -1,21 +1,15 @@
 const renderCreatePaymentEventList = (session) => {
-    function changebackgroundtocolor() {
-        document.body.style.backgroundImage =
-            'linear-gradient(to left, #c200fb, #ffbc0a';
-    }
-    changebackgroundtocolor();
     const page = document.getElementById('page');
     let userCount = 1;
 
     // get rid of all br tags after styling
 
     page.innerHTML = `
-    
+    <h1 id="page-title">CREATE PAYMENT EVENT</h1>
     <div class="container mx-auto">
     <div class="d-flex-center">
-    
     <form id="eventDetails">
-    <h1>Add Payment Event</h1>
+
         <label for="eventName">Event Name:</label><br>
         <input type="text" id="eventName" name="eventName"><br>
         <label for="description">Description:</label><br>
@@ -25,15 +19,18 @@ const renderCreatePaymentEventList = (session) => {
         <label for="dueDate">Due Date:</label><br>
         <input type="text" id="dueDate" name="dueDate">  
         
-        <h1>User Breakdown</h1>
+        <h4>User Breakdown</h4>
         <span>Click to add user</span>
         <button id="add-user" class="addUser-${userCount}">+</button><br>
         <div id="add-user-section">
+
                 <section class="user-section">
                 <div class="row">
                     <div class="col">
                         <label for="user">User ${userCount}:</label><br>
-                         <input type="text" id="${userCount}" class="user" name="user"> 
+                         <input type="text" id="${userCount}" class="user" name="user" value="${
+        getSession().username
+    }" readonly> 
                     </div>
                     <div class="col">
                         <label for="percentage">Percentage: </label>
@@ -42,8 +39,9 @@ const renderCreatePaymentEventList = (session) => {
                     </div>
                 </div>
                 </section>
-        </div>
 
+        </div>
+        <p style="color: red" id="displayError"></p>
         <button class="btn-block btn-color" type="submit">Submit</button>
     </form>
     </div>
@@ -83,6 +81,8 @@ const renderCreatePaymentEventList = (session) => {
         // add user count when clicked on
         userCount += 1;
     });
+
+    const displayError = document.querySelector('#displayError');
 
     const form = document.getElementById('eventDetails');
     form.addEventListener('submit', (event) => {
@@ -143,6 +143,8 @@ const renderCreatePaymentEventList = (session) => {
             error = 'Description is required';
         } else if (body.due_date === null) {
             error = 'Due Date is required';
+        } else if (body.event_name.length > 20) {
+            error = 'Event Name has to be under 20 characters';
         } else if (moment(body.due_date).isBefore(new Date())) {
             error = 'Due Date has to be in the future';
         } else if (body.total_amount === '') {
@@ -167,26 +169,21 @@ const renderCreatePaymentEventList = (session) => {
                             })
                             .catch((error) => {
                                 clearErrors();
-                                displayError(error.response.data.message);
+                                displayError.innerText = error;
                             });
                     })
                     .catch((error) => {
                         clearErrors();
-                        displayError(error.response.data.message);
+                        displayError.innerText = error;
                     }); //update endpoint
             } else {
                 clearErrors();
-                displayError(error);
+                displayError.innerText = error;
             }
         } else {
             clearErrors();
-            clearPercentageError();
-
-            const formDiv = document.querySelector('#add-user-section');
-            const errorPercentage = document.createElement('p');
-            errorPercentage.setAttribute('id', 'error-percentage');
-            errorPercentage.innerHTML = 'Invalid percentage total'; // can fix text later.
-            formDiv.appendChild(errorPercentage);
+            error = 'Invalid Percentage Total';
+            displayError.innerText = error;
         }
     });
 };

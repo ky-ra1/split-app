@@ -18,6 +18,7 @@ function renderPaymentEvent(event_id) {
 
                     page.innerHTML = `
                 <div>
+                    <h4 style="text-align: center; color: red; margin: 30px" id="displayError"></h4>
                     <h1>${response.data.rows[0].event_name}</h1>
                     <p>Total Amount: ${response.data.rows[0].total_amount}</p>
                 `;
@@ -84,11 +85,18 @@ function renderPaymentEvent(event_id) {
                 })
                 .catch((error) => {
                     clearErrors();
-                    displayError(error);
+                    const displayError =
+                        document.querySelector('#displayError');
+                    error =
+                        'Event Error, Please return to Home whilst we resolve this error';
+                    displayError.innerText = error;
                 });
         })
         .catch((error) => {
             clearErrors();
-            displayError(error);
+            const displayError = document.querySelector('#displayError');
+            error =
+                'Event Error, Please return to Home whilst we resolve this error';
+            displayError.innerText = error;
         });
 }

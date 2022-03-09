@@ -9,7 +9,6 @@ function addSelectListenersForOwing() {
             } else {
                 paid_status = true;
             }
-
             const body = {
                 id: parseInt(event.target.attributes.identifier.textContent),
                 paid_status: paid_status,
@@ -20,11 +19,19 @@ function addSelectListenersForOwing() {
                 .then((response) => {
                     setTimeout(() => {
                         mainPageElement(getSession());
-                    }, 1000);
+                    }, 2000);
+                    const displaySuccess =
+                        document.querySelector('#displaySuccess');
+                    displaySuccess.innerText =
+                        'Update Successful, page will refresh.';
                 })
                 .catch((error) => {
                     clearErrors();
-                    displayError(error);
+                    const displayError =
+                        document.querySelector('#displayError');
+                    error =
+                        'Status update error, we hope to resolve this soon.';
+                    displayError.innerText = error;
                 });
         });
     }
@@ -52,12 +59,20 @@ function addSelectListenersForOwed() {
                 .then((response) => {
                     setTimeout(() => {
                         mainPageElement(getSession());
-                    }, 1000);
-
+                    }, 2000);
                     //show status updated successfully
+                    const displaySuccess =
+                        document.querySelector('#displaySuccess');
+                    displaySuccess.innerText =
+                        'Update Successful, page will refresh.';
                 })
                 .catch((error) => {
-                    //do some erroring things
+                    clearErrors();
+                    const displayError =
+                        document.querySelector('#displayError');
+                    error =
+                        'Status update error, we hope to resolve this soon.';
+                    displayError.innerText = error;
                 });
         });
     }
@@ -68,17 +83,29 @@ function renderPaymentsOwed(session) {
 
     const page = document.getElementById('page');
     page.innerHTML += `
-        <h1>Payments</h1>
-    `;
+    <section id="intro" class="intro">
+        <div class="slogan">
+			<h2>SPLIT</h2>
+			<h4>Create, Track and Update Payments</h4>
+		</div>
+    </section>
+    <section id="all-payments-section">
+        <h1>PAYMENTS</h1>
+        <h6 style="color: red" id="displayError"></h6>
 
-    page.innerHTML += `
         <section id="payments_owing_section">
             <h3>Payments Owing</h3>
+            <h6 style="color: green" id="displaySuccess"></h6>
         </section>
+
         <section id="payments_owed_to_me">
             <h3>Payments Owed To Me</h3>
+            <h6 style="color: green" id="displaySuccess"></h6>
         </section>
+    </section>
     `;
+
+    const displayError = document.querySelector('#displayError');
 
     //FIX API CALL to get the event creator, currently displaying event name rather than event creator
     axios
@@ -187,7 +214,10 @@ function renderPaymentsOwed(session) {
         })
         .catch((error) => {
             clearErrors();
-            displayError(error);
+            const displayError = document.querySelector('#displayError');
+            error =
+                'Error getting all Payment Owing Details, we hope to resolve this soon.';
+            displayError.innerText = error;
         });
 
     axios
@@ -312,6 +342,9 @@ function renderPaymentsOwed(session) {
         })
         .catch((error) => {
             clearErrors();
-            displayError(error);
+            const displayError = document.querySelector('#displayError');
+            error =
+                'Error getting all Payment Owed Details, we hope to resolve this soon.';
+            displayError.innerText = error;
         });
 }
