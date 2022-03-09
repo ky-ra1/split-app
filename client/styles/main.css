@@ -284,8 +284,22 @@ a:hover {
 
 #all-payments-section > h1 {
     color: rgb(46, 3, 67);
-    font-size: 30px;
     font-weight: 600;
+}
+
+#payments_owing_section > h3,
+#payments_owed_to_me > h3 {
+    color: rgb(71, 3, 104);
+    font-size: 25px;
+    font-weight: 500;
+}
+
+#paymentsOwingTable > #paymentsOwingTableBody {
+    border-spacing: 20px 1em !important;
+}
+
+#payments_owing_section {
+    margin: 10px 0 50px 0;
 }
 
 /* ===========================
@@ -301,6 +315,11 @@ a:hover {
     text-align: center;
 }
 
+#all-payments-event-section > h1 {
+    color: rgb(46, 3, 67);
+    font-weight: 600;
+}
+
 /* ===========================
 --- History
 ============================ */
@@ -312,4 +331,15 @@ a:hover {
     padding: 5% 0 5% 0;
     align-items: center;
     text-align: center;
+}
+
+#all-history-section > h1 {
+    color: rgb(46, 3, 67);
+    font-weight: 600;
+}
+
+#payments_history_section > h3 {
+    color: rgb(71, 3, 104);
+    font-size: 25px;
+    font-weight: 500;
 }

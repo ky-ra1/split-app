@@ -42,7 +42,11 @@ function renderPaymentHistory(session) {
                     payment.user_id !== payment.event_creator_id
                 ) {
                     paymentHistorySection.innerHTML += `
-                        <p>${payment.event_name} | ${payment.username} | ${payment.due_date} | ${payment.amount} | ${status}</p>
+                        <p>${payment.event_name} | ${
+                        payment.username
+                    } | ${moment(payment.due_date).format('D MMMM YYYY')} | ${
+                        payment.amount
+                    } | ${status}</p>
                     `;
                 }
             });

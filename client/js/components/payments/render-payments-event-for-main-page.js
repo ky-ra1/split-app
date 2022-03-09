@@ -6,7 +6,7 @@ function renderPaymentsEventForMainPage(session) {
     const page = document.getElementById('page');
     page.innerHTML += `
     <section id="all-payments-event-section">
-        <h1>Payments Event</h1>
+        <h1>PAYMENTS EVENT</h1>
         <h6 style="color: red" id="displayError"></h6>
  
         <section id="payments_event_section">
