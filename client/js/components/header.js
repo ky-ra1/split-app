@@ -18,6 +18,12 @@ function renderHeader(session = {}) {
                     width="50"
                 />PLIT
             </a>
+            <a class="btn float-end d-inline offcanvas_btn" href="#sidebar_left" role="button" aria-controls="sidebar_left">
+                <i class="material-icons" style="font-size:40px;color:black" data-bs-target="#sidebar_left"
+                    data-bs-toggle="offcanvas"
+                    class="img-fluid hlogo rounded"
+                    width="50">menu</i>
+            </a>
             
             <div class="clearfix"></div>
         </div>
@@ -81,9 +87,15 @@ function renderHeader(session = {}) {
                     width="50"
                 />PLIT
             </a>
-           
+           <a class="btn float-end d-inline offcanvas_btn" href="#sidebar_left" role="button" aria-controls="sidebar_left">
+                <i class="material-icons" style="font-size:40px;color:black" data-bs-target="#sidebar_left"
+                    data-bs-toggle="offcanvas"
+                    class="img-fluid hlogo rounded"
+                    width="50">menu</i>
+            </a>
             <div class="clearfix"></div>
         </div>
+        
         <div
             class="offcanvas offcanvas-start"
             tabindex="-1"

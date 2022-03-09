@@ -343,3 +343,8 @@ a:hover {
     font-size: 25px;
     font-weight: 500;
 }
+
+/* nav-bar */
+.material-icons {
+    border: 2px solid white !important;
+}
