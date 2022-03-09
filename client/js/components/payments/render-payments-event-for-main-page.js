@@ -1,6 +1,7 @@
 //paymentevent
 
-function renderPaymentsEventForMainPage(session) {
+function renderPaymentsEventForMainPage() {
+    const session = getSession();
     user_id = session.user_id;
 
     const page = document.getElementById('page');

@@ -1,5 +1,6 @@
-function renderHeader(session = {}) {
+function renderHeader() {
     const header = document.querySelector('#header-nav');
+    const session = getSession();
 
     if (session.email) {
         header.innerHTML = `       

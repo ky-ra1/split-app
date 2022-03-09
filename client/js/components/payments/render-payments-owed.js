@@ -78,7 +78,8 @@ function addSelectListenersForOwed() {
     }
 }
 
-function renderPaymentsOwed(session) {
+function renderPaymentsOwed() {
+    const session = getSession();
     user_id = session.user_id;
 
     const page = document.getElementById('page');
@@ -107,7 +108,6 @@ function renderPaymentsOwed(session) {
 
     const displayError = document.querySelector('#displayError');
 
-    //FIX API CALL to get the event creator, currently displaying event name rather than event creator
     axios
         .get(`/api/payments/getPaymentsOwingToMe/${user_id}`)
         .then((response) => {
@@ -261,14 +261,7 @@ function renderPaymentsOwed(session) {
             payments.forEach((payment) => {
                 if (payment.user_id !== payment.event_creator_id) {
                     let status = '';
-                    // if (!payment.paid_status && !payment.received_status) {
-                    //     status = 'PAYMENT PENDING';
-                    // } else if (
-                    //     payment.paid_status &&
-                    //     !payment.received_status
-                    // ) {
-                    //     status = 'PAID - CONFIRMED';
-                    // }
+
 
                     if (!payment.paid_status) {
                         status = 'UNPAID';
@@ -294,7 +287,6 @@ function renderPaymentsOwed(session) {
                         let row_data_4 = document.createElement('td');
                         row_data_4.innerHTML = `${payment.amount}`;
                         let row_data_5 = document.createElement('td');
-                        // row_data_4.innerHTML = `${status}`;
 
                         const selectListOwed = document.createElement('select');
                         selectListOwed.classList.add('selectPaymentOwed');
@@ -315,8 +307,6 @@ function renderPaymentsOwed(session) {
                         optionOne.text = 'PAYMENT PENDING';
                         optionTwo.value = 'PAID - CONFIRMED';
                         optionTwo.text = 'PAID - CONFIRMED';
-
-                        // console.log(payment.payments_id, status)
 
                         if (status.includes('PAYMENT')) {
                             selectListOwed.add(optionOne, null);

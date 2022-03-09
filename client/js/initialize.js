@@ -11,8 +11,8 @@ function renderAppWithoutSession() {
 function renderAppWithSession() {
     fetchSession().then((session) => {
         if(session) {
-            renderHeader(session);
-            mainPageElement(session);
+            renderHeader();
+            mainPageElement();
         }
     })
 }
