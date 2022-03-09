@@ -30,7 +30,7 @@ const Users = {
         const query =
             'INSERT INTO users (first_name, username, password, email) VALUES($1, $2, $3, $4) RETURNING *';
         return db
-            .query(query, [first_name, username, password, email])
+            .query(query, [first_name, username.toLowerCase(), password, email.toLowerCase()])
             .then((response) => {
                 return response.rows ? response.rows[0] : {};
             });
