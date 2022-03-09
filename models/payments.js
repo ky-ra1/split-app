@@ -15,7 +15,7 @@ const Payments = {
         });
     },
 
-    getPaymentsOwingToMe: (id) => { //TOFIX
+    getPaymentsOwingToMe: (id) => {
         const query =
             'SELECT payments.id AS payments_id, payments.user_id, payments_event.id AS event_id, payments_event.event_name, payments.paid_status, payments.received_status, payments.paid_date, payments_event.due_date, payments.amount, users.username from payments left join payments_event on payments_event.id = payments.payment_event_id left join users on payments_event.event_creator_id = users.id WHERE user_id = $1';
         return db.query(query, [id]).then((response) => {
@@ -23,7 +23,7 @@ const Payments = {
         });
     },
 
-    getPaymentsOwedToMe: (id) => { //TOFIX
+    getPaymentsOwedToMe: (id) => { 
         const query =
             'SELECT payments.id AS payments_id, payments.user_id, payments_event.id AS event_id, payments_event.event_name, payments.paid_status, payments.received_status, payments.paid_date, payments_event.due_date, payments.amount, users.username, payments_event.event_creator_id from payments left join payments_event on payments_event.id = payments.payment_event_id left join users on payments.user_id = users.id WHERE payments_event.event_creator_id = $1';
         return db.query(query, [id]).then((response) => {
