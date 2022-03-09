@@ -14,7 +14,7 @@ function renderLoginForm() {
                                 src="https://static.thenounproject.com/png/180195-200.png"
                             />
                         </div>
-                        <h3 class="mb-5 text-center heading">We are Split.</h3>
+                        <h3 class="mb-5 text-center heading">Split with us</h3>
                         <h6 class="msg-info">Please login to your account</h6>
                         <p style="text-align: center; color: red" id="displayError"></p>
                         <form id="login" action="/api/sessions" method="POST">
@@ -55,13 +55,13 @@ function renderLoginForm() {
             </div>
             <div class="card card2">
                 <div class="my-auto mx-md-5 px-md-5 right">
-                    <h3 class="text-white">Just Split</h3>
-                    <small class="text-white"
-                        >The best way to split costs and track payments. </small
+                    <h3 class="text-white" style="font-weight: 600">Just Split</h3>
+                    <small class="text-white" style="font-size: 1.2em">
+                        No more awkward conversations with your mates. The best way to split costs and track payments. </small
                     >
                 </div>
                 <div class="bottom text-center mb-5">
-                    <p href="#" class="sm-text mx-auto mb-3">
+                    <p href="#" class="sm-text mx-auto mb-3" style="font-weight: 550">
                         Don't have an account?<button id="createNewAccount" 
                             class="btn btn-white ml-2"
                         >

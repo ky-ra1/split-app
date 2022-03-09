@@ -16,7 +16,7 @@ function renderHeader(session = {}) {
                     data-bs-toggle="offcanvas"
                     class="img-fluid hlogo rounded"
                     width="50"
-                />
+                />PLIT
             </a>
             
             <div class="clearfix"></div>
@@ -28,8 +28,8 @@ function renderHeader(session = {}) {
             aria-labelledby="offcanvasExampleLabel"
         >
             <div class="offcanvas-header">
-                <h5 class="offcanvas-title" id="offcanvasExampleLabel">
-                    Split App
+                <h5 class="offcanvas-title" id="offcanvasExampleLabel" style="font-weight: 550">
+                    SPLIT APP
                 </h5>
                 <button
                     type="button"
@@ -39,7 +39,7 @@ function renderHeader(session = {}) {
                 ></button>
             </div>
             <div class="offcanvas-body">
-                <div>Split is awesome.</div>
+                <div>Hello <span style="font-weight: bold; color: #d500f9">${session.username}</span>!</div>
                 <ul id="navlist" class="nav flex-column">
                     <li id="main-page" class="nav-item">
                         <a class="nav-link active" href="#">Home</a>
@@ -79,7 +79,7 @@ function renderHeader(session = {}) {
                     data-bs-toggle="offcanvas"
                     class="img-fluid hlogo rounded"
                     width="50"
-                />LIT
+                />PLIT
             </a>
            
             <div class="clearfix"></div>
