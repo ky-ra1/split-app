@@ -12,14 +12,12 @@ function renderHeader(session = {}) {
             >
                 <img 
                     src="https://static.thenounproject.com/png/180195-200.png"
-                    class="main-page"
-                    
-                    class="img-fluid hlogo rounded"
+                    class="main-page img-fluid hlogo rounded"
                     width="50"
                 />PLIT
             
             <a class="btn float-end d-inline offcanvas_btn" href="#sidebar_left" role="button" aria-controls="sidebar_left">
-                <i class="material-icons" style="font-size:40px;color:black" data-bs-target="#sidebar_left"
+                <i id="menu_button" class="material-icons" style="font-size:40px;color:black" data-bs-target="#sidebar_left"
                     data-bs-toggle="offcanvas"
                     class="img-fluid hlogo rounded"
                     width="50">menu</i>
@@ -47,7 +45,7 @@ function renderHeader(session = {}) {
             <div class="offcanvas-body">
                 <div>Hello <span style="font-weight: bold; color: #d500f9">${session.username}</span>!</div>
                 <ul id="navlist" class="nav flex-column">
-                    <li class="main-page" class="nav-item">
+                    <li id="main-page-from-offcanvas" class="nav-item">
                         <a class="nav-link active" href="#">Home</a>
                     </li>
                     <li id="payment-event" class="nav-item">
@@ -70,6 +68,11 @@ function renderHeader(session = {}) {
         document.querySelector('.main-page').addEventListener('click', () => {
             mainPageElement(session);
         });
+        document
+            .querySelector('#main-page-from-offcanvas')
+            .addEventListener('click', () => {
+                mainPageElement(session);
+            });
     } else {
         header.innerHTML = `       
          <div class="w-100 border fixed-top py-2">
@@ -81,14 +84,12 @@ function renderHeader(session = {}) {
             >
                  <img 
                     src="https://static.thenounproject.com/png/180195-200.png"
-                    class="main-page"
-                    
-                    class="img-fluid hlogo rounded"
+                    class="main-page img-fluid hlogo rounded"
                     width="50"
                 />PLIT
             </a>
            <a class="btn float-end d-inline offcanvas_btn" href="#sidebar_left" role="button" aria-controls="sidebar_left">
-                <i class="material-icons" style="font-size:40px;color:black" data-bs-target="#sidebar_left"
+                <i id="menu_button" class="material-icons" style="font-size:40px;color:black" data-bs-target="#sidebar_left"
                     data-bs-toggle="offcanvas"
                     class="img-fluid hlogo rounded"
                     width="50">menu</i>
