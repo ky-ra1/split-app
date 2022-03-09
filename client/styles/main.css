@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
 main {
     margin-top: 60px;
-    padding: 20px;
+    /* padding: 20px; */
 }
 body {
     font-family: 'Montserrat', sans-serif;
@@ -126,11 +126,11 @@ button:focus {
 }
 
 #page-title {
-    font-family: 'Anton', 'sans-serif';
+    font-weight: 600;
+    padding: 4% 0 2% 0;
     display: flex;
     justify-content: center;
-    margin: 30px;
-    color: #470154;
+    color: #d500f9;
 }
 
 .btn-white:hover {
@@ -228,4 +228,88 @@ a:hover {
     outline: none;
     border: none;
     margin: 5px;
+}
+
+/* ===========================
+--- Intro
+============================ */
+
+.intro {
+    position: relative;
+    background-color: rgb(255, 255, 255);
+}
+
+#intro.intro {
+    padding: 5% 0 5% 0;
+    width: 100vw;
+}
+
+.intro .slogan {
+    text-align: center;
+}
+
+.intro .slogan h2 {
+    color: rgb(0, 0, 0);
+    text-shadow: none;
+    font-size: 50px;
+    line-height: 60px;
+    font-weight: 700;
+    font-family: Montserrat, sans-serif;
+    background-color: rgba(0, 0, 0, 0);
+    text-decoration: none;
+    text-transform: uppercase;
+    border-width: 0px;
+    border-color: #000;
+    border-style: none;
+    text-shadow: -1px 0 1px #000;
+}
+
+.intro .slogan h4 {
+    color: rgb(181, 181, 181);
+    text-shadow: -1px 1px 1px #000;
+}
+
+/* ===========================
+--- Payments
+============================ */
+
+#all-payments-section {
+    background-color: rgb(238, 228, 240);
+    display: flex;
+    flex-direction: column;
+    padding: 5% 0 5% 0;
+    align-items: center;
+    text-align: center;
+}
+
+#all-payments-section > h1 {
+    color: rgb(46, 3, 67);
+    font-size: 30px;
+    font-weight: 600;
+}
+
+/* ===========================
+--- Payments Event
+============================ */
+
+#all-payments-event-section {
+    background-color: rgb(239, 225, 216);
+    display: flex;
+    flex-direction: column;
+    padding: 5% 0 5% 0;
+    align-items: center;
+    text-align: center;
+}
+
+/* ===========================
+--- History
+============================ */
+
+#all-history-section {
+    background-color: rgb(235, 227, 203);
+    display: flex;
+    flex-direction: column;
+    padding: 5% 0 5% 0;
+    align-items: center;
+    text-align: center;
 }

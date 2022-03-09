@@ -4,8 +4,10 @@ function renderPaymentHistory(session) {
 
     const page = document.getElementById('page');
     page.innerHTML += `
+    <section id="all-history-section">
         <h1>History</h1>
         <h6 style="color: red" id="displayError"></h6>
+    </section>
     `;
 
     const displayError = document.querySelector('#displayError');
@@ -19,11 +21,13 @@ function renderPaymentHistory(session) {
             const paymentsHistory = response.data;
 
             if (paymentsHistory.length > 0) {
-                page.innerHTML += `
-                    <section id="payments_history_section">
-                        <h3>Payment History</h3>
-                    </section>
-                `;
+                const historySection = document.getElementById(
+                    'all-history-section'
+                );
+                const paymentHistory = document.createElement('section');
+                paymentHistory.setAttribute('id', 'payments_history_section');
+                paymentHistory.innerHTML += `<h3>Payment History</h3>`;
+                historySection.appendChild(paymentHistory);
             }
 
             const paymentHistorySection = document.getElementById(
