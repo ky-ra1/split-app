@@ -29,13 +29,19 @@ const renderCreatePaymentEventList = (session) => {
         <span>Click to add user</span>
         <button id="add-user" class="addUser-${userCount}">+</button><br>
         <div id="add-user-section">
-            <section class="user-section">
-                <label for="user">User ${userCount}:</label><br>
-                <input type="text" id="${userCount}" class="user" name="user"> 
-                <label for="percentage">Percentage: </label>
-                <input type="number" id="percentage-${userCount}" class="percentage" name="percentage">   
-                <span id="display-${userCount}"></span><br>
-            </section>
+                <section class="user-section">
+                <div class="row">
+                    <div class="col">
+                        <label for="user">User ${userCount}:</label><br>
+                         <input type="text" id="${userCount}" class="user" name="user"> 
+                    </div>
+                    <div class="col">
+                        <label for="percentage">Percentage: </label>
+                        <input type="number" id="percentage-${userCount}" class="percentage" name="percentage">   
+                        <span id="display-${userCount}"></span><br>
+                    </div>
+                </div>
+                </section>
         </div>
 
         <button class="btn-block btn-color" type="submit">Submit</button>
