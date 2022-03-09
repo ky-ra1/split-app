@@ -5,13 +5,13 @@ function renderPaymentsEventForMainPage(session) {
 
     const page = document.getElementById('page');
     page.innerHTML += `
-        <h1>Payments Event</h1>
+    <section id="all-payments-event-section">
+        <h1>PAYMENTS EVENT</h1>
         <h6 style="color: red" id="displayError"></h6>
-    `;
-
-    page.innerHTML += `
+ 
         <section id="payments_event_section">
         </section>
+    </section>
     `;
 
     const displayError = document.querySelector('#displayError');

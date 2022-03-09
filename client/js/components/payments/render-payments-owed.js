@@ -83,19 +83,26 @@ function renderPaymentsOwed(session) {
 
     const page = document.getElementById('page');
     page.innerHTML += `
-        <h1>Payments</h1>
+    <section id="intro" class="intro">
+        <div class="slogan">
+			<h2>SPLIT</h2>
+			<h4>Create, Track and Update Payments</h4>
+		</div>
+    </section>
+    <section id="all-payments-section">
+        <h1>PAYMENTS</h1>
         <h6 style="color: red" id="displayError"></h6>
-    `;
 
-    page.innerHTML += `
         <section id="payments_owing_section">
             <h3>Payments Owing</h3>
             <h6 style="color: green" id="displaySuccess"></h6>
         </section>
+
         <section id="payments_owed_to_me">
             <h3>Payments Owed To Me</h3>
             <h6 style="color: green" id="displaySuccess"></h6>
         </section>
+    </section>
     `;
 
     const displayError = document.querySelector('#displayError');
