@@ -6,7 +6,7 @@ function renderPaymentHistory() {
     const page = document.getElementById('page');
     page.innerHTML += `
     <section id="all-history-section">
-        <h1>History</h1>
+        <h1>HISTORY</h1>
         <h6 style="color: red" id="displayError"></h6>
     </section>
     `;
