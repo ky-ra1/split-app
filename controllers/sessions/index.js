@@ -22,13 +22,11 @@ router.post('/', (req, res) => {
             if (valid) {
                 req.session.user_id = user.id;
                 req.session.email = user.email;
-                req.session.first_name = user.first_name;
                 req.session.username = user.username;
 
                 res.json({
                     user_id: user.id,
                     email: email,
-                    first_name: user.first_name,
                     username: user.username,
                 });
             } else {
@@ -46,7 +44,6 @@ router.get('/', (req, res) => {
         res.json({
             user_id: req.session.user_id,
             email: req.session.email,
-            first_name: req.session.first_name,
             username: req.session.username,
         });
     } else {

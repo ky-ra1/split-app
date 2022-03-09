@@ -24,7 +24,7 @@ router.get('/getByEmail/:email', (req, res) => {
 });
 
 router.get('/', (req, res) => {
-    Users.getAll().then(email => {
+    Users.getAll().then((email) => {
         res.json(email);
     })
 });
@@ -38,11 +38,11 @@ router.post('/', userCreateValidator, (req, res) => {
         .then((user) => {
             req.session.user_id = user.id;
             req.session.username = user.username;
-            req.session.first_name = user.first_name;
+            req.session.email = user.email;
 
             res.json(user);
         })
-        .catch(error => {
+        .catch((error) => {
             res.status(400).json({
                 message: "username or email invalid",
             });
@@ -50,7 +50,7 @@ router.post('/', userCreateValidator, (req, res) => {
 });
 
 router.get('/', (req,res) => {
-    Users.getAll().then(users => {
+    Users.getAll().then((users) => {
         res.json(users);
     });
 });
