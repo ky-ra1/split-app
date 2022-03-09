@@ -109,8 +109,10 @@ button:focus {
 }
 
 .btn-color:hover {
-    color: #fff;
-    background-image: linear-gradient(to left, #d500f9, #ffd54f);
+    color: #d500f9;
+    border-radius: 50px;
+    background-image: linear-gradient(to left, #ffff, #ffff);
+    border: 2px solid #d500f9 !important;
 }
 
 .btn-white {

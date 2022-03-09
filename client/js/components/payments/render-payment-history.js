@@ -5,7 +5,10 @@ function renderPaymentHistory(session) {
     const page = document.getElementById('page');
     page.innerHTML += `
         <h1>History</h1>
+        <h6 style="color: red" id="displayError"></h6>
     `;
+
+    const displayError = document.querySelector('#displayError');
 
     let status;
 
@@ -42,6 +45,8 @@ function renderPaymentHistory(session) {
         })
         .catch((error) => {
             clearErrors();
-            displayError(error);
+            const displayError = document.querySelector('#displayError');
+            error = 'Error getting history, we hope to resolve this soon.';
+            displayError.innerText = error;
         });
 }

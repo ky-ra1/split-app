@@ -1,9 +1,4 @@
 const renderCreatePaymentEventList = (session) => {
-    function changebackgroundtocolor() {
-        document.body.style.backgroundImage =
-            'linear-gradient(to left, #c200fb, #ffbc0a';
-    }
-    changebackgroundtocolor();
     const page = document.getElementById('page');
     let userCount = 1;
 
@@ -16,6 +11,7 @@ const renderCreatePaymentEventList = (session) => {
     
     <form id="eventDetails">
     <h1>Add Payment Event</h1>
+    <p style="color: red" id="displayError"></p>
         <label for="eventName">Event Name:</label><br>
         <input type="text" id="eventName" name="eventName"><br>
         <label for="description">Description:</label><br>
@@ -31,13 +27,15 @@ const renderCreatePaymentEventList = (session) => {
         <div id="add-user-section">
             <section class="user-section">
                 <label for="user">User ${userCount}:</label><br>
-                <input type="text" id="${userCount}" class="user" name="user"> 
+                <input type="text" id="${userCount}" class="user" name="user" value="${
+        getSession().username
+    }" readonly> 
                 <label for="percentage">Percentage: </label>
                 <input type="number" id="percentage-${userCount}" class="percentage" name="percentage">   
                 <span id="display-${userCount}"></span><br>
             </section>
         </div>
-
+        
         <button class="btn-block btn-color" type="submit">Submit</button>
     </form>
     </div>
@@ -77,6 +75,8 @@ const renderCreatePaymentEventList = (session) => {
         // add user count when clicked on
         userCount += 1;
     });
+
+    const displayError = document.querySelector('#displayError');
 
     const form = document.getElementById('eventDetails');
     form.addEventListener('submit', (event) => {
@@ -161,26 +161,21 @@ const renderCreatePaymentEventList = (session) => {
                             })
                             .catch((error) => {
                                 clearErrors();
-                                displayError(error.response.data.message);
+                                displayError.innerText = error;
                             });
                     })
                     .catch((error) => {
                         clearErrors();
-                        displayError(error.response.data.message);
+                        displayError.innerText = error;
                     }); //update endpoint
             } else {
                 clearErrors();
-                displayError(error);
+                displayError.innerText = error;
             }
         } else {
             clearErrors();
-            clearPercentageError();
-
-            const formDiv = document.querySelector('#add-user-section');
-            const errorPercentage = document.createElement('p');
-            errorPercentage.setAttribute('id', 'error-percentage');
-            errorPercentage.innerHTML = 'Invalid percentage total'; // can fix text later.
-            formDiv.appendChild(errorPercentage);
+            error = 'Invalid Percentage Total';
+            displayError.innerText = error;
         }
     });
 };
