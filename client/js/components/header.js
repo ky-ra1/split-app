@@ -47,7 +47,7 @@ function renderHeader(session = {}) {
             <div class="offcanvas-body">
                 <div>Hello <span style="font-weight: bold; color: #d500f9">${session.username}</span>!</div>
                 <ul id="navlist" class="nav flex-column">
-                    <li class="main-page" class="nav-item">
+                    <li id="main-page-from-offcanvas" class="nav-item">
                         <a class="nav-link active" href="#">Home</a>
                     </li>
                     <li id="payment-event" class="nav-item">
@@ -70,6 +70,11 @@ function renderHeader(session = {}) {
         document.querySelector('.main-page').addEventListener('click', () => {
             mainPageElement(session);
         });
+        document
+            .querySelector('#main-page-from-offcanva')
+            .addEventListener('click', () => {
+                mainPageElement(session);
+            });
     } else {
         header.innerHTML = `       
          <div class="w-100 border fixed-top py-2">
