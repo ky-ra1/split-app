@@ -99,8 +99,6 @@ function renderPaymentsEventForMainPage() {
         .catch((error) => {
             clearErrors();
             const displayError = document.querySelector('#displayError');
-            error =
-                'Error getting Payments Event, we hope to resolve this soon.';
-            displayError.innerText = error;
+            displayError.innerText = error.response.data.message;
         });
 }

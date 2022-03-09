@@ -159,8 +159,7 @@ function renderSignupForm() {
                 })
                 .catch((error) => {
                     clearErrors();
-                    displayError.innerText =
-                        'Please select a new username and/or email';
+                    displayError.innerText = error.response.data.message;
                 });
         } else {
             clearErrors();

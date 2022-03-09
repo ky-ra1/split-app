@@ -171,12 +171,13 @@ const renderCreatePaymentEventList = () => {
                             })
                             .catch((error) => {
                                 clearErrors();
-                                displayError.innerText = error;
+                                displayError.innerText =
+                                    error.response.data.message;
                             });
                     })
                     .catch((error) => {
                         clearErrors();
-                        displayError.innerText = error;
+                        displayError.innerText = error.response.data.message;
                     }); //update endpoint
             } else {
                 clearErrors();

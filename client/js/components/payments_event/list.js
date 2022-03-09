@@ -87,16 +87,12 @@ function renderPaymentEvent(event_id) {
                     clearErrors();
                     const displayError =
                         document.querySelector('#displayError');
-                    error =
-                        'Event Error, Please return to Home whilst we resolve this error';
-                    displayError.innerText = error;
+                    displayError.innerText = error.response.data.message;
                 });
         })
         .catch((error) => {
             clearErrors();
             const displayError = document.querySelector('#displayError');
-            error =
-                'Event Error, Please return to Home whilst we resolve this error';
-            displayError.innerText = error;
+            displayError.innerText = error.response.data.message;
         });
 }
