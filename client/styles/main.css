@@ -105,7 +105,7 @@ button:focus {
     background-image: linear-gradient(to left, #ffd54f, #d500f9);
     padding: 15px;
     cursor: pointer;
-    border: 2px solid transparent !important;
+    border: 2px solid !important;
     margin-top: 40px;
 }
 
