@@ -7,7 +7,4 @@ function fetchSession() {
             setSession(response.data);
             return response.data;
         })
-        .catch((error) => {
-            return error;
-        });
 }
