@@ -1,10 +1,10 @@
 //payments owed
 
-function mainPageElement(session) {
+function mainPageElement() {
     const page = document.getElementById('page');
     page.innerHTML = '';
 
-    renderPaymentsOwed(session);
-    renderPaymentsEventForMainPage(session);
-    renderPaymentHistory(session);
+    renderPaymentsOwed();
+    renderPaymentsEventForMainPage();
+    renderPaymentHistory();
 }

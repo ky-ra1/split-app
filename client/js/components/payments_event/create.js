@@ -1,4 +1,5 @@
-const renderCreatePaymentEventList = (session) => {
+const renderCreatePaymentEventList = () => {
+    const session = getSession();
     const page = document.getElementById('page');
     let userCount = 1;
 

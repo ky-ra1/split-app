@@ -1,5 +1,6 @@
 //payment history
-function renderPaymentHistory(session) {
+function renderPaymentHistory() {
+    const session = getSession();
     user_id = session.user_id;
 
     const page = document.getElementById('page');
