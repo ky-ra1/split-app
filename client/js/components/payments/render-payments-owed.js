@@ -29,9 +29,7 @@ function addSelectListenersForOwing() {
                     clearErrors();
                     const displayError =
                         document.querySelector('#displayError');
-                    error =
-                        'Status update error, we hope to resolve this soon.';
-                    displayError.innerText = error;
+                    displayError.innerText = error.response.data.message;
                 });
         });
     }
@@ -70,9 +68,7 @@ function addSelectListenersForOwed() {
                     clearErrors();
                     const displayError =
                         document.querySelector('#displayError');
-                    error =
-                        'Status update error, we hope to resolve this soon.';
-                    displayError.innerText = error;
+                    displayError.innerText = error.response.data.message;
                 });
         });
     }
@@ -215,9 +211,7 @@ function renderPaymentsOwed() {
         .catch((error) => {
             clearErrors();
             const displayError = document.querySelector('#displayError');
-            error =
-                'Error getting all Payment Owing Details, we hope to resolve this soon.';
-            displayError.innerText = error;
+            displayError.innerText = error.response.data.message;
         });
 
     axios
@@ -261,7 +255,6 @@ function renderPaymentsOwed() {
             payments.forEach((payment) => {
                 if (payment.user_id !== payment.event_creator_id) {
                     let status = '';
-
 
                     if (!payment.paid_status) {
                         status = 'UNPAID';
@@ -333,8 +326,6 @@ function renderPaymentsOwed() {
         .catch((error) => {
             clearErrors();
             const displayError = document.querySelector('#displayError');
-            error =
-                'Error getting all Payment Owed Details, we hope to resolve this soon.';
-            displayError.innerText = error;
+            displayError.innerText = error.response.data.message;
         });
 }

@@ -55,7 +55,6 @@ function renderPaymentHistory() {
         .catch((error) => {
             clearErrors();
             const displayError = document.querySelector('#displayError');
-            error = 'Error getting history, we hope to resolve this soon.';
-            displayError.innerText = error;
+            displayError.innerText = error.response.data.message;
         });
 }

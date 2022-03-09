@@ -3,8 +3,8 @@ const errorHandler = (err, req, res, next) => {
     let message = err.message || 'Something went wrong.';
 
     res.status(status).json({ message });
-    
-    next(error);
+
+    // next(err);
 };
 
 module.exports = errorHandler;

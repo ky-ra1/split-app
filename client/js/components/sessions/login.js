@@ -106,8 +106,7 @@ function renderLoginForm() {
                     renderAppWithSession();
                 })
                 .catch((error) => {
-                    displayError.innerText =
-                        'Please check your email or password';
+                    displayError.innerText = error.response.data.message;
                     clearErrors();
                 });
         } else {
