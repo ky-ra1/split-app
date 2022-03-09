@@ -200,10 +200,18 @@ function addUserForm() {
     section.setAttribute('class', 'user-section');
     userForm.appendChild(section);
 
+    let divRow = document.createElement('div');
+    divRow.setAttribute('class', 'row');
+    section.appendChild(divRow);
+
+    let divCol = document.createElement('div');
+    divCol.setAttribute('class', 'col');
+    divRow.appendChild(divCol);
+
     let userLabel = document.createElement('label');
     userLabel.setAttribute('for', userCount);
     userLabel.innerHTML = `User ${userCount}:`;
-    section.appendChild(userLabel);
+    divCol.appendChild(userLabel);
 
     let breakTag = document.createElement('br');
     section.appendChild(breakTag);
@@ -213,19 +221,23 @@ function addUserForm() {
     userInput.setAttribute('id', userCount);
     userInput.setAttribute('class', 'user');
     userInput.setAttribute('name', 'user');
-    section.appendChild(userInput);
+    divCol.appendChild(userInput);
+
+    let divCol2 = document.createElement('div');
+    divCol2.setAttribute('class', 'col');
+    divRow.appendChild(divCol2);
 
     let percentageLabel = document.createElement('label');
     percentageLabel.setAttribute('for', `percentage-${userCount}`);
     percentageLabel.innerHTML = `Percentage: `;
-    section.appendChild(percentageLabel);
+    divCol2.appendChild(percentageLabel);
 
     let percentageInput = document.createElement('input');
     percentageInput.setAttribute('type', 'number');
     percentageInput.setAttribute('id', `percentage-${userCount}`);
     percentageInput.setAttribute('class', 'percentage');
     percentageInput.setAttribute('name', 'percentage');
-    section.appendChild(percentageInput);
+    divCol2.appendChild(percentageInput);
 
     section.appendChild(breakTag);
 }
