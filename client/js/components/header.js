@@ -12,9 +12,7 @@ function renderHeader(session = {}) {
             >
                 <img 
                     src="https://static.thenounproject.com/png/180195-200.png"
-                    class="main-page"
-                    
-                    class="img-fluid hlogo rounded"
+                    class="main-page img-fluid hlogo rounded"
                     width="50"
                 />PLIT
             
@@ -71,7 +69,7 @@ function renderHeader(session = {}) {
             mainPageElement(session);
         });
         document
-            .querySelector('#main-page-from-offcanva')
+            .querySelector('#main-page-from-offcanvas')
             .addEventListener('click', () => {
                 mainPageElement(session);
             });
@@ -86,9 +84,7 @@ function renderHeader(session = {}) {
             >
                  <img 
                     src="https://static.thenounproject.com/png/180195-200.png"
-                    class="main-page"
-                    
-                    class="img-fluid hlogo rounded"
+                    class="main-page img-fluid hlogo rounded"
                     width="50"
                 />PLIT
             </a>
