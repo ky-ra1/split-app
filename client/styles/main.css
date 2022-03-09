@@ -196,3 +196,8 @@ a:hover {
     outline: none;
     border: none;
 }
+
+/* nav-bar */
+.material-icons {
+    border: 2px solid white !important;
+}
