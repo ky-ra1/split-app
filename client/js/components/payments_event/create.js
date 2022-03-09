@@ -21,7 +21,8 @@ const renderCreatePaymentEventList = (session) => {
         
         <h4>User Breakdown</h4>
         <span>Click to add user</span>
-        <button id="add-user" class="addUser-${userCount}">+</button><br>
+        <button id="add-user" class="addUser-${userCount}"><i class="material-icons" style="">group_add</i>
+        </button><br>
         <div id="add-user-section">
 
                 <section class="user-section">
