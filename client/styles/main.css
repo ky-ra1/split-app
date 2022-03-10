@@ -126,6 +126,7 @@ button:focus {
 }
 
 #page-title {
+    margin-top: 100px;
     font-weight: 600;
     padding: 4% 0 2% 0;
     display: flex;
