@@ -30,7 +30,7 @@ const renderCreatePaymentEventList = () => {
                 <div class="row">
                     <div class="col">
                         <label for="user">User ${userCount}:</label><br>
-                         <input type="text" id="${userCount}" class="user" name="user" value="${
+                        <input type="text" id="${userCount}" class="user" name="user" value="${
         getSession().username
     }" readonly> 
                     </div>
@@ -140,23 +140,41 @@ const renderCreatePaymentEventList = () => {
         };
 
         if (body.event_name === '') {
-            error = 'Event Name is required';
+            error = {
+                message: 'Event Name is required',
+                field_name: eventNameField,
+            }
         } else if (body.description === '') {
-            error = 'Description is required';
-        } else if (body.due_date === null) {
-            error = 'Due Date is required';
-        } else if (body.event_name.length > 20) {
-            error = 'Event Name has to be under 20 characters';
-        } else if (moment(body.due_date).isBefore(new Date())) {
-            error = 'Due Date has to be in the future';
+            error = {
+                message: 'Description is required',
+                field_name: descriptionField,
+            }
         } else if (body.total_amount === '') {
-            error = 'Total Amount is required';
+            error = {
+                message: 'Total Amount is required',
+                field_name: totalAmountField,
+            }
+        } else if (body.due_date === null) {
+            error = {
+                message: 'Due Date is required',
+                field_name: dueDateField,
+            }
+        } else if (body.event_name.length > 20) {
+            error = {
+                message: 'Event Name has to be under 20 characters',
+                field_name: eventNameField,
+            }
+        } else if (moment(body.due_date).isBefore(new Date())) {
+            error = {
+                message: 'Due Date has to be in the future',
+                field_name: dueDateField,
+            }
         }
-
-        if (validPercentage) {
-            clearPercentageError();
+        
             // need to validate the payment user fields with percentage above
-            if (!error) {
+        if (!error) {      
+            clearPercentageError();
+            if (validPercentage) {
                 axios
                     .post('/api/paymentsEvent', body)
                     .then((response) => {
@@ -181,12 +199,14 @@ const renderCreatePaymentEventList = () => {
                     }); //update endpoint
             } else {
                 clearErrors();
+                error = 'Invalid Percentage Total';
                 displayError.innerText = error;
             }
         } else {
             clearErrors();
-            error = 'Invalid Percentage Total';
-            displayError.innerText = error;
+            clearInputError();
+            error.field_name.setAttribute('class', 'form-control is-invalid');
+            displayError.innerText = error.message;
         }
     });
 };
@@ -248,4 +268,5 @@ function clearPercentageError() {
     if (displayedErrorPercentage) {
         displayedErrorPercentage.remove();
     }
+
 }
