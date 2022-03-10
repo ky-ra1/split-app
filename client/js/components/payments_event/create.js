@@ -50,6 +50,7 @@ const renderCreatePaymentEventList = () => {
         </div>
         <p style="color: red" id="displayError"></p>
         <button class="btn-block btn-color" type="submit">Submit</button>
+        <p style="color: #EC7D10; font-size: 13px" >Every field is required</p>
     </form>
     </div>
     </div>`;
