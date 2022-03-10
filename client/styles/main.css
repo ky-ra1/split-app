@@ -126,6 +126,7 @@ button:focus {
 }
 
 #page-title {
+    margin-top: 100px;
     font-weight: 600;
     padding: 4% 0 2% 0;
     display: flex;
@@ -221,13 +222,27 @@ a:hover {
     text-align: center;
 }
 
+button.delete_user:hover {
+    background-color: #fc2f00;
+    color: #fff;
+
+    text-align: center;
+}
+
 #eventDetails * {
     letter-spacing: 0.5px;
     outline: none;
     border: none;
     margin: 5px;
 }
+button.delete_user {
+    background-color: #fff;
+    color: #fc2f00;
+    border: 2px solid #fc2f00 !important;
+    border-radius: 20px;
 
+    text-align: center;
+}
 /* ===========================
 --- Intro
 ============================ */
