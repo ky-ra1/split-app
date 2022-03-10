@@ -12,13 +12,13 @@ const renderCreatePaymentEventList = () => {
     <form id="eventDetails">
 
         <label for="eventName">Event Name:</label><br>
-        <input type="text" id="eventName" name="eventName"><br>
+        <input type="text" id="eventName" name="eventName" required><br>
         <label for="description">Description:</label><br>
-        <input type="text" id="description" name="description"><br>    
+        <input type="text" id="description" name="description" required><br>    
         <label for="totalAmount">Total Amount:</label><br>
-        <input type="number" id="totalAmount" name="totalAmount"><br>
+        <input type="number" id="totalAmount" name="totalAmount" required><br>
         <label for="dueDate">Due Date:</label><br>
-        <input type="text" id="dueDate" name="dueDate">  
+        <input type="text" id="dueDate" name="dueDate" required>  
         
         <h4>User Breakdown</h4>
         <span>Click to add user</span>
