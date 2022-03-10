@@ -24,6 +24,10 @@ const renderCreatePaymentEventList = () => {
         <span>Click to add user</span>
         <button id="add-user" class="addUser-${userCount}"><i class="material-icons" style="">group_add</i>
         </button><br>
+
+        <span>Click to delete the last user field</span>
+        <button onclick="removeUser()"  id="delete_user_button" class="delete_user"><span class="material-icons">group_remove</span></button>
+        
         <div id="add-user-section">
 
                 <section class="user-section">
@@ -39,6 +43,7 @@ const renderCreatePaymentEventList = () => {
                         <input type="number" id="percentage-${userCount}" class="percentage" name="percentage">   
                         <span id="display-${userCount}"></span><br>
                     </div>
+                    
                 </div>
                 </section>
 
@@ -53,6 +58,8 @@ const renderCreatePaymentEventList = () => {
         field: document.getElementById('dueDate'),
         format: 'DD MMMM YYYY',
     });
+
+    //////////////////
 
     // + button
     const addUserButton = document.querySelector('#add-user');
@@ -198,10 +205,12 @@ function addUserForm() {
     // create a section for each
     let section = document.createElement('section');
     section.setAttribute('class', 'user-section');
+    section.setAttribute('id', `delete_user_section${userCount}`);
+
     userForm.appendChild(section);
 
     let divRow = document.createElement('div');
-    divRow.setAttribute('class', 'row');
+    divRow.setAttribute('class', 'row eachline');
     section.appendChild(divRow);
 
     let divCol = document.createElement('div');
@@ -239,6 +248,16 @@ function addUserForm() {
     percentageInput.setAttribute('name', 'percentage');
     divCol2.appendChild(percentageInput);
 
+    // // add delete buttons each line
+
+    // let divCol3 = document.createElement('div');
+    // divCol3.setAttribute('class', 'col col-lg-2 col align-self-end');
+    // divRow.appendChild(divCol3);
+    // let deleteUserButton = document.createElement('div');
+    // deleteUserButton.innerHTML = `<button onclick="removeUser()"  id="delete_user_button" class="delete_user">Delete User</button>`;
+    // divCol3.appendChild(deleteUserButton);
+    // //
+
     section.appendChild(breakTag);
 }
 
@@ -248,4 +267,15 @@ function clearPercentageError() {
     if (displayedErrorPercentage) {
         displayedErrorPercentage.remove();
     }
+}
+
+function removeUser() {
+    let sections = document.getElementsByClassName('user-section');
+    console.log(sections.length);
+
+    var elem = document.getElementById(`delete_user_section${sections.length}`);
+    console.log(elem);
+
+    elem.parentNode.removeChild(elem);
+    return false;
 }
