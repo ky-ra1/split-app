@@ -192,7 +192,7 @@ const renderCreatePaymentEventList = () => {
             }
         } else {
             clearErrors();
-            error = 'Invalid Percentage Total';
+            error = 'Invalid Percentage Total/Percentage is required';
             displayError.innerText = error;
         }
     });
