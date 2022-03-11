@@ -186,6 +186,10 @@ a:hover {
     margin-left: 13px;
 }
 
+#logo {
+    width: 150px;
+}
+
 /* create_payment_page */
 
 #eventDetails {
