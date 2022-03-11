@@ -78,7 +78,7 @@ function renderPaymentsEventForMainPage() {
                 row_data_4.innerHTML = `${status}`;
 
                 let row_data_5 = document.createElement('td');
-                row_data_5.innerHTML = `<span class="event-details" identifier="${paymentEvent.id}">View More</span>`;
+                row_data_5.innerHTML = `<span class="event-details" identifier="${paymentEvent.id}">View</span>`;
 
                 row.appendChild(row_data_1);
                 row.appendChild(row_data_2);

@@ -83,7 +83,7 @@ function renderPaymentsOwed() {
     <section id="intro" class="intro">
         
                 <div class="slogan">
-                    <h2 style="font-weight: 900; font-size: 80px"><img src="https://static.thenounproject.com/png/180195-200.png" id="logo_main_page" class="main-page img-fluid hlogo rounded" width="150"><span style="color: ;">P</span><span style="color: ">L</span><span style="color: ">I</span><span style="color: ;">T</span></h2>
+                    <h2 style="font-weight: 900; font-size: 80px"><img src="../../split-logo.png" id="logo_main_page" class="main-page img-fluid hlogo rounded" width="150"><span style="color: ;">P</span><span style="color: ">L</span><span style="color: ">I</span><span style="color: ;">T</span></h2>
 
                     <div class="test"><h4>Create</h4></div> 
                     <div class="test"> 

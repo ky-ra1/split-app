@@ -12,7 +12,7 @@ function renderHeader() {
                 aria-controls="sidebar_left"
             >
                 <img 
-                    src="https://static.thenounproject.com/png/180195-200.png"
+                    src="../../split-logo.png"
                     class="main-page img-fluid hlogo rounded"
                     width="50"
                 />PLIT
