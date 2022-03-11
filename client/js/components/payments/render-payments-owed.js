@@ -81,25 +81,37 @@ function renderPaymentsOwed() {
     const page = document.getElementById('page');
     page.innerHTML += `
     <section id="intro" class="intro">
-        <div class="slogan">
-			<h2>SPLIT</h2>
-			<h4>Create, Track and Update Payments</h4>
-		</div>
+        
+                <div class="slogan">
+                    <h2 style="font-weight: 900; font-size: 80px"><img src="https://static.thenounproject.com/png/180195-200.png" id="logo_main_page" class="main-page img-fluid hlogo rounded" width="150"><span style="color: ;">P</span><span style="color: ">L</span><span style="color: ">I</span><span style="color: ;">T</span></h2>
+
+                    <div class="test"><h4>Create</h4></div> 
+                    <div class="test"> 
+                    <span><h4>Split and Track</h4></span>
+                    </div>
     </section>
+
+    
     <section id="all-payments-section">
-        <h1>PAYMENTS</h1>
-        <h6 style="color: red" id="displayError"></h6>
+   
+            
+                <h1 style="font-weight: 600; color:  rgb(46, 3, 67)">PAYMENTS</h1>
+                <h6 style="color: red" id="displayError"></h6>
 
-        <section id="payments_owing_section">
-            <h3>Payments Owing</h3>
-            <h6 style="color: green" id="displaySuccess"></h6>
-        </section>
+                <section id="payments_owing_section">
+                
+                    <h3>Payments Owing</h3>
+                    <h6 style="color: green" id="displaySuccess"></h6>
+                </section>
 
-        <section id="payments_owed_to_me">
-            <h3>Payments Owed To Me</h3>
-            <h6 style="color: green" id="displaySuccess"></h6>
-        </section>
+                <section id="payments_owed_to_me">
+                    <h3>Payments Owed To Me</h3>
+                    <h6 style="color: green" id="displaySuccess"></h6>
+                </section>
+            
+   
     </section>
+    
     `;
 
     const displayError = document.querySelector('#displayError');
@@ -114,10 +126,12 @@ function renderPaymentsOwed() {
 
             let table = document.createElement('table');
             table.setAttribute('id', 'paymentsOwingTable');
+            table.setAttribute('class', 'table');
             let thead = document.createElement('thead');
             thead.setAttribute('id', 'paymentsOwingTableHead');
             let tbody = document.createElement('tbody');
             tbody.setAttribute('id', 'paymentsOwingTableBody');
+            tbody.setAttribute('scope', 'col');
 
             table.appendChild(thead);
             table.appendChild(tbody);
@@ -172,6 +186,7 @@ function renderPaymentsOwed() {
 
                         const selectList = document.createElement('select');
                         selectList.classList.add('selectPaymentOwing');
+                        selectList.classList.add('form-select');
                         selectList.setAttribute(
                             'identifier',
                             payment.payments_id
@@ -224,10 +239,13 @@ function renderPaymentsOwed() {
 
             let table = document.createElement('table');
             table.setAttribute('id', 'paymentsOwingTable');
+            table.setAttribute('class', 'table');
             let thead = document.createElement('thead');
             thead.setAttribute('id', 'paymentsOwingTableHead');
+
             let tbody = document.createElement('tbody');
             tbody.setAttribute('id', 'paymentsOwingTableBody');
+            tbody.setAttribute('scope', 'col');
 
             table.appendChild(thead);
             table.appendChild(tbody);

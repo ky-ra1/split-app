@@ -27,10 +27,12 @@ function renderPaymentsEventForMainPage() {
 
             let table = document.createElement('table');
             table.setAttribute('id', 'paymentsEventTable');
+            table.setAttribute('class', 'table');
             let thead = document.createElement('thead');
             thead.setAttribute('id', 'paymentsEventTableHead');
             let tbody = document.createElement('tbody');
             tbody.setAttribute('id', 'paymentsEventTableBody');
+            tbody.setAttribute('scope', 'col');
 
             table.appendChild(thead);
             table.appendChild(tbody);
