@@ -13,7 +13,7 @@ function renderSignupForm() {
                         >
                         </div>
                         <div class="bottom text-center mb-5">
-                            <p href="#" class="sm-text mx-auto mb-3" style="font-weight: 550">
+                            <p href="#" class="sm-text mx-auto mb-3" style="font-weight: 500">
                                 Already have an account?  <button
                                     id="login_button"
                                     class="btn btn-white ml-2"
