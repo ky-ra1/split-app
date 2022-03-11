@@ -11,7 +11,7 @@ function renderLoginForm() {
                         <div class="row justify-content-center px-3 mb-3">
                             <img
                                 id="logo"
-                                src="https://static.thenounproject.com/png/180195-200.png"
+                                src="../../split-logo.png"
                             />
                         </div>
                         <h3 class="mb-5 text-center heading">Split with us</h3>

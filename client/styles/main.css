@@ -345,16 +345,16 @@ button.delete_user {
 --- Payments Event
 ============================ */
 span.event-details {
-    color: white;
-    background-color: black;
-    padding: 6px;
-
-    border: 2px solid #d500f9 !important;
-    border-radius: 20px;
-}
-span.event-details:hover {
     background-color: #d500f9;
     color: #fff;
+    padding: 6px;
+    border: 2px solid #d500f9 !important;
+    border-radius: 20px;
+    font-size: 10px;
+}
+span.event-details:hover {
+    color: black;
+    background-color: white;
     cursor: pointer;
 
     text-align: center;

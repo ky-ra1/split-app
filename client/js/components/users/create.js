@@ -31,7 +31,7 @@ function renderSignupForm() {
                                 >
                                     <img
                                         id="logo"
-                                        src="https://static.thenounproject.com/png/180195-200.png"
+                                        src="../../split-logo.png"
                                     />
                                 </div>
                                 <h3 class="mb-5 text-center heading">
