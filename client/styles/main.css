@@ -422,19 +422,15 @@ div.test {
     white-space: nowrap;
 }
 div.test:first-of-type {
-    /* For increasing performance 
-                       ID/Class should've been used. 
-                       For a small demo 
-                       it's okaish for now */
-    animation: showup 7s infinite;
+    animation: showup 7s;
 }
 div.test:last-of-type {
     width: 0px;
     animation: reveal 7s infinite;
 }
 div.test:last-of-type span {
-    margin-left: -355px;
-    animation: slidein 7s infinite;
+    margin-left: -280px;
+    animation: slidein 30s;
 }
 @keyframes showup {
     0% {
@@ -475,13 +471,13 @@ div.test:last-of-type span {
         width: 0px;
     }
     30% {
-        width: 355px;
+        width: 280px;
     }
     80% {
         opacity: 1;
     }
     100% {
         opacity: 0;
-        width: 355px;
+        width: 280px;
     }
 }
