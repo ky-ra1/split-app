@@ -4,6 +4,11 @@ No more awkward conversations with your mates. The best way to split costs and t
 
 Website: https://split-app-seixr06.herokuapp.com/
 
+## Screenshots
+
+![Split Login](/assets/split-login.png)
+![Split Home](/assets/split-home.png)
+
 ## Tech Used
 
 -   Bootstrap
@@ -88,4 +93,24 @@ Every User can be a Main User and vice versa.
 
 ![erd](/assets/database-ERD.png)
 
-## Constraints
+## Approach
+
+This is a group project for GA's SEIX06 with 4 members - Elynn, Karishma, Kyra, May.
+
+We started to breakdown our ideas with the vision and user stories. We then utilised Trello as to breakdown our tasks followed by Figma to plan the basic layout.
+
+When planning for the breakdown of task, we focused on delivering a minimum viable product (MVP) first as seen on our trello board. To complete our project, we used a combination of working strategies such as mobbing, pair programming and splitting up tasks for individual work.
+
+![Trello image](/assets/Trello-screenshot.png)
+
+## Challenges
+
+-   The splitting of tasks equally due to differing abilities of team members. Through stronger communication we talked about what cards everyone would like to work on moving forward.
+-   The plan behind the MVP was more complicated and time consuming than what we intially thought. Therefore, we added a 'canned' column to our trello board to ensure our MVP meets its main goals by the due date
+-   Working through complicated SQL queries
+-   Backend error handling which we tackled
+
+## Credits
+
+[Logo image](https://static.thenounproject.com/png/180195-200.png)
+[Coolors](https://coolors.co/c200fb-fc2f00-ec7d10-ffbc0a)
