@@ -82,7 +82,7 @@ function renderPaymentHistory() {
                         'D MMMM YYYY'
                     )}`;
                     let row_data_4 = document.createElement('td');
-                    row_data_4.innerHTML = `${payment.amount}`;
+                    row_data_4.innerHTML = `$ ${payment.amount}`;
 
                     row.appendChild(row_data_1);
                     row.appendChild(row_data_2);

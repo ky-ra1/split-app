@@ -20,7 +20,7 @@ function renderPaymentEvent(event_id) {
                 <div>
                     <h4 style="text-align: center; color: red; margin: 30px" id="displayError"></h4>
                     <h1>${response.data.rows[0].event_name}</h1>
-                    <p>Total Amount: ${response.data.rows[0].total_amount}</p>
+                    <p>Total Amount: $ ${response.data.rows[0].total_amount}</p>
                 `;
 
                     let table = document.createElement('table');
