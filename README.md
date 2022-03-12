@@ -1,23 +1,31 @@
 # Split App
 
-The best way to split costs and track payments.
+No more awkward conversations with your mates. The best way to split costs and track payments.
+
+Website: https://split-app-seixr06.herokuapp.com/
+
+## Tech Used
+
+-   Bootstrap
+-   HTML/CSS
+-   Node JS
+-   Express JS
+-   Postgres
 
 ## Vision
 
-Simplify the way we split costs.
-Track payments, where a user can login and they can view the payment amounts they're required to pay and is owed to them.
+We want to simplify the way we split costs and allow users to track payments.
+A user can login and view the payment amounts they're required to pay and is owed to them.
 
-The `main user` can put in their total amount and then add additional people with percentages of how much each person will pay and a due date for the payment. The percentage amounts are stored associated to the user to pay.
+The `main user` can create a payment event, which includes a total amount. They can then add additional `users` with percentages attached of how much they will pay, coupled with a due date for the payment. The percentage amounts are stored in association to the `user` to pay.
 
-You can add a tag that each user is assigned to for a specific payment event.
+Usernames are used to assign and attach specific `users` for specific payment events.
 
-The user can login and see the details of what that specific user needs to pay for all their combined payment events.
+Upon login, users can view the breakdown of payment details, such as what specific users owe them and what they owe to specific users/event. Payments also include statuses, which users can update to reflect actual status - e.g. Payment received.
 
-They can also mark the payments they've made as 'Done'.
+When a `user` logs in that was also a `main user` that created a payment event, they willl see a list of payments pending and list of payments to be made.
 
-When a `user` logs in that was a main user for a payment event, they'll see a list of payments pending and list of payments to be made.
-
-## Potential future feature
+## Potential future features
 
 -   Let users rate each other for payment
 -   Add a comment for payments
@@ -79,3 +87,5 @@ Every User can be a Main User and vice versa.
 ## Entity Relationship Diagram
 
 ![erd](/assets/database-ERD.png)
+
+## Constraints

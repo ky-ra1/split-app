@@ -11,7 +11,7 @@ function renderLoginForm() {
                         <div class="row justify-content-center px-3 mb-3">
                             <img
                                 id="logo"
-                                src="https://static.thenounproject.com/png/180195-200.png"
+                                src="../../split-logo.png"
                             />
                         </div>
                         <h3 class="mb-5 text-center heading">Split with us</h3>
@@ -61,7 +61,7 @@ function renderLoginForm() {
                     >
                 </div>
                 <div class="bottom text-center mb-5">
-                    <p href="#" class="sm-text mx-auto mb-3" style="font-weight: 550">
+                    <p href="#" class="sm-text mx-auto mb-3" style="font-weight: 500">
                         Don't have an account?<button id="createNewAccount" 
                             class="btn btn-white ml-2"
                         >

@@ -27,10 +27,12 @@ function renderPaymentsEventForMainPage() {
 
             let table = document.createElement('table');
             table.setAttribute('id', 'paymentsEventTable');
+            table.setAttribute('class', 'table');
             let thead = document.createElement('thead');
             thead.setAttribute('id', 'paymentsEventTableHead');
             let tbody = document.createElement('tbody');
             tbody.setAttribute('id', 'paymentsEventTableBody');
+            tbody.setAttribute('scope', 'col');
 
             table.appendChild(thead);
             table.appendChild(tbody);
@@ -65,7 +67,7 @@ function renderPaymentsEventForMainPage() {
                     paymentEvent.creation_date
                 ).format('D MMMM YYYY')}`;
                 let row_data_3 = document.createElement('td');
-                row_data_3.innerHTML = `${paymentEvent.remaining_amount}`;
+                row_data_3.innerHTML = `$ ${paymentEvent.remaining_amount}`;
 
                 let status = 'Incomplete';
                 if (paymentEvent.completed) {
@@ -76,7 +78,7 @@ function renderPaymentsEventForMainPage() {
                 row_data_4.innerHTML = `${status}`;
 
                 let row_data_5 = document.createElement('td');
-                row_data_5.innerHTML = `<span class="event-details" identifier="${paymentEvent.id}">View More</span>`;
+                row_data_5.innerHTML = `<span class="event-details" identifier="${paymentEvent.id}">View</span>`;
 
                 row.appendChild(row_data_1);
                 row.appendChild(row_data_2);

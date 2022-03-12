@@ -10,18 +10,22 @@ const renderCreatePaymentEventList = () => {
     <form id="eventDetails">
 
         <label for="eventName">Event Name:</label>
-        <input type="text" id="eventName" name="eventName">
+        <input type="text" id="eventName" name="eventName" required>
         <label for="description">Description:</label>
-        <input type="text" id="description" name="description">  
+        <input type="text" id="description" name="description" required>  
         <label for="totalAmount">Total Amount:</label>
-        <input type="number" id="totalAmount" name="totalAmount">
+        <input type="number" id="totalAmount" name="totalAmount" required>
         <label for="dueDate">Due Date:</label>
-        <input type="text" id="dueDate" name="dueDate">  
+        <input type="text" id="dueDate" name="dueDate" required>  
         
         <h4>User Breakdown</h4>
         <span>Click to add user</span>
         <button id="add-user" class="addUser-${userCount}"><i class="material-icons" style="">group_add</i>
         </button>
+
+        <span>Click to delete the last user field</span>
+        <button onclick="removeUser()"  id="delete_user_button" class="delete_user"><span class="material-icons">group_remove</span></button>
+        
         <div id="add-user-section">
 
                 <section class="user-section">
@@ -37,12 +41,14 @@ const renderCreatePaymentEventList = () => {
                         <input type="number" id="percentage-${userCount}" class="percentage" name="percentage">   
                         <span id="display-${userCount}"></span>
                     </div>
+                    
                 </div>
                 </section>
 
         </div>
         <p style="color: red" id="displayError"></p>
         <button class="btn-block btn-color" type="submit">Submit</button>
+        <p style="color: #EC7D10; font-size: 13px" >Every field is required</p>
     </form>
     </div>
     </div>`;
@@ -51,6 +57,8 @@ const renderCreatePaymentEventList = () => {
         field: document.getElementById('dueDate'),
         format: 'DD MMMM YYYY',
     });
+
+    
 
     // + button
     const addUserButton = document.querySelector('#add-user');
@@ -138,23 +146,41 @@ const renderCreatePaymentEventList = () => {
         };
 
         if (body.event_name === '') {
-            error = 'Event Name is required';
+            error = {
+                message: 'Event Name is required',
+                field_name: eventNameField,
+            }
         } else if (body.description === '') {
-            error = 'Description is required';
-        } else if (body.due_date === null) {
-            error = 'Due Date is required';
-        } else if (body.event_name.length > 20) {
-            error = 'Event Name has to be under 20 characters';
-        } else if (moment(body.due_date).isBefore(new Date())) {
-            error = 'Due Date has to be in the future';
+            error = {
+                message: 'Description is required',
+                field_name: descriptionField,
+            }
         } else if (body.total_amount === '') {
-            error = 'Total Amount is required';
+            error = {
+                message: 'Total Amount is required',
+                field_name: totalAmountField,
+            }
+        } else if (body.due_date === null) {
+            error = {
+                message: 'Due Date is required',
+                field_name: dueDateField,
+            }
+        } else if (body.event_name.length > 20) {
+            error = {
+                message: 'Event Name has to be under 20 characters',
+                field_name: eventNameField,
+            }
+        } else if (moment(body.due_date).isBefore(new Date())) {
+            error = {
+                message: 'Due Date has to be in the future',
+                field_name: dueDateField,
+            }
         }
-
-        if (validPercentage) {
-            clearPercentageError();
+        
             // need to validate the payment user fields with percentage above
-            if (!error) {
+        if (!error) {      
+            clearPercentageError();
+            if (validPercentage) {
                 axios
                     .post('/api/paymentsEvent', body)
                     .then((response) => {
@@ -179,12 +205,14 @@ const renderCreatePaymentEventList = () => {
                     }); //update endpoint
             } else {
                 clearErrors();
+                error = 'Invalid Percentage Total';
                 displayError.innerText = error;
             }
         } else {
             clearErrors();
-            error = 'Invalid Percentage Total';
-            displayError.innerText = error;
+            clearInputError();
+            error.field_name.setAttribute('class', 'form-control is-invalid');
+            displayError.innerText = error.message;
         }
     });
 };
@@ -196,10 +224,12 @@ function addUserForm() {
     // create a section for each
     let section = document.createElement('section');
     section.setAttribute('class', 'user-section');
+    section.setAttribute('id', `delete_user_section${userCount}`);
+
     userForm.appendChild(section);
 
     let divRow = document.createElement('div');
-    divRow.setAttribute('class', 'row');
+    divRow.setAttribute('class', 'row eachline');
     section.appendChild(divRow);
 
     let divCol = document.createElement('div');
@@ -233,6 +263,7 @@ function addUserForm() {
     percentageInput.setAttribute('class', 'percentage');
     percentageInput.setAttribute('name', 'percentage');
     divCol2.appendChild(percentageInput);
+
 }
 
 function clearPercentageError() {
@@ -241,4 +272,16 @@ function clearPercentageError() {
     if (displayedErrorPercentage) {
         displayedErrorPercentage.remove();
     }
+
+}
+
+function removeUser() {
+    let sections = document.getElementsByClassName('user-section');
+    console.log(sections.length);
+
+    var elem = document.getElementById(`delete_user_section${sections.length}`);
+    console.log(elem);
+
+    elem.parentNode.removeChild(elem);
+    return false;
 }
