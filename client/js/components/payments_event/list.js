@@ -36,8 +36,8 @@ function renderPaymentEvent(event_id) {
                                                     <tr>
                                                         <th scope="col">Event Creator:</th>
                                                         <th scope="col">Sent To:</th>
-                                                        <th scope="col">Date:</th>
                                                         <th scope="col">Amount:</th>
+                                                        <th scope="col">Date Due:</th>
                                                         <th scope="col">Status:</th>
                                                     </tr>
                                                 </thead>
