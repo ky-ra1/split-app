@@ -3,27 +3,25 @@ const renderCreatePaymentEventList = () => {
     const page = document.getElementById('page');
     let userCount = 1;
 
-    // get rid of all br tags after styling
-
     page.innerHTML = `
     <h1 id="page-title">CREATE PAYMENT EVENT</h1>
     <div class="container mx-auto">
     <div class="d-flex-center">
     <form id="eventDetails">
 
-        <label for="eventName">Event Name:</label><br>
-        <input type="text" id="eventName" name="eventName" required><br>
-        <label for="description">Description:</label><br>
-        <input type="text" id="description" name="description" required><br>    
-        <label for="totalAmount">Total Amount:</label><br>
-        <input type="number" id="totalAmount" name="totalAmount" required><br>
-        <label for="dueDate">Due Date:</label><br>
+        <label for="eventName">Event Name:</label>
+        <input type="text" id="eventName" name="eventName" required>
+        <label for="description">Description:</label>
+        <input type="text" id="description" name="description" required>  
+        <label for="totalAmount">Total Amount:</label>
+        <input type="number" id="totalAmount" name="totalAmount" required>
+        <label for="dueDate">Due Date:</label>
         <input type="text" id="dueDate" name="dueDate" required>  
         
         <h4>User Breakdown</h4>
         <span>Click to add user</span>
         <button id="add-user" class="addUser-${userCount}"><i class="material-icons" style="">group_add</i>
-        </button><br>
+        </button>
 
         <span>Click to delete the last user field</span>
         <button onclick="removeUser()"  id="delete_user_button" class="delete_user"><span class="material-icons">group_remove</span></button>
@@ -33,15 +31,15 @@ const renderCreatePaymentEventList = () => {
                 <section class="user-section">
                 <div class="row">
                     <div class="col">
-                        <label for="user">User ${userCount}:</label><br>
-                        <input type="text" id="${userCount}" class="user" name="user" value="${
+                        <label for="user">User ${userCount}:</label>
+                         <input type="text" id="${userCount}" class="user" name="user" value="${
         getSession().username
     }" readonly> 
                     </div>
                     <div class="col">
                         <label for="percentage">Percentage: </label>
                         <input type="number" id="percentage-${userCount}" class="percentage" name="percentage">   
-                        <span id="display-${userCount}"></span><br>
+                        <span id="display-${userCount}"></span>
                     </div>
                     
                 </div>
@@ -60,7 +58,7 @@ const renderCreatePaymentEventList = () => {
         format: 'DD MMMM YYYY',
     });
 
-    //////////////////
+    
 
     // + button
     const addUserButton = document.querySelector('#add-user');
@@ -243,9 +241,6 @@ function addUserForm() {
     userLabel.innerHTML = `User ${userCount}:`;
     divCol.appendChild(userLabel);
 
-    let breakTag = document.createElement('br');
-    section.appendChild(breakTag);
-
     let userInput = document.createElement('input');
     userInput.setAttribute('type', 'text');
     userInput.setAttribute('id', userCount);
@@ -269,17 +264,6 @@ function addUserForm() {
     percentageInput.setAttribute('name', 'percentage');
     divCol2.appendChild(percentageInput);
 
-    // // add delete buttons each line
-
-    // let divCol3 = document.createElement('div');
-    // divCol3.setAttribute('class', 'col col-lg-2 col align-self-end');
-    // divRow.appendChild(divCol3);
-    // let deleteUserButton = document.createElement('div');
-    // deleteUserButton.innerHTML = `<button onclick="removeUser()"  id="delete_user_button" class="delete_user">Delete User</button>`;
-    // divCol3.appendChild(deleteUserButton);
-    // //
-
-    section.appendChild(breakTag);
 }
 
 function clearPercentageError() {
