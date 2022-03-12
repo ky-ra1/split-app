@@ -3,33 +3,31 @@ const renderCreatePaymentEventList = () => {
     const page = document.getElementById('page');
     let userCount = 1;
 
-    // get rid of all br tags after styling
-
     page.innerHTML = `
     <h1 id="page-title">CREATE PAYMENT EVENT</h1>
     <div class="container mx-auto">
     <div class="d-flex-center">
     <form id="eventDetails">
 
-        <label for="eventName">Event Name:</label><br>
-        <input type="text" id="eventName" name="eventName"><br>
-        <label for="description">Description:</label><br>
-        <input type="text" id="description" name="description"><br>    
-        <label for="totalAmount">Total Amount:</label><br>
-        <input type="number" id="totalAmount" name="totalAmount"><br>
-        <label for="dueDate">Due Date:</label><br>
+        <label for="eventName">Event Name:</label>
+        <input type="text" id="eventName" name="eventName">
+        <label for="description">Description:</label>
+        <input type="text" id="description" name="description">  
+        <label for="totalAmount">Total Amount:</label>
+        <input type="number" id="totalAmount" name="totalAmount">
+        <label for="dueDate">Due Date:</label>
         <input type="text" id="dueDate" name="dueDate">  
         
         <h4>User Breakdown</h4>
         <span>Click to add user</span>
         <button id="add-user" class="addUser-${userCount}"><i class="material-icons" style="">group_add</i>
-        </button><br>
+        </button>
         <div id="add-user-section">
 
                 <section class="user-section">
                 <div class="row">
                     <div class="col">
-                        <label for="user">User ${userCount}:</label><br>
+                        <label for="user">User ${userCount}:</label>
                          <input type="text" id="${userCount}" class="user" name="user" value="${
         getSession().username
     }" readonly> 
@@ -37,7 +35,7 @@ const renderCreatePaymentEventList = () => {
                     <div class="col">
                         <label for="percentage">Percentage: </label>
                         <input type="number" id="percentage-${userCount}" class="percentage" name="percentage">   
-                        <span id="display-${userCount}"></span><br>
+                        <span id="display-${userCount}"></span>
                     </div>
                 </div>
                 </section>
@@ -213,9 +211,6 @@ function addUserForm() {
     userLabel.innerHTML = `User ${userCount}:`;
     divCol.appendChild(userLabel);
 
-    let breakTag = document.createElement('br');
-    section.appendChild(breakTag);
-
     let userInput = document.createElement('input');
     userInput.setAttribute('type', 'text');
     userInput.setAttribute('id', userCount);
@@ -238,8 +233,6 @@ function addUserForm() {
     percentageInput.setAttribute('class', 'percentage');
     percentageInput.setAttribute('name', 'percentage');
     divCol2.appendChild(percentageInput);
-
-    section.appendChild(breakTag);
 }
 
 function clearPercentageError() {

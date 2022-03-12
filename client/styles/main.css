@@ -1,4 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+@import url(https://unpkg.com/@webpixels/css@1.1.5/dist/index.css);
+@import url("https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.4.0/font/bootstrap-icons.min.css");
+
 main {
     margin-top: 60px;
     /* padding: 20px; */
