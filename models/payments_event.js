@@ -53,7 +53,7 @@ const PaymentsEvent = {
     updateCompletedStatus: (event_id, status) => {
         if (status) {
             const query =
-                'UPDATE payments_event SET completed = true WHERE id = $1 RETURNING *';
+                'UPDATE payments_event SET completed = true WHERE id = $1 and remaining_amount = 0 RETURNING *';
             return db.query(query, [event_id]).then((response) => {
                 return response.rows ? response.rows[0] : {};
             });

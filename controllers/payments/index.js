@@ -37,7 +37,14 @@ router.get('/getPaymentsPaid/:id', isLoggedIn, (req, res) => {
 
 router.patch('/updateBothStatus', isLoggedIn, (req, res) => {
     payments.updateBothStatus(req.body).then((payment) => {
-        res.json(payment);
+        const body = {
+            payment_event_id: payment.rows[0].payment_event_id,
+            amount: payment.rows[0].amount,
+            status: true,
+        };
+        PaymentsEvent.updateRemainingAmount(body).then((response) => {
+            res.json(response);
+        });
     });
 });
 
@@ -61,27 +68,25 @@ router.patch('/updateReceivedStatus/', isLoggedIn, (req, res) => {
         }
 
         PaymentsEvent.updateRemainingAmount(updateBody).then((event) => {
-            payments
-                .getPaymentByEventId(event.event_creator_id)
-                .then((response) => {
-                    let completedPayments = 0;
-                    response.rows.forEach((payments) => {
-                        if (payments.received_status && payments.paid_status) {
-                            completedPayments += 1;
-                        }
-                    });
-                    if (
-                        completedPayments === response.rows.length ||
-                        !updateBody.status
-                    ) {
-                        PaymentsEvent.updateCompletedStatus(
-                            response.rows[0].payment_event_id,
-                            updateBody.status
-                        ).then((response) => {
-                            return response;
-                        });
+            payments.getPaymentByEventId(event.id).then((response) => {
+                let completedPayments = 0;
+                response.rows.forEach((payments) => {
+                    if (payments.received_status && payments.paid_status) {
+                        completedPayments += 1;
                     }
                 });
+                if (
+                    completedPayments === response.rows.length ||
+                    !updateBody.status
+                ) {
+                    PaymentsEvent.updateCompletedStatus(
+                        response.rows[0].payment_event_id,
+                        updateBody.status
+                    ).then((response) => {
+                        return response;
+                    });
+                }
+            });
         });
 
         res.json(payment);
