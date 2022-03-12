@@ -1,4 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+#page {
+    padding-bottom: 57px;
+}
 main {
     margin-top: 60px;
     /* padding: 20px; */
@@ -415,6 +418,9 @@ span.event-details:hover {
 footer {
     background-color: #2d3e50;
     color: #fff;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 }
 .github {
     color: #fff;

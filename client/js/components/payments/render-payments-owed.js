@@ -299,6 +299,7 @@ function renderPaymentsOwed() {
 
                         const selectListOwed = document.createElement('select');
                         selectListOwed.classList.add('selectPaymentOwed');
+                        selectListOwed.classList.add('form-select');
                         selectListOwed.setAttribute(
                             'identifier',
                             payment.payments_id
