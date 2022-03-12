@@ -1,6 +1,6 @@
 function renderPaymentEvent(event_id) {
     const page = document.getElementById('page');
-       
+ 
     axios
         .get(`/api/paymentsEvent/getByEventId/${event_id}`)
         .then((response) => {
@@ -17,28 +17,29 @@ function renderPaymentEvent(event_id) {
                     });
 
                   
-                    page.innerHTML = `<div class="container">              
+                    page.innerHTML = `<div class="container">   
+                    <link rel="stylesheet" href="/styles/list.css" />
                     <h4 style="text-align: center; color: red; margin: 30px" id="displayError"></h4>                
                         <!-- Main content -->
                         <div class="h-screen flex-grow-1 overflow-y-lg-auto">
                             
                             <!-- Main -->
-                            <main class="py-6 bg-surface-secondary">
+                            <main>
                                 <div class="container-fluid">
                                     <!-- Card stats -->
                                     <div class="card shadow border-0 mb-7">
                                         <div class="card-header">
-                                            <h5 class="mb-0">Event Details</h5>
+                                            <h1 class="mb-0">Event Details</h1>
                                         </div>
                                         <div class="table-responsive">
                                             <table class="table table-hover table-nowrap">
-                                                <thead class="thead-light">
+                                                <thead class="thead">
                                                     <tr>
-                                                        <th scope="col">Event Creator:</th>
-                                                        <th scope="col">Sent To:</th>
-                                                        <th scope="col">Amount:</th>
-                                                        <th scope="col">Date Due:</th>
-                                                        <th scope="col">Status:</th>
+                                                        <th scope="col">Event Creator</th>
+                                                        <th scope="col">Sent To</th>
+                                                        <th scope="col">Amount</th>
+                                                        <th scope="col">Date Due</th>
+                                                        <th scope="col">Status</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -56,8 +57,8 @@ function renderPaymentEvent(event_id) {
                                                         )}</td>
                                                         <td> ${
                                                             item.paid_status && item.received_status
-                                                                ? 'paid <span class="badge badge-lg badge-dot"> <i class="bg-success"></i></span>'
-                                                                : 'not paid <span class="badge badge-lg badge-dot"> <i class="bg-danger"></i></span> '
+                                                                ? '<span class="badge badge-lg badge-dot"> <i class="bg-success"></i></span> paid '
+                                                                : '<span class="badge badge-lg badge-dot"> <i class="bg-danger"></i></span> not paid '
                                                         }</td>
                                                     </tr>`
                                                     }).join("")}
@@ -67,9 +68,12 @@ function renderPaymentEvent(event_id) {
                                         </div>
                                     </div>
                                 </div>
+                                
                             </main>
                         </div>
+                       
                     </div>
+                   
                    `;
                     
                 })

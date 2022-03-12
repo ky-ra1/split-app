@@ -1,6 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
-@import url(https://unpkg.com/@webpixels/css@1.1.5/dist/index.css);
-@import url("https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.4.0/font/bootstrap-icons.min.css");
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800'); 
 
 main {
     margin-top: 60px;
@@ -492,3 +490,4 @@ div.test:last-of-type span {
         width: 280px;
     }
 }
+
