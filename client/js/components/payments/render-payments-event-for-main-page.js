@@ -67,7 +67,7 @@ function renderPaymentsEventForMainPage() {
                     paymentEvent.creation_date
                 ).format('D MMMM YYYY')}`;
                 let row_data_3 = document.createElement('td');
-                row_data_3.innerHTML = `${paymentEvent.remaining_amount}`;
+                row_data_3.innerHTML = `$ ${paymentEvent.remaining_amount}`;
 
                 let status = 'Incomplete';
                 if (paymentEvent.completed) {
