@@ -29,49 +29,49 @@ function renderPaymentHistory() {
                 paymentHistory.setAttribute('id', 'payments_history_section');
                 paymentHistory.innerHTML += `<h3>Payment History</h3>`;
                 historySection.appendChild(paymentHistory);
-            }
+                let table = document.createElement('table');
+                table.setAttribute('id', 'paymentsHistoryTable');
+                table.setAttribute('class', 'table');
+                let thead = document.createElement('thead');
+                thead.setAttribute('id', 'paymentsHistoryTableHead');
+                let tbody = document.createElement('tbody');
+                tbody.setAttribute('id', 'paymentsHistoryTableBody');
+                tbody.setAttribute('scope', 'col');
 
-            const paymentHistorySection = document.getElementById(
-                'payments_history_section'
-            );
+                table.appendChild(thead);
+                table.appendChild(tbody);
+
+                const paymentHistorySection = document.getElementById(
+                    'payments_history_section'
+                );
+
+                paymentHistorySection.appendChild(table);
+
+                let row_heading = document.createElement('tr');
+                let heading_1 = document.createElement('th');
+                heading_1.innerHTML = 'Event Name';
+                let heading_2 = document.createElement('th');
+                heading_2.innerHTML = 'Creator';
+                let heading_3 = document.createElement('th');
+                heading_3.innerHTML = 'Paid Date';
+                let heading_4 = document.createElement('th');
+                heading_4.innerHTML = 'Amount';
+
+                row_heading.appendChild(heading_1);
+                row_heading.appendChild(heading_2);
+                row_heading.appendChild(heading_3);
+                row_heading.appendChild(heading_4);
+                thead.appendChild(row_heading);
+            }
 
             paymentsHistory.forEach((payment) => {
                 status = 'PAID - Confirmed';
+
                 if (
                     payment.paid_status &&
                     payment.received_status &&
                     payment.user_id !== payment.event_creator_id
                 ) {
-                    let table = document.createElement('table');
-                    table.setAttribute('id', 'paymentsHistoryTable');
-                    table.setAttribute('class', 'table');
-                    let thead = document.createElement('thead');
-                    thead.setAttribute('id', 'paymentsHistoryTableHead');
-                    let tbody = document.createElement('tbody');
-                    tbody.setAttribute('id', 'paymentsHistoryTableBody');
-                    tbody.setAttribute('scope', 'col');
-
-                    table.appendChild(thead);
-                    table.appendChild(tbody);
-
-                    paymentHistorySection.appendChild(table);
-
-                    let row_heading = document.createElement('tr');
-                    let heading_1 = document.createElement('th');
-                    heading_1.innerHTML = 'Event Name';
-                    let heading_2 = document.createElement('th');
-                    heading_2.innerHTML = 'Creator';
-                    let heading_3 = document.createElement('th');
-                    heading_3.innerHTML = 'Paid Date';
-                    let heading_4 = document.createElement('th');
-                    heading_4.innerHTML = 'Amount';
-
-                    row_heading.appendChild(heading_1);
-                    row_heading.appendChild(heading_2);
-                    row_heading.appendChild(heading_3);
-                    row_heading.appendChild(heading_4);
-                    thead.appendChild(row_heading);
-
                     let row = document.createElement('tr');
                     let row_data_1 = document.createElement('td');
                     row_data_1.innerHTML = `${payment.event_name}`;
@@ -88,7 +88,10 @@ function renderPaymentHistory() {
                     row.appendChild(row_data_2);
                     row.appendChild(row_data_3);
                     row.appendChild(row_data_4);
-                    tbody.appendChild(row);
+                    const paymentsHistoryTableBody = document.getElementById(
+                        'paymentsHistoryTableBody'
+                    );
+                    paymentsHistoryTableBody.appendChild(row);
                 }
             });
         })
